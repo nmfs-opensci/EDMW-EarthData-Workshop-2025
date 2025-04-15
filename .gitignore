@@ -1,0 +1,16 @@
+*netrc
+*checkpoints
+/tutorials/data/*Links.txt
+*.vrt
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+**/.DS_Store
+/.quarto/
+/_site/
+/_freeze/
+/python-notebooks/demonstrated data/
+.DS_Store
+*.nc

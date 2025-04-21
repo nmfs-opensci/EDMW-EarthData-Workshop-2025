@@ -35,15 +35,22 @@ title: Our Team
 
 <img src="images/Eli.png" alt="Eli Holmes" style="width:75%; ; border-radius: 50%;">
 
-<!--
- ![](images/Eli.png){width=75% fig-alt="picture of Eli Holmes"}
--->
-
 [NOAA Fisheries](https://www.fisheries.noaa.gov/)
 
 [webpage](https://eeholmes.github.io/) &#x2022;  [GitHub](https://github.com/eeholmes)  &#x2022; [ORCID](https://orcid.org/0000-0001-9128-8393)
 </div>
 
+<div>
+### Ryan Vandermeulen
+
+<img src="images/Eli.png" alt="Ryan" style="width:75%; ; border-radius: 50%;">
+
+[NOAA Fisheries](https://www.fisheries.noaa.gov/)
+
+[webpage](https://www.fisheries.noaa.gov/contact/ryan-vandermeulen)  &#x2022; [ORCID](https://orcid.org/0000-0001-5886-8142)
+</div>
+
+<!--
 
 <div>
 ### Sunny Hospital
@@ -116,4 +123,7 @@ title: Our Team
 ### More
 
 </div>
+
+-->
+
 </div>

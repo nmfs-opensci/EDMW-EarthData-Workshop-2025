@@ -3,7 +3,6 @@ project:
   output-dir: docs
   render:
     - "*.*"
-    - "!tutorials/python-notebooks/*.ipynb"
     - "!tutorials/r/gdalcubes.qmd"
     - "!tutorials/r/5-r-geospatial.qmd"
 
@@ -12,13 +11,13 @@ execute:
   
 website:
   page-navigation: true  
-  title: "2024 EDMW Workshop 3B"
+  title: "2025 EDMW Workshop - PACE"
   favicon: "images/favicon-16x16.png"
-  site-url: https://nmfs-opensci.github.io/EDMW-EarthData-Workshop-2024
-  repo-url: https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2024
+  site-url: https://nmfs-opensci.github.io/EDMW-EarthData-Workshop-2025
+  repo-url: https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2025
   repo-actions: [edit, issue, source]
   
-  page-footer: <img src="https://github.com/nmfs-opensci/assets/blob/main/logo/nmfs-opensci-logo2.png?raw=true" alt="NMFS Open Science logo" style="width:150px"><br />NMFS Open Science (2023)
+  page-footer: <img src="https://github.com/nmfs-opensci/assets/blob/main/logo/nmfs-opensci-logo2.png?raw=true" alt="NMFS Open Science logo" style="width:150px"><br />NMFS Open Science (2025)
  
   sidebar:
     logo: https://github.com/nmfs-opensci/assets/blob/main/logo/nmfs-opensci-logo2.png?raw=true
@@ -64,22 +63,16 @@ website:
                 href: content/01-intro-to-jupyterhub.qmd
           - section: "Tutorials in R"
             contents:
+              - text: ED Catalog
+                href: tutorials/r/0-earthdata-catalog.qmd
               - text: Search
-                href: tutorials/r/1-earthdatalogin.qmd
-              - text: Subset and Crop
-                href: tutorials/r/2-subset-and-plot.qmd
-              - text: Mask to a shapefile
-                href: tutorials/r/3-extract-satellite-data-within-boundary.qmd
+                href: tutorials/r/1-earthaccess.qmd
           - section: "Tutorials in Python"
             contents:
+              - text: ED Catalog
+                href: tutorials/python/0-earthdata-catalog.ipynb
               - text: Search
                 href: tutorials/python/1-earthaccess.ipynb
-              - text: Subset and Crop
-                href: tutorials/python/2-subset-and-plot.ipynb
-              - text: Mask to a shapefile
-                href: tutorials/python/3-extract-satellite-data-within-boundary.ipynb
-              - text: Monthly and seasonal means
-                href: tutorials/python/4-data-cubes.ipynb
       - text: <img width=100px>
       - text: <img src="/images/noaa_emblem_logo-2022.png" width=100px>
         href: https://fisheries.noaa.gov
@@ -88,13 +81,10 @@ website:
     search: true
     right: 
       - icon: server
-        href: https://dhub.opensci.live/
+        href: https://workshop.nmfs-openscapes.2i2c.cloud/
         text: "JupyterHub"
-      - icon: wechat
-        href: https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2024/discussions
-        text: "Discussions"
       - icon: github
-        href: https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2024
+        href: https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2025
         text: "Repo"
       - icon: globe
         href: https://github.com/nmfs-opensci

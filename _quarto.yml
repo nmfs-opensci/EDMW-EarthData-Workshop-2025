@@ -51,6 +51,10 @@ website:
             - text: Git-RStudio
               href: content/02-git-rstudio.md
           - coc.md
+      - section: "Lectures"
+        href: lectures/index.md
+        contents:
+          - lectures/Intro-to-PACE.pdf
       - section: "Tutorials"
         contents:
           - section: "Welcome"
@@ -73,6 +77,8 @@ website:
                 href: tutorials/python/0-earthdata-catalog.ipynb
               - text: Search
                 href: tutorials/python/1-earthaccess.ipynb
+              - text: Level 2 Data
+                href: tutorials/python/2-level2.ipynb
       - text: <img width=100px>
       - text: <img src="/images/noaa_emblem_logo-2022.png" width=100px>
         href: https://fisheries.noaa.gov

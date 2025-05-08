@@ -54,8 +54,10 @@ website:
       - section: "Lectures"
         href: lectures/index.md
         contents:
-          - lectures/Intro-to-PACE.pdf
-          - lectures/PACE-Products.pdf
+          - text: Intro to PACE
+            href: lectures/Intro-to-PACE.pdf
+          - text: PACE Products
+            href: lectures/PACE-Products.pdf
       - section: "Tutorials"
         contents:
           - section: "Welcome"

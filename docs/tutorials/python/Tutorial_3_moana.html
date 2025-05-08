@@ -429,7 +429,8 @@ function googleTranslateElementInit() {
 </section>
 <section id="lock-and-load-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="lock-and-load-the-data">Lock and load the data</h2>
-<div id="d05417c1-06e7-47af-ae9a-28a2401e5a52" class="cell" data-execution_count="2">
+<p>We’re going to do something slightly different here, and pull from ERDDAP instead of NASA Earth Access.</p>
+<div id="d05417c1-06e7-47af-ae9a-28a2401e5a52" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Load Libraries ----</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -439,21 +440,34 @@ function googleTranslateElementInit() {
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.feature <span class="im">as</span> cfeature</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Load Data ----</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>filename <span class="op">=</span> <span class="st">'PACE_OCI.20240901_20240930.L3m.MO.MOANA.V3_0.0p1deg.nc'</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> xr.open_dataset(filename)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign core variables</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>latitude <span class="op">=</span> dataset[<span class="st">"lat"</span>]</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>longitude <span class="op">=</span> dataset[<span class="st">"lon"</span>]</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>syn_da <span class="op">=</span> dataset[<span class="st">"syncoccus_moana"</span>]</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>pico_da <span class="op">=</span> dataset[<span class="st">"picoeuk_moana"</span>]</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>pro_da <span class="op">=</span> dataset[<span class="st">"prococcus_moana"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://cwcgom.aoml.noaa.gov/erddap/griddap/noaa_aoml_a113_ab04_933f"</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> xr.open_dataset(url)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> dataset.sel(time<span class="op">=</span><span class="st">"2024-09-25T00:00:00.000000000"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign core variables</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>latitude <span class="op">=</span> dataset[<span class="st">"latitude"</span>]</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>longitude <span class="op">=</span> dataset[<span class="st">"longitude"</span>]</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>syn_da <span class="op">=</span> dataset[<span class="st">"syncoccus_moana"</span>]</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>pico_da <span class="op">=</span> dataset[<span class="st">"picoeuk_moana"</span>]</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>pro_da <span class="op">=</span> dataset[<span class="st">"prococcus_moana"</span>]</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Load Data ----</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">#filename = 'PACE_OCI.20240901_20240930.L3m.MO.MOANA.V3_0.0p1deg.nc'</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">#dataset = xr.open_dataset(filename)</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign core variables</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">#latitude = dataset["lat"]</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co">#longitude = dataset["lon"]</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co">#syn_da = dataset["syncoccus_moana"]</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">#pico_da = dataset["picoeuk_moana"]</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co">#pro_da = dataset["prococcus_moana"]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="its-map-time-again" class="level2">
 <h2 class="anchored" data-anchor-id="its-map-time-again">It’s map time again</h2>
 <p>We’ve got three different phytoplankton classes in this MOANA data set. Let’s create some pretty maps and get a sense of their relative distributions.</p>
-<div id="0c2522f0-e3e4-4b29-bae9-80fba7ab04c2" class="cell" data-execution_count="3">
+<div id="0c2522f0-e3e4-4b29-bae9-80fba7ab04c2" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define colormaps</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>custom_cmaps <span class="op">=</span> {</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Prochlorococcus"</span>: plt.cm.Blues,</span>
@@ -489,7 +503,7 @@ function googleTranslateElementInit() {
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    cmap <span class="op">=</span> custom_cmaps[title]</span>
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    img <span class="op">=</span> data.plot(</span>
 <span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        ax<span class="op">=</span>ax,</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span><span class="st">"lon"</span>, y<span class="op">=</span><span class="st">"lat"</span>,</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span><span class="st">"longitude"</span>, y<span class="op">=</span><span class="st">"latitude"</span>,</span>
 <span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        cmap<span class="op">=</span>cmap,</span>
 <span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>        robust<span class="op">=</span><span class="va">True</span>,</span>
 <span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>        add_colorbar<span class="op">=</span><span class="va">False</span></span>
@@ -514,10 +528,10 @@ function googleTranslateElementInit() {
 <section id="lets-get-a-bit-more-quantitative" class="level2">
 <h2 class="anchored" data-anchor-id="lets-get-a-bit-more-quantitative">Let’s get a bit more quantitative</h2>
 <p>Let’s get a little better sense of how these phytoplakton classes are geographically distributed. What we’re going to do next is plot how all three of these phytoplankton classes change in relation to latitude. To do this, we’ll be taking “slices” of data and averaging them. Conceptually, think of a horizontal line across 50 degrees North - we’ll extract all that data, take an average, and then move on to the pixel below (e.g.&nbsp;49.98 degrees North) and do the same until we hit 50 degrees South. Doing this for each phytoplankton class, we can now distill this information into something that can be put onto a line plot.</p>
-<div id="71ceff87-a045-4626-bce6-a488b9d17877" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>syn <span class="op">=</span> dataset[<span class="st">"syncoccus_moana"</span>].sel(lat <span class="op">=</span> <span class="bu">slice</span>(<span class="dv">50</span>, <span class="op">-</span><span class="dv">50</span>)).mean(dim<span class="op">=</span>[<span class="st">"lon"</span>])</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>pro <span class="op">=</span> dataset[<span class="st">"prococcus_moana"</span>].sel(lat <span class="op">=</span> <span class="bu">slice</span>(<span class="dv">50</span>, <span class="op">-</span><span class="dv">50</span>)).mean(dim<span class="op">=</span>[<span class="st">"lon"</span>])</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>pico <span class="op">=</span> dataset[<span class="st">"picoeuk_moana"</span>].sel(lat <span class="op">=</span> <span class="bu">slice</span>(<span class="dv">50</span>, <span class="op">-</span><span class="dv">50</span>)).mean(dim<span class="op">=</span>[<span class="st">"lon"</span>])</span>
+<div id="71ceff87-a045-4626-bce6-a488b9d17877" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>syn <span class="op">=</span> dataset[<span class="st">"syncoccus_moana"</span>].sel(latitude <span class="op">=</span> <span class="bu">slice</span>(<span class="dv">50</span>, <span class="op">-</span><span class="dv">50</span>)).mean(dim<span class="op">=</span>[<span class="st">"longitude"</span>])</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>pro <span class="op">=</span> dataset[<span class="st">"prococcus_moana"</span>].sel(latitude <span class="op">=</span> <span class="bu">slice</span>(<span class="dv">50</span>, <span class="op">-</span><span class="dv">50</span>)).mean(dim<span class="op">=</span>[<span class="st">"longitude"</span>])</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>pico <span class="op">=</span> dataset[<span class="st">"picoeuk_moana"</span>].sel(latitude <span class="op">=</span> <span class="bu">slice</span>(<span class="dv">50</span>, <span class="op">-</span><span class="dv">50</span>)).mean(dim<span class="op">=</span>[<span class="st">"longitude"</span>])</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>custom_colors <span class="op">=</span> {</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Prochlorococcus"</span>: plt.cm.Blues(<span class="fl">0.6</span>),</span>
@@ -528,15 +542,15 @@ function googleTranslateElementInit() {
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>fig, ax1 <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Primary axis: Syn and Pico</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>ax1.plot(syn[<span class="st">"lat"</span>], syn, label<span class="op">=</span><span class="st">"Synechococcus"</span>, color<span class="op">=</span>custom_colors[<span class="st">"Synechococcus"</span>])</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>ax1.plot(pico[<span class="st">"lat"</span>], pico, label<span class="op">=</span><span class="st">"Picoeukaryotes"</span>, color<span class="op">=</span>custom_colors[<span class="st">"Picoeukaryotes"</span>])</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>ax1.plot(syn[<span class="st">"latitude"</span>], syn, label<span class="op">=</span><span class="st">"Synechococcus"</span>, color<span class="op">=</span>custom_colors[<span class="st">"Synechococcus"</span>])</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>ax1.plot(pico[<span class="st">"latitude"</span>], pico, label<span class="op">=</span><span class="st">"Picoeukaryotes"</span>, color<span class="op">=</span>custom_colors[<span class="st">"Picoeukaryotes"</span>])</span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">"Latitude"</span>)</span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">"Mean Abundance (Syn &amp; Pico)"</span>, color<span class="op">=</span><span class="st">"black"</span>)</span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span><span class="st">"black"</span>)</span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Secondary axis: Prochlorococcus</span></span>
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> ax1.twinx()</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>ax2.plot(pro[<span class="st">"lat"</span>], pro, label<span class="op">=</span><span class="st">"Prochlorococcus"</span>, color<span class="op">=</span>custom_colors[<span class="st">"Prochlorococcus"</span>], linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>ax2.plot(pro[<span class="st">"latitude"</span>], pro, label<span class="op">=</span><span class="st">"Prochlorococcus"</span>, color<span class="op">=</span>custom_colors[<span class="st">"Prochlorococcus"</span>], linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
 <span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">"Mean Abundance (Prochlorococcus)"</span>, color<span class="op">=</span>custom_colors[<span class="st">"Prochlorococcus"</span>])</span>
 <span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>ax2.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span>custom_colors[<span class="st">"Prochlorococcus"</span>])</span>
 <span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
@@ -562,45 +576,46 @@ function googleTranslateElementInit() {
 <h2 class="anchored" data-anchor-id="the-times-they-are-a-changin">The times, they are a changin’</h2>
 <p>For this exercise, we’ll download one year’s worth of PACE data to see how things are evolving over time. Don’t worry, we’ll do monthly time steps for the time being (i.e., only 12 files), but you can increase the frequency to 8-day averages (46 files), or even daily (all 365!), if you want. Using this time series, we’re going to use the “slice” function again, but this time we’ll extract a 10 degree x 10 degree box in the south Atlantic ocean. It can be smaller, or located elsewhere if you like, but either way, we’re going to average the data within that box for each individual time step.</p>
 <p>Next, we’ll plot how all three of these phytoplankton classes change over the course of 1 year, allowing you to see the cycles of growth and decay relative to one another. It is useful to add this context because not all chlorophyll-a is equivalent, e.g., a bloom of <em>Prochlorococcus</em> may represent a different amount of trophic energy potential relative to blooms of other phytoplankton classes, or it may havce come about from a different oceanographic process.</p>
-<div id="8cf8e1c2-4aaf-4028-86d6-d0abcc84f2c4" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>file_pattern <span class="op">=</span> <span class="st">"PACE_OCI.202*.L3m.MO.MOANA.V3_0.0p1deg.nc"</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> xr.open_mfdataset(file_pattern, combine<span class="op">=</span><span class="st">'nested'</span>,concat_dim<span class="op">=</span><span class="st">"time"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>lat_box <span class="op">=</span> <span class="bu">slice</span>(<span class="op">-</span><span class="dv">30</span>, <span class="op">-</span><span class="dv">40</span>)     <span class="co"># reversed order: north to south</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>lon_box <span class="op">=</span> <span class="bu">slice</span>(<span class="op">-</span><span class="dv">40</span>, <span class="op">-</span><span class="dv">30</span>)     <span class="co"># within available lon range</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset and average over space (lat/lon)</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>syn_timeseries <span class="op">=</span> ds[<span class="st">"syncoccus_moana"</span>].sel(lat<span class="op">=</span>lat_box, lon<span class="op">=</span>lon_box).mean(dim<span class="op">=</span>[<span class="st">"lat"</span>, <span class="st">"lon"</span>], skipna<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>pro_timeseries <span class="op">=</span> ds[<span class="st">"prococcus_moana"</span>].sel(lat<span class="op">=</span>lat_box, lon<span class="op">=</span>lon_box).mean(dim<span class="op">=</span>[<span class="st">"lat"</span>, <span class="st">"lon"</span>], skipna<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>pico_timeseries <span class="op">=</span> ds[<span class="st">"picoeuk_moana"</span>].sel(lat<span class="op">=</span>lat_box, lon<span class="op">=</span>lon_box).mean(dim<span class="op">=</span>[<span class="st">"lat"</span>, <span class="st">"lon"</span>], skipna<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the figure and axis</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>fig, ax1 <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot syn and pico on the left y-axis</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>ax1.plot(syn_timeseries[<span class="st">"time"</span>], syn_timeseries, label<span class="op">=</span><span class="st">"Synechococcus"</span>, color<span class="op">=</span>custom_colors[<span class="st">"Synechococcus"</span>])</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>ax1.plot(pico_timeseries[<span class="st">"time"</span>], pico_timeseries, label<span class="op">=</span><span class="st">"Picoeukaryotes"</span>, color<span class="op">=</span>custom_colors[<span class="st">"Picoeukaryotes"</span>])</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">"Time"</span>)</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">"Mean Abundance (Syn &amp; Pico)"</span>, color<span class="op">=</span><span class="st">"black"</span>)</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span><span class="st">"black"</span>)</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a secondary y-axis for prococcus_moana</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> ax1.twinx()</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>ax2.plot(pro_timeseries[<span class="st">"time"</span>], pro_timeseries, label<span class="op">=</span><span class="st">"Prochlorococcus"</span>, color<span class="op">=</span>custom_colors[<span class="st">"Prochlorococcus"</span>], linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">"Mean Abundance (Prochlorococcus)"</span>, color<span class="op">=</span>custom_colors[<span class="st">"Prochlorococcus"</span>])</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>ax2.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span>custom_colors[<span class="st">"Prochlorococcus"</span>])</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine all legends</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>lines_1, labels_1 <span class="op">=</span> ax1.get_legend_handles_labels()</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>lines_2, labels_2 <span class="op">=</span> ax2.get_legend_handles_labels()</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>ax1.legend(lines_1 <span class="op">+</span> lines_2, labels_1 <span class="op">+</span> labels_2, loc<span class="op">=</span><span class="st">"upper left"</span>)</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Add title and grid</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Monthly Phytoplankton Abundance in Selected Box"</span>)</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="8cf8e1c2-4aaf-4028-86d6-d0abcc84f2c4" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Load Data ----</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://cwcgom.aoml.noaa.gov/erddap/griddap/noaa_aoml_a113_ab04_933f"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> xr.open_dataset(url)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>da<span class="op">=</span>dataset.sel(latitude<span class="op">=</span><span class="bu">slice</span>(<span class="op">-</span><span class="dv">39</span>,<span class="op">-</span><span class="dv">42</span>), longitude<span class="op">=</span><span class="bu">slice</span>(<span class="op">-</span><span class="dv">54</span>,<span class="op">-</span><span class="dv">51</span>))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign core variables</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>latitude_ts <span class="op">=</span> da[<span class="st">"latitude"</span>]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>longitude_ts <span class="op">=</span> da[<span class="st">"longitude"</span>]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>syn_ts <span class="op">=</span> da[<span class="st">"syncoccus_moana"</span>].mean(dim<span class="op">=</span>[<span class="st">"latitude"</span>, <span class="st">"longitude"</span>])</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>pico_ts <span class="op">=</span> da[<span class="st">"picoeuk_moana"</span>].mean(dim<span class="op">=</span>[<span class="st">"latitude"</span>, <span class="st">"longitude"</span>])</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>pro_ts <span class="op">=</span> da[<span class="st">"prococcus_moana"</span>].mean(dim<span class="op">=</span>[<span class="st">"latitude"</span>, <span class="st">"longitude"</span>])</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the figure and axis</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>fig, ax1 <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot syn and pico on the left y-axis</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>ax1.plot(syn_ts[<span class="st">"time"</span>], syn_ts, label<span class="op">=</span><span class="st">"Synechococcus"</span>, color<span class="op">=</span>custom_colors[<span class="st">"Synechococcus"</span>])</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>ax1.plot(pico_ts[<span class="st">"time"</span>], pico_ts, label<span class="op">=</span><span class="st">"Picoeukaryotes"</span>, color<span class="op">=</span>custom_colors[<span class="st">"Picoeukaryotes"</span>])</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">"Time"</span>)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">"Mean Abundance (Syn &amp; Pico)"</span>, color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a secondary y-axis for prococcus_moana</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> ax1.twinx()</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>ax2.plot(pro_ts[<span class="st">"time"</span>], pro_ts, label<span class="op">=</span><span class="st">"Prochlorococcus"</span>, color<span class="op">=</span>custom_colors[<span class="st">"Prochlorococcus"</span>], linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">"Mean Abundance (Prochlorococcus)"</span>, color<span class="op">=</span>custom_colors[<span class="st">"Prochlorococcus"</span>])</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>ax2.tick_params(axis<span class="op">=</span><span class="st">'y'</span>, labelcolor<span class="op">=</span>custom_colors[<span class="st">"Prochlorococcus"</span>])</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine all legends</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>lines_1, labels_1 <span class="op">=</span> ax1.get_legend_handles_labels()</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>lines_2, labels_2 <span class="op">=</span> ax2.get_legend_handles_labels()</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>ax1.legend(lines_1 <span class="op">+</span> lines_2, labels_1 <span class="op">+</span> labels_2, loc<span class="op">=</span><span class="st">"upper left"</span>)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Add title and grid</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Monthly Phytoplankton Abundance in Selected Box"</span>)</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -615,7 +630,7 @@ function googleTranslateElementInit() {
 <p>A central theme of working with PACE data revolves around wrangling multiple dimensions of data into something you can conceptualize. Viewing three separate maps makes it a bit difficult to see the interactions between the different phytoplankton classes. This is important - we want to know where these boundaries are colliding, because this indicates that something is changing with the underlying oceanography.</p>
 <p>Let’s try something a little different here. Instead of making three separate plots, let’s stack them all and make a false “true color” image by substituting the usual red, green, and blue radiance channels with <em>Synechococcus</em> (red), Picoeukaryotes (green), and <em>Proclorococcus</em> (blue). Can it be done?</p>
 <p>Yes, but with a tiny bit of nuance here. We talked earlier about how higher cell counts does not unequivocally mean that this is a “dominant” class. We can do something called histogram stretching, which is a little trick some folks use to make their true color images pop a little more. Basically, for each phytoplankton class, let’s take all the data between the 2% and 98% percentile range, and normalize those data to the respective median. This ensure all phytoplankton classes are now on a level playing field when we stack them up. Higher or lower values no longer represent absolute cell counts, they now represent higher or lower weights relative to their central tendency. The same trick is often done for making “true color” images to make them pop a little more. Let’s give it a try:</p>
-<div id="a1641e73-c25d-4564-a28e-f1bb8dd7b2a6" class="cell" data-execution_count="15">
+<div id="a1641e73-c25d-4564-a28e-f1bb8dd7b2a6" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.feature <span class="im">as</span> cfeature</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -643,7 +658,7 @@ function googleTranslateElementInit() {
 <span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>gl.right_labels <span class="op">=</span> gl.top_labels <span class="op">=</span> <span class="va">False</span></span>
 <span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Use imshow with correct extent</span></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>extent <span class="op">=</span> [pro_da.lon.<span class="bu">min</span>(), pro_da.lon.<span class="bu">max</span>(), pro_da.lat.<span class="bu">min</span>(), pro_da.lat.<span class="bu">max</span>()]</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>extent <span class="op">=</span> [pro_da.longitude.<span class="bu">min</span>(), pro_da.longitude.<span class="bu">max</span>(), pro_da.latitude.<span class="bu">min</span>(), pro_da.latitude.<span class="bu">max</span>()]</span>
 <span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>ax.imshow(rgb_image, origin<span class="op">=</span><span class="st">'lower'</span>, extent<span class="op">=</span>extent, transform<span class="op">=</span>ccrs.PlateCarree())</span>
 <span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
@@ -661,7 +676,7 @@ function googleTranslateElementInit() {
 <section id="just-a-tiny-bit-more-context-please" class="level2">
 <h2 class="anchored" data-anchor-id="just-a-tiny-bit-more-context-please">Just a tiny bit more context, please</h2>
 <p>We still could use a bit of help contextualizing the above image, so let’s just make a little legend for it. Since we’re in tri-color space, let’s use the very useful, and in my opinion, underutilized ternary plot. These are fun little plots that show the relative contribution of three variables relative to one another. It helps us determine how to interpret the purple, teal, pink, and orange areas you see on the map.</p>
-<div id="96f916d8-63b6-42d7-a6da-970dfd422677" class="cell" data-execution_count="18">
+<div id="96f916d8-63b6-42d7-a6da-970dfd422677" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.patches <span class="im">import</span> Polygon</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define triangle vertices (RGB space: R=Syn, G=Pico, B=Pro)</span></span>

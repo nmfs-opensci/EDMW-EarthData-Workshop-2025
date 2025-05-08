@@ -399,11 +399,11 @@
     ]
   },
   {
-    "objectID": "tutorials/python/Tutorial_3_moana-erddap.html",
-    "href": "tutorials/python/Tutorial_3_moana-erddap.html",
+    "objectID": "tutorials/python/Tutorial_3_moana-erddap.html#you-will-need-3.7gb-for-this-tutorial",
+    "href": "tutorials/python/Tutorial_3_moana-erddap.html#you-will-need-3.7gb-for-this-tutorial",
     "title": "Tutorial 3: Make way for MOANA (Multi Ordination ANAlysis, that is",
-    "section": "",
-    "text": "YOU WILL NEED 3.7Gb for this tutorial\nGo to File &gt; Hub Control Panel &gt; Stop my server\nThen restart after chosing 3.7",
+    "section": "YOU WILL NEED 3.7Gb for this tutorial",
+    "text": "YOU WILL NEED 3.7Gb for this tutorial\nGo to File &gt; Hub Control Panel &gt; Stop my server\nThen restart after chosing 3.7 Gb in the drop-down.",
     "crumbs": [
       "JupyterHub",
       "Tutorials",

@@ -55,6 +55,7 @@ website:
         href: lectures/index.md
         contents:
           - lectures/Intro-to-PACE.pdf
+          - lectures/PACE-Products.pdf
       - section: "Tutorials"
         contents:
           - section: "Welcome"
@@ -64,21 +65,19 @@ website:
               - text: Geoscience cloud tools
                 href: content/01-intro-to-cloud.qmd
               - text: Jupyter hubs
-                href: content/01-intro-to-jupyterhub.qmd
-          - section: "Tutorials in R"
-            contents:
-              - text: ED Catalog
-                href: tutorials/r/0-earthdata-catalog.qmd
-              - text: Search
-                href: tutorials/r/1-earthaccess.qmd
-          - section: "Tutorials in Python"
+                href: content/01-intro-to-jupyterhub.md
+          - section: "Tutorials"
             contents:
               - text: ED Catalog
                 href: tutorials/python/0-earthdata-catalog.ipynb
               - text: Search
                 href: tutorials/python/1-earthaccess.ipynb
-              - text: Level 2 Data
-                href: tutorials/python/2-level2.ipynb
+              - text: Rrs and AVW
+                href: tutorials/python/Tutorial_2_Rrs_AVW.ipynb
+              - text: MOANA
+                href: tutorials/python/Tutorial_3_moana-erddap.ipynb
+              - text: Kd
+                href: tutorials/python/Tutorial_4_kd.ipynb
       - text: <img width=100px>
       - text: <img src="/images/noaa_emblem_logo-2022.png" width=100px>
         href: https://fisheries.noaa.gov

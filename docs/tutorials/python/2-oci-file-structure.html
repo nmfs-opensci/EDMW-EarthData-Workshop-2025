@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Eli Holmes (NOAA)">
 
-<title>File Structure at Three Processing Levels for the Ocean Color Instrument (OCI) – 2025 EDMW Workshop - PACE</title>
+<title>Level 2 and 3 file structure – 2025 EDMW Workshop - PACE</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,7 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
@@ -102,6 +103,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script src="https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -151,7 +156,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">File Structure at Three Processing Levels for the Ocean Color Instrument (OCI)</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Level 2 and 3 file structure</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -258,22 +263,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text">Tutorials</span></a>
+            <a href="../../lectures/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lectures</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item sidebar-item-section">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/Intro-to-PACE.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro to PACE</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/PACE-Products.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PACE Products</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">Welcome</span></a>
+ <span class="menu-text">Tutorials</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Welcome</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../content/01-welcome.html" class="sidebar-item-text sidebar-link">
@@ -296,31 +324,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Tutorials in R</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../tutorials/r/0-earthdata-catalog.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ED Catalog</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../tutorials/r/1-earthaccess.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Search</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">Tutorials in Python</span></a>
+ <span class="menu-text">Tutorials</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -336,6 +341,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../../tutorials/python/1-earthaccess.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Search</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/python/Tutorial_2_Rrs_AVW.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rrs and AVW</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/python/Tutorial_3_moana-erddap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MOANA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/python/Tutorial_4_kd.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kd</span></a>
   </div>
 </li>
       </ul>
@@ -361,8 +384,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#file-structure-for-level-2-and-3-products-from-the-ocean-color-instrument-oci" id="toc-file-structure-for-level-2-and-3-products-from-the-ocean-color-instrument-oci" class="nav-link active" data-scroll-target="#file-structure-for-level-2-and-3-products-from-the-ocean-color-instrument-oci">File Structure for Level 2 and 3 products from the Ocean Color Instrument (OCI)</a></li>
+  <li><a href="#import-libraries" id="toc-import-libraries" class="nav-link" data-scroll-target="#import-libraries">Import libraries</a></li>
+  <li><a href="#login-into-nasa-earth-data" id="toc-login-into-nasa-earth-data" class="nav-link" data-scroll-target="#login-into-nasa-earth-data">Login into NASA Earth Data</a></li>
+  <li><a href="#chesapeake-bay" id="toc-chesapeake-bay" class="nav-link" data-scroll-target="#chesapeake-bay">Chesapeake Bay</a></li>
+  <li><a href="#load-level-2-data" id="toc-load-level-2-data" class="nav-link" data-scroll-target="#load-level-2-data">Load Level 2 data</a></li>
+  <li><a href="#level-2-netcdf-files-are-grouped" id="toc-level-2-netcdf-files-are-grouped" class="nav-link" data-scroll-target="#level-2-netcdf-files-are-grouped">Level 2 NetCDF files are grouped</a></li>
+  <li><a href="#plot-the-swath" id="toc-plot-the-swath" class="nav-link" data-scroll-target="#plot-the-swath">Plot the swath</a></li>
   </ul>
 <div class="toc-actions"><ul class="collapse"><li><a href="https://github.dev/nmfs-opensci/EDMW-EarthData-Workshop-2025/blob/main/tutorials/python/2-oci-file-structure.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2025/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2025/blob/main/tutorials/python/2-oci-file-structure.ipynb" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
@@ -380,13 +408,19 @@ function googleTranslateElementInit() {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">File Structure at Three Processing Levels for the Ocean Color Instrument (OCI)</h1>
+<h1 class="title">Level 2 and 3 file structure</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Eli Holmes (NOAA) </p>
+          </div>
+  </div>
     
   
     
@@ -397,31 +431,24 @@ function googleTranslateElementInit() {
 </header>
 
 
-<p><strong>Authors:</strong> Anna Windle (NASA, SSAI), Ian Carroll (NASA, UMBC), Carina Poulin (NASA, SSAI)</p>
+<p><a href="https://colab.research.google.com/github/nmfs-opensci/nmfshackdays-2025/blob/main/topics-2025/2025-PACE/level2.ipynb"><img src="https://img.shields.io/badge/Open_in_Colab-blue?style=for-the-badge.png" class="img-fluid" alt="Colab Badge"></a> <a href="javascript:void(0);" onclick="openJupyterWidget('https://github.com/nmfs-opensci/nmfshackdays-2025/blob/main/topics-2025/2025-PACE/level2.ipynb');"> <img src="https://img.shields.io/badge/Open_in_JupyterHub-orange?style=for-the-badge" alt="JupyterHub Badge"> </a> <a href="https://nmfs-opensci.github.io/NMFSHackDays-2025/topics-2025/2025-PACE/level2.ipynb"><img src="https://img.shields.io/badge/Download-grey?style=for-the-badge.png" class="img-fluid" alt="Download Badge"></a></p>
+<section id="file-structure-for-level-2-and-3-products-from-the-ocean-color-instrument-oci" class="level2">
+<h2 class="anchored" data-anchor-id="file-structure-for-level-2-and-3-products-from-the-ocean-color-instrument-oci">File Structure for Level 2 and 3 products from the Ocean Color Instrument (OCI)</h2>
+<p><strong>NetCDF</strong> ([Network Common Data Format][netcdf]) is a binary file format for storing multidimensional scientific data (variables). It is optimized for array-oriented data access and support a machine-independent format for representing scientific data. Files ending in <code>.nc</code> are NetCDF files.</p>
+<p><strong>XArray</strong> is a [package][xarray] that supports the use of multi-dimensional arrays in Python. It is widely used to handle Earth observation data, which often involves multiple dimensions — for instance, longitude, latitude, time, and channels/bands.</p>
 <blockquote class="blockquote">
-<p><strong>PREREQUISITES</strong></p>
-<p>This notebook has the following prerequisites: - <a href="oci_data_access.html" target="_blank">OCI Data Access</a></p>
-</blockquote>
-<section id="summary" class="level2">
-<h2 class="anchored" data-anchor-id="summary">Summary</h2>
-<hr>
-<p>In this example we will use the <code>earthaccess</code> package to access an OCI Level-1B, Level-2, and Level-3 NetCDF file and open them using <code>xarray</code>.</p>
-<p><strong>NetCDF</strong> (<a href="https://www.unidata.ucar.edu/software/netcdf/">Network Common Data Format</a>) is a binary file format for storing multidimensional scientific data (variables). It is optimized for array-oriented data access and support a machine-independent format for representing scientific data. Files ending in <code>.nc</code> are NetCDF files.</p>
-<p><strong>XArray</strong> is a <a href="https://docs.xarray.dev/">package</a> that supports the use of multi-dimensional arrays in Python. It is widely used to handle Earth observation data, which often involves multiple dimensions — for instance, longitude, latitude, time, and channels/bands.</p>
-</section>
-<section id="learning-objectives" class="level2">
-<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
-<p>At the end of this notebok you will know: * How to find groups in a NetCDF file * How to use <code>xarray</code> to open OCI data * What key variables are present in the groups within OCI L1B, L2, and L3 files</p>
-<p><a name="toc"></a> ## Contents ***</p>
+<p>📘 Learning Objectives</p>
 <ol type="1">
-<li><a href="#setup">Setup</a></li>
-<li><a href="#l1b">Inspecting OCI L1B File Structure</a></li>
-<li><a href="#l2">Inspecting OCI L2 File Structure</a></li>
-<li><a href="#l3">Inspecting OCI L3 File Structure</a></li>
+<li>Understand the differences between NetCDF file structure in Level 2 verus Level 3</li>
+<li>How to find groups in a NetCDF file</li>
+<li>How to use <code>xarray</code> to open OCI data</li>
+<li>How to add indices and coordinates with <code>xarray</code></li>
 </ol>
-<p><a name="setup"></a> ## 1. Setup ***</p>
-<p>We begin by importing all of the packages used in this notebook. If you have created an environment following the <a href="https://oceancolor.gsfc.nasa.gov/resources/docs/tutorials">guidance</a> provided with this tutorial, then the imports will be successful.</p>
-<div id="0c7efcd5" class="cell">
+</blockquote>
+</section>
+<section id="import-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="import-libraries">Import libraries</h2>
+<div id="0c7efcd5" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> earthaccess</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> h5netcdf</span>
@@ -429,230 +456,1117 @@ function googleTranslateElementInit() {
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Set (and persist to your user profile on the host, if needed) your Earthdata Login credentials.</p>
-<div id="c4b5e13f" class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>auth <span class="op">=</span> earthaccess.login(persist<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="login-into-nasa-earth-data" class="level2">
+<h2 class="anchored" data-anchor-id="login-into-nasa-earth-data">Login into NASA Earth Data</h2>
+<div id="c4b5e13f" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> earthaccess</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>auth <span class="op">=</span> earthaccess.login()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># are we authenticated?</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> auth.authenticated:</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ask for credentials and persist them in a .netrc file</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    auth.login(strategy<span class="op">=</span><span class="st">"interactive"</span>, persist<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><a href="#top">Back to top</a> <a name="l1b"></a> ## 2. Inspecting OCI L1B File Structure ***</p>
-<p>Let’s use <code>xarray</code> to open up a OCI L1B NetCDF file using <code>earthaccess</code>. We will use the same search method used in <a href="oci_data_access.html">OCI Data Access</a>. Note that L1B files do not include cloud coverage metadata, so we cannot use that filter.</p>
-<div id="b96350d8-72f7-4bef-b0c7-9ef4ed012d72" class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tspan <span class="op">=</span> (<span class="st">"2024-04-01"</span>, <span class="st">"2024-04-16"</span>)</span>
+</section>
+<section id="chesapeake-bay" class="level2">
+<h2 class="anchored" data-anchor-id="chesapeake-bay">Chesapeake Bay</h2>
+<p>We will be looking at data over Chesapeake Bay.</p>
+<p><img src="bbox_chesapeake.png" class="img-fluid"></p>
+</section>
+<section id="load-level-2-data" class="level2">
+<h2 class="anchored" data-anchor-id="load-level-2-data">Load Level 2 data</h2>
+<p>Level 2 data is swath data and is not a regular grid. As the satelitte follows an orbit around the earth, it collects data. The data are saved in files of roughly ~5-minute chunks of the path.</p>
+<ul>
+<li><p>Rows (<code>number_of_lines</code>) represent the along-track direction — each line is a step forward along the satellite’s orbit.</p></li>
+<li><p>Columns (<code>pixels_per_line</code>) represent the cross-track direction — multiple observations made side-by-side during a single line scan.</p></li>
+</ul>
+<p>We can use <code>earthaccess</code> to find the files that overlap with our Chesepeake Bay bounding box. We will also look for files that have low cloud cover.</p>
+<div id="483663d3-6494-4e09-a639-8edced596fcb" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tspan <span class="op">=</span> (<span class="st">"2024-04-01"</span>, <span class="st">"2024-04-23"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>bbox <span class="op">=</span> (<span class="op">-</span><span class="fl">76.75</span>, <span class="fl">36.97</span>, <span class="op">-</span><span class="fl">75.74</span>, <span class="fl">39.01</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> earthaccess.search_data(</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    short_name<span class="op">=</span><span class="st">"PACE_OCI_L1B_SCI"</span>,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    temporal<span class="op">=</span>tspan,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    bounding_box<span class="op">=</span>bbox,</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>clouds <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">30</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> earthaccess.search_data(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    short_name<span class="op">=</span><span class="st">"PACE_OCI_L2_AOP"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    temporal<span class="op">=</span>tspan,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    bounding_box<span class="op">=</span>bbox,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    cloud_cover<span class="op">=</span>clouds,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>1</code></pre>
 </div>
-<div id="0dcec107-085c-4ca5-8a82-153f19d0610b" class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>paths <span class="op">=</span> earthaccess.<span class="bu">open</span>(results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We want to confirm we are running code on a remote host with direct access to the NASA Earthdata Cloud. The next cell has no effect if we are, and otherwise raises an error. If there’s an error, consider the substitution explained in the OCI Data Access notebook.</p>
-<div id="d8d88d32-2dca-46b7-b259-b5dcdaad29df" class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    paths[<span class="dv">0</span>].f.bucket</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">AttributeError</span>:</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="st">"The result opened without an S3FileSystem."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e9b14378-e926-4382-9e9c-cfb772b87300" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the results and create a fileset</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fileset <span class="op">=</span> earthaccess.<span class="bu">open</span>(results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"cd1d4a26633a4ff1a1a3d1f246b4ed31","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+</script>
 </div>
-<p>Let’s open the first file of the L1B files list:</p>
-<div id="4885c23c" class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> xr.open_dataset(paths[<span class="dv">0</span>])</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>dataset</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"21e45185898f467d8ad8aa990b8294cc","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+</script>
 </div>
-<p>Notice that this <code>xarray.Dataset</code> has nothing but “Attributes”. We cannot use <code>xarray</code> to open multi-group hierarchies or list groups within a NetCDF file, but it can open a specific group if you know its path. The <code>xarray-datatree</code> package is going to be merged into <code>xarray</code> in the not too distant future, which will allow <code>xarray</code> to open the entire hieerarchy. In the meantime, we can use a lower level reader to see the top-level groups.</p>
-<p>TODO: Link to a PACE/OCI user’s guide, referencing the section which explains each group.</p>
-<div id="099d32e9-d6ad-48e7-99a9-9cfe9ac2a58d" class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> h5netcdf.File(paths[<span class="dv">0</span>]) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    groups <span class="op">=</span> <span class="bu">list</span>(<span class="bu">file</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>groups</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"77233bdf97534755b1da08a3a27177f0","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+</script>
 </div>
-<p>Let’s open the “observation_data” group, which contains the core science variables.</p>
-<div id="db8b1cc8" class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> xr.open_dataset(paths[<span class="dv">0</span>], group<span class="op">=</span><span class="st">"observation_data"</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>dataset</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now you can view the Dimensions, Coordinates, and Variables of this group. To show/hide attributes, press the paper icon on the right hand side of each variable. To show/hide data reprensetaton, press the cylinder icon. For instance, you could check the attributes on “rhot_blue” to see that this variable is the “Top of Atmosphere Blue Band Reflectance”.</p>
-<p>The dimensions of the “rhot_blue” variable are (“blue_bands”, “number_of_scans”, “ccd_pixels”), and it has shape (119, 1709, 1272). The <code>sizes</code> attribute of a variable gives us that information as a dictionary.</p>
-<div id="1992f158" class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">"rhot_blue"</span>].sizes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="level-2-netcdf-files-are-grouped" class="level2">
+<h2 class="anchored" data-anchor-id="level-2-netcdf-files-are-grouped">Level 2 NetCDF files are grouped</h2>
+<p>The Level 2 NetCDF files are grouped. The geophysical data and navigation data (lat/lon) are in different groups in the file. Let’s open the first file with <code>xarray</code>. Notice that this <code>xarray.Dataset</code> has nothing but “Attributes”. We cannot use <code>xarray.open_dataset</code> to open multi-group hierarchies. Instead we use <code>xarray.open_datatree</code>.</p>
+<div id="01ffea77-fb9d-4a13-b8fe-310cdb832278" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>xr.open_dataset(fileset[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewbox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewbox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme="dark"],
+html[data-theme="dark"],
+body[data-theme="dark"],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1f1f1f;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: inline-block;
+  opacity: 0;
+  height: 0;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:focus + label {
+  border: 2px solid var(--xr-font-color0);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: "►";
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: "▼";
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: "(";
+}
+
+.xr-dim-list:after {
+  content: ")";
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ",";
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class="xr-text-repr-fallback">&lt;xarray.Dataset&gt; Size: 0B
+Dimensions:  ()
+Data variables:
+    *empty*
+Attributes: (12/45)
+    title:                             OCI Level-2 Data AOP
+    product_name:                      PACE_OCI.20240414T183158.L2.OC_AOP.V3_...
+    processing_version:                3.0
+    history:                           l2gen par=/data18/sdpsoper/vdc/vpu37/w...
+    instrument:                        OCI
+    platform:                          PACE
+    ...                                ...
+    geospatial_lon_max:                -74.16712
+    geospatial_lon_min:                -112.36776
+    startDirection:                    Ascending
+    endDirection:                      Ascending
+    day_night_flag:                    Day
+    earth_sun_distance_correction:     0.9936428666114807</pre><div class="xr-wrap" style="display:none"><div class="xr-header"><div class="xr-obj-type">xarray.Dataset</div></div><ul class="xr-sections"><li class="xr-section-item"><input id="section-f23f1d7d-8e98-43de-af0c-4ad1e9a461cb" class="xr-section-summary-in" type="checkbox" disabled=""><label for="section-f23f1d7d-8e98-43de-af0c-4ad1e9a461cb" class="xr-section-summary" title="Expand/collapse section">Dimensions:</label><div class="xr-section-inline-details"></div><div class="xr-section-details"></div></li><li class="xr-section-item"><input id="section-e062194d-c54e-4723-91e3-0f9dbb2c2c7d" class="xr-section-summary-in" type="checkbox" disabled=""><label for="section-e062194d-c54e-4723-91e3-0f9dbb2c2c7d" class="xr-section-summary" title="Expand/collapse section">Coordinates: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"></ul></div></li><li class="xr-section-item"><input id="section-4da87a38-48fa-4b32-8184-f404e33a9aa8" class="xr-section-summary-in" type="checkbox" disabled=""><label for="section-4da87a38-48fa-4b32-8184-f404e33a9aa8" class="xr-section-summary" title="Expand/collapse section">Data variables: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"></ul></div></li><li class="xr-section-item"><input id="section-60303e40-a7d1-459f-88e7-b13d2507022c" class="xr-section-summary-in" type="checkbox" disabled=""><label for="section-60303e40-a7d1-459f-88e7-b13d2507022c" class="xr-section-summary" title="Expand/collapse section">Indexes: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"></ul></div></li><li class="xr-section-item"><input id="section-a31b6e50-650d-4dce-a250-ee27b62073d8" class="xr-section-summary-in" type="checkbox"><label for="section-a31b6e50-650d-4dce-a250-ee27b62073d8" class="xr-section-summary">Attributes: <span>(45)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"><dt><span>title :</span></dt><dd>OCI Level-2 Data AOP</dd><dt><span>product_name :</span></dt><dd>PACE_OCI.20240414T183158.L2.OC_AOP.V3_0.nc</dd><dt><span>processing_version :</span></dt><dd>3.0</dd><dt><span>history :</span></dt><dd>l2gen par=/data18/sdpsoper/vdc/vpu37/workbuf/PACE_OCI.20240414T183158.L1B.V3.nc.param metafile=PACE_OCI.20240414T183158.L2.OC_AOP.V3_0.nc.meta</dd><dt><span>instrument :</span></dt><dd>OCI</dd><dt><span>platform :</span></dt><dd>PACE</dd><dt><span>Conventions :</span></dt><dd>CF-1.8, ACDD-1.3</dd><dt><span>license :</span></dt><dd>https://science.nasa.gov/earth-science/earth-science-data/data-information-policy/</dd><dt><span>naming_authority :</span></dt><dd>gov.nasa.gsfc.sci.oceandata</dd><dt><span>id :</span></dt><dd>3.0/L2/PACE_OCI.20240414T183158.L2.OC_AOP.V3_0.nc</dd><dt><span>date_created :</span></dt><dd>2025-02-10T17:01:28.000Z</dd><dt><span>standard_name_vocabulary :</span></dt><dd>CF Standard Name Table v36</dd><dt><span>institution :</span></dt><dd>NASA Goddard Space Flight Center, Ocean Ecology Laboratory, Ocean Biology Processing Group</dd><dt><span>creator_name :</span></dt><dd>NASA/GSFC/OBPG</dd><dt><span>creator_email :</span></dt><dd>data@oceancolor.gsfc.nasa.gov</dd><dt><span>creator_url :</span></dt><dd>https://oceandata.sci.gsfc.nasa.gov</dd><dt><span>project :</span></dt><dd>Ocean Biology Processing Group (NASA/GSFC/OBPG)</dd><dt><span>publisher_name :</span></dt><dd>NASA/GSFC/OBPG</dd><dt><span>publisher_url :</span></dt><dd>https://oceandata.sci.gsfc.nasa.gov</dd><dt><span>publisher_email :</span></dt><dd>data@oceancolor.gsfc.nasa.gov</dd><dt><span>identifier_product_doi_authority :</span></dt><dd>http://dx.doi.org</dd><dt><span>identifier_product_doi :</span></dt><dd>10.5067/PACE/OCI/L2/OC_AOP/3.0</dd><dt><span>processing_level :</span></dt><dd>L2</dd><dt><span>cdm_data_type :</span></dt><dd>swath</dd><dt><span>spatialResolution :</span></dt><dd>1000 m</dd><dt><span>time_coverage_start :</span></dt><dd>2024-04-14T18:31:58.073Z</dd><dt><span>time_coverage_end :</span></dt><dd>2024-04-14T18:36:57.956Z</dd><dt><span>start_center_longitude :</span></dt><dd>-88.64161</dd><dt><span>start_center_latitude :</span></dt><dd>33.647682</dd><dt><span>end_center_longitude :</span></dt><dd>-94.78735</dd><dt><span>end_center_latitude :</span></dt><dd>51.648903</dd><dt><span>northernmost_latitude :</span></dt><dd>53.861073</dd><dt><span>southernmost_latitude :</span></dt><dd>30.618729</dd><dt><span>easternmost_longitude :</span></dt><dd>-74.16712</dd><dt><span>westernmost_longitude :</span></dt><dd>-112.36776</dd><dt><span>geospatial_lat_units :</span></dt><dd>degrees_north</dd><dt><span>geospatial_lon_units :</span></dt><dd>degrees_east</dd><dt><span>geospatial_lat_max :</span></dt><dd>53.861073</dd><dt><span>geospatial_lat_min :</span></dt><dd>30.618729</dd><dt><span>geospatial_lon_max :</span></dt><dd>-74.16712</dd><dt><span>geospatial_lon_min :</span></dt><dd>-112.36776</dd><dt><span>startDirection :</span></dt><dd>Ascending</dd><dt><span>endDirection :</span></dt><dd>Ascending</dd><dt><span>day_night_flag :</span></dt><dd>Day</dd><dt><span>earth_sun_distance_correction :</span></dt><dd>0.9936428666114807</dd></dl></div></li></ul></div></div>
 </div>
-<p>Let’s plot the reflectance at postion 100 in the “blue_bands” dimension.</p>
-<div id="ae93cc3a" class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> dataset[<span class="st">"rhot_blue"</span>].sel({<span class="st">"blue_bands"</span>: <span class="dv">100</span>}).plot()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><a href="#toc">Back to top</a> <a name="l2"></a> ## 3. Inspecting OCI L2 File Structure</p>
-<p>OCI L2 files include retrievals of geophysical variables, such as Apparent Optical Properties (AOP), for each L1 swath. We’ll use the same <code>earthaccess</code> search for L2 AOP data. Although now we can use <code>cloud_cover</code> too.</p>
-<div id="fdf82137-57e1-4cf5-a598-fd0b6c809f03" class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tspan <span class="op">=</span> (<span class="st">"2024-04-01"</span>, <span class="st">"2024-04-23"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>bbox <span class="op">=</span> (<span class="op">-</span><span class="fl">76.75</span>, <span class="fl">36.97</span>, <span class="op">-</span><span class="fl">75.74</span>, <span class="fl">39.01</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>clouds <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">50</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> earthaccess.search_data(</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    short_name<span class="op">=</span><span class="st">"PACE_OCI_L2_AOP_NRT"</span>,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    temporal<span class="op">=</span>tspan,</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    bounding_box<span class="op">=</span>bbox,</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    cloud_cover<span class="op">=</span>clouds,</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="4885c23c" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> xr.open_datatree(fileset[<span class="dv">0</span>], decode_timedelta <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ds.groups</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>('/',
+ '/sensor_band_parameters',
+ '/scan_line_attributes',
+ '/geophysical_data',
+ '/navigation_data',
+ '/processing_control',
+ '/processing_control/input_parameters',
+ '/processing_control/flag_percentages')</code></pre>
 </div>
-<div id="6265e367-f761-4d1a-9da8-ddc07f074915" class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>paths <span class="op">=</span> earthaccess.<span class="bu">open</span>(results)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    paths[<span class="dv">0</span>].f.bucket</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">AttributeError</span>:</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="st">"The result opened without an S3FileSystem."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="5b88fd7a" class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> h5netcdf.File(paths[<span class="dv">0</span>]) <span class="im">as</span> <span class="bu">file</span>:</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    groups <span class="op">=</span> <span class="bu">list</span>(<span class="bu">file</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>groups</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The Rrs data is in <code>geophysical_data</code>.</p>
+<p>The lat/lon for the swaths is in <code>navigation_data</code>. To make maps, we want to add the lat/lon as coordinates in our xarray dataset. We will also want to add on the values for the wavelengths which is in <code>sensor_band_parameters</code>. Note, we could do this with <code>xr.open_datatree()</code> but specifying the group seems clearer.</p>
+<div id="94df1553-83cd-48b6-b6da-1e1507b59b71" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> fileset[<span class="dv">0</span>]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>rrs <span class="op">=</span> xr.open_dataset(f, group<span class="op">=</span><span class="st">"geophysical_data"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>nav <span class="op">=</span> xr.open_dataset(f, group<span class="op">=</span><span class="st">"navigation_data"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>wave <span class="op">=</span> xr.open_dataset(f, group<span class="op">=</span><span class="st">"sensor_band_parameters"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>rrs <span class="op">=</span> rrs.assign_coords(</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    longitude <span class="op">=</span> nav[<span class="st">"longitude"</span>],</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    latitude <span class="op">=</span> nav[<span class="st">"latitude"</span>],</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    wavelength_3d <span class="op">=</span> wave[<span class="st">"wavelength_3d"</span>]</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>)[<span class="st">"Rrs"</span>]</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>rrs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewbox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewbox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme="dark"],
+html[data-theme="dark"],
+body[data-theme="dark"],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1f1f1f;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: inline-block;
+  opacity: 0;
+  height: 0;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:focus + label {
+  border: 2px solid var(--xr-font-color0);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: "►";
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: "▼";
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: "(";
+}
+
+.xr-dim-list:after {
+  content: ")";
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ",";
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class="xr-text-repr-fallback">&lt;xarray.DataArray 'Rrs' (number_of_lines: 1710, pixels_per_line: 1272,
+                         wavelength_3d: 172)&gt; Size: 1GB
+[374120640 values with dtype=float32]
+Coordinates:
+  * wavelength_3d  (wavelength_3d) float64 1kB 346.0 348.0 351.0 ... 717.0 719.0
+    longitude      (number_of_lines, pixels_per_line) float32 9MB ...
+    latitude       (number_of_lines, pixels_per_line) float32 9MB ...
+Dimensions without coordinates: number_of_lines, pixels_per_line
+Attributes:
+    long_name:      Remote sensing reflectance
+    units:          sr^-1
+    standard_name:  surface_ratio_of_upwelling_radiance_emerging_from_sea_wat...
+    valid_min:      -30000
+    valid_max:      25000</pre><div class="xr-wrap" style="display:none"><div class="xr-header"><div class="xr-obj-type">xarray.DataArray</div><div class="xr-array-name">'Rrs'</div><ul class="xr-dim-list"><li><span>number_of_lines</span>: 1710</li><li><span>pixels_per_line</span>: 1272</li><li><span class="xr-has-index">wavelength_3d</span>: 172</li></ul></div><ul class="xr-sections"><li class="xr-section-item"><div class="xr-array-wrap"><input id="section-941d7c9b-15d8-45ca-9828-1d40019062fa" class="xr-array-in" type="checkbox" checked=""><label for="section-941d7c9b-15d8-45ca-9828-1d40019062fa" title="Show/hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-array-preview xr-preview"><span>...</span></div><div class="xr-array-data"><pre>[374120640 values with dtype=float32]</pre></div></div></li><li class="xr-section-item"><input id="section-5cbc8231-95c1-4325-b5a5-15104b3ff3f7" class="xr-section-summary-in" type="checkbox" checked=""><label for="section-5cbc8231-95c1-4325-b5a5-15104b3ff3f7" class="xr-section-summary">Coordinates: <span>(3)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">wavelength_3d</span></div><div class="xr-var-dims">(wavelength_3d)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">346.0 348.0 351.0 ... 717.0 719.0</div><input id="attrs-2a5cdb59-9c93-4a24-9a62-0d4ea9557094" class="xr-var-attrs-in" type="checkbox"><label for="attrs-2a5cdb59-9c93-4a24-9a62-0d4ea9557094" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-2ab33191-4225-4ae1-9c2f-39f10fa95cda" class="xr-var-data-in" type="checkbox"><label for="data-2ab33191-4225-4ae1-9c2f-39f10fa95cda" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>long_name :</span></dt><dd>wavelengths</dd><dt><span>units :</span></dt><dd>nm</dd><dt><span>valid_min :</span></dt><dd>0</dd><dt><span>valid_max :</span></dt><dd>20000</dd></dl></div><div class="xr-var-data"><pre>array([346., 348., 351., 353., 356., 358., 361., 363., 366., 368., 371., 373.,
+       375., 378., 380., 383., 385., 388., 390., 393., 395., 398., 400., 403.,
+       405., 408., 410., 413., 415., 418., 420., 422., 425., 427., 430., 432.,
+       435., 437., 440., 442., 445., 447., 450., 452., 455., 457., 460., 462.,
+       465., 467., 470., 472., 475., 477., 480., 482., 485., 487., 490., 492.,
+       495., 497., 500., 502., 505., 507., 510., 512., 515., 517., 520., 522.,
+       525., 527., 530., 532., 535., 537., 540., 542., 545., 547., 550., 553.,
+       555., 558., 560., 563., 565., 568., 570., 573., 575., 578., 580., 583.,
+       586., 588., 613., 615., 618., 620., 623., 625., 627., 630., 632., 635.,
+       637., 640., 641., 642., 643., 645., 646., 647., 648., 650., 651., 652.,
+       653., 655., 656., 657., 658., 660., 661., 662., 663., 665., 666., 667.,
+       668., 670., 671., 672., 673., 675., 676., 677., 678., 679., 681., 682.,
+       683., 684., 686., 687., 688., 689., 691., 692., 693., 694., 696., 697.,
+       698., 699., 701., 702., 703., 704., 706., 707., 708., 709., 711., 712.,
+       713., 714., 717., 719.])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>longitude</span></div><div class="xr-var-dims">(number_of_lines, pixels_per_line)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-1ffd4fe3-742a-410a-b273-e30b7b2f9380" class="xr-var-attrs-in" type="checkbox"><label for="attrs-1ffd4fe3-742a-410a-b273-e30b7b2f9380" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-1855c254-27ca-44ad-be4b-d0266859cc74" class="xr-var-data-in" type="checkbox"><label for="data-1855c254-27ca-44ad-be4b-d0266859cc74" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>long_name :</span></dt><dd>Longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>valid_min :</span></dt><dd>-180.0</dd><dt><span>valid_max :</span></dt><dd>180.0</dd></dl></div><div class="xr-var-data"><pre>[2175120 values with dtype=float32]</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>latitude</span></div><div class="xr-var-dims">(number_of_lines, pixels_per_line)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-dd30490a-9243-4988-9791-baa21b71c44e" class="xr-var-attrs-in" type="checkbox"><label for="attrs-dd30490a-9243-4988-9791-baa21b71c44e" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-e42a01c5-8646-4cdc-a562-d50c2b6c85d2" class="xr-var-data-in" type="checkbox"><label for="data-e42a01c5-8646-4cdc-a562-d50c2b6c85d2" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>long_name :</span></dt><dd>Latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>valid_min :</span></dt><dd>-90.0</dd><dt><span>valid_max :</span></dt><dd>90.0</dd></dl></div><div class="xr-var-data"><pre>[2175120 values with dtype=float32]</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-d80cdaf3-2c1e-4c53-acfe-5830a24c1cb7" class="xr-section-summary-in" type="checkbox"><label for="section-d80cdaf3-2c1e-4c53-acfe-5830a24c1cb7" class="xr-section-summary">Indexes: <span>(1)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-index-name"><div>wavelength_3d</div></div><div class="xr-index-preview">PandasIndex</div><input type="checkbox" disabled=""><label></label><input id="index-cc87b12a-6c11-4fed-beb7-9a6788deeb34" class="xr-index-data-in" type="checkbox"><label for="index-cc87b12a-6c11-4fed-beb7-9a6788deeb34" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(Index([346.0, 348.0, 351.0, 353.0, 356.0, 358.0, 361.0, 363.0, 366.0, 368.0,
+       ...
+       706.0, 707.0, 708.0, 709.0, 711.0, 712.0, 713.0, 714.0, 717.0, 719.0],
+      dtype='float64', name='wavelength_3d', length=172))</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-43dd170a-c44a-4bdb-b490-ae75f73d6f75" class="xr-section-summary-in" type="checkbox" checked=""><label for="section-43dd170a-c44a-4bdb-b490-ae75f73d6f75" class="xr-section-summary">Attributes: <span>(5)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"><dt><span>long_name :</span></dt><dd>Remote sensing reflectance</dd><dt><span>units :</span></dt><dd>sr^-1</dd><dt><span>standard_name :</span></dt><dd>surface_ratio_of_upwelling_radiance_emerging_from_sea_water_to_downwelling_radiative_flux_in_air</dd><dt><span>valid_min :</span></dt><dd>-30000</dd><dt><span>valid_max :</span></dt><dd>25000</dd></dl></div></li></ul></div></div>
 </div>
-<p>Let’s look at the “geophysical_data” group, which is a new group generated by the level 2 processing.</p>
-<div id="d20840bf" class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> xr.open_dataset(paths[<span class="dv">0</span>], group<span class="op">=</span><span class="st">"geophysical_data"</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>rrs <span class="op">=</span> dataset[<span class="st">"Rrs"</span>]</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>rrs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="43e6b5fa-534e-4a1b-a17d-2220e3fe789e" class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>rrs.sizes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="plot-the-swath" class="level2">
+<h2 class="anchored" data-anchor-id="plot-the-swath">Plot the swath</h2>
+<p>This is pretty wide. Our bounding box is in the bottom right corner.</p>
+<div id="b557b7fc-f07f-4b11-88a6-11a20e6e8675" class="cell" data-scrolled="true" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>rrs.sel(wavelength_3d<span class="op">=</span><span class="dv">717</span>).plot(x<span class="op">=</span><span class="st">"longitude"</span>, y<span class="op">=</span><span class="st">"latitude"</span>, cmap<span class="op">=</span><span class="st">"jet"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2-oci-file-structure_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
-<p>The Rrs variable has length 184 in the wavelength dimension, so the blue, red, and SWIR wavelengths have been combined. Let’s map the Rrs at “wavelength_3d” position 100.</p>
-<div id="58ed61b8" class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> rrs.sel({<span class="st">"wavelength_3d"</span>: <span class="dv">100</span>}).plot(cmap<span class="op">=</span><span class="st">"viridis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Right now, the scene is being plotted using <code>number_of_lines</code> and <code>pixels_per_line</code> as “x” and “y”, respectively. We need to add latitude and longitude values to create a true map. To do this, we will create a merged <code>xarray.Dataset</code> that pulls in information from the “navigation_data” group.</p>
-<div id="04aa8db5-ad13-4088-b49e-6c36b372a397" class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> xr.open_dataset(paths[<span class="dv">0</span>], group<span class="op">=</span><span class="st">"navigation_data"</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> dataset.set_coords((<span class="st">"longitude"</span>, <span class="st">"latitude"</span>))</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> dataset.rename({<span class="st">"pixel_control_points"</span>: <span class="st">"pixels_per_line"</span>})</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> xr.merge((rrs, dataset.coords))</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>dataset</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Although we now have coordinates, they won’t immediately help because the data are not gridded by latitude and longitude. The Level 2 data cover the original instrument swath and have not been resampled to a regular grid. Therefore latitude and longitude are known, but cannot be used immediately to “look-up” values like you can along an array’s dimensions.</p>
-<p>Let’s make a scatter plot of the pixel locations so we can see the irregular spacing. By selecting a <code>slice</code> with a step size larger than one, we get a subset of the locations for better visualization.</p>
-<div id="ff095d8e" class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> dataset.sel(</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"number_of_lines"</span>: <span class="bu">slice</span>(<span class="va">None</span>, <span class="va">None</span>, <span class="dv">1720</span> <span class="op">//</span> <span class="dv">20</span>),</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pixels_per_line"</span>: <span class="bu">slice</span>(<span class="va">None</span>, <span class="va">None</span>, <span class="dv">1272</span> <span class="op">//</span> <span class="dv">20</span>),</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>).plot.scatter(x<span class="op">=</span><span class="st">"longitude"</span>, y<span class="op">=</span><span class="st">"latitude"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="0b226296-3895-4e59-841d-a43befe17556" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>ccrs.PlateCarree())</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>ax.coastlines()</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>ax.gridlines(draw_labels<span class="op">=</span>{<span class="st">"left"</span>: <span class="st">"y"</span>, <span class="st">"bottom"</span>: <span class="st">"x"</span>})</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> rrs.sel(wavelength_3d<span class="op">=</span><span class="dv">717</span>).plot(x<span class="op">=</span><span class="st">"longitude"</span>, y<span class="op">=</span><span class="st">"latitude"</span>, cmap<span class="op">=</span><span class="st">"viridis"</span>, vmin<span class="op">=</span><span class="dv">0</span>, ax<span class="op">=</span>ax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2-oci-file-structure_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
-<p>Let’s plot this new <code>xarray.Dataset</code> the same way as before, but add latitude and longitude.</p>
-<div id="d8b1a0bb" class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>rrs <span class="op">=</span> dataset[<span class="st">"Rrs"</span>].sel({<span class="st">"wavelength_3d"</span>: <span class="dv">100</span>})</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> rrs.plot(x<span class="op">=</span><span class="st">"longitude"</span>, y<span class="op">=</span><span class="st">"latitude"</span>, cmap<span class="op">=</span><span class="st">"viridis"</span>, vmin<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now you can project the data onto a grid. If you wanna get fancy, add a coastline.</p>
-<div id="c3d7c51f" class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>ccrs.PlateCarree())</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>ax.coastlines()</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>ax.gridlines(draw_labels<span class="op">=</span>{<span class="st">"left"</span>: <span class="st">"y"</span>, <span class="st">"bottom"</span>: <span class="st">"x"</span>})</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> rrs.plot(x<span class="op">=</span><span class="st">"longitude"</span>, y<span class="op">=</span><span class="st">"latitude"</span>, cmap<span class="op">=</span><span class="st">"viridis"</span>, vmin<span class="op">=</span><span class="dv">0</span>, ax<span class="op">=</span>ax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Because Level 2 data is not on a grid, we cannot use <code>slice()</code> to get lat/lon subsets. Instead we need to create a mask.</p>
+<div id="063deca7-6395-4c38-89d5-a161a8a7e2e1" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>bbox <span class="op">=</span> (<span class="op">-</span><span class="fl">76.75</span>, <span class="fl">36.97</span>, <span class="op">-</span><span class="fl">75.74</span>, <span class="fl">39.01</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>lon_min, lat_min, lon_max, lat_max <span class="op">=</span> bbox</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply mask using where(), drop empty pixels</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>rrs_box <span class="op">=</span> rrs.where(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    (rrs.latitude <span class="op">&gt;=</span> lat_min) <span class="op">&amp;</span> (rrs.latitude <span class="op">&lt;=</span> lat_max) <span class="op">&amp;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    (rrs.longitude <span class="op">&gt;=</span> lon_min) <span class="op">&amp;</span> (rrs.longitude <span class="op">&lt;=</span> lon_max),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    drop<span class="op">=</span><span class="va">True</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot result</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>ccrs.PlateCarree())</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>ax.coastlines()</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>ax.gridlines(draw_labels<span class="op">=</span>{<span class="st">"left"</span>: <span class="st">"y"</span>, <span class="st">"bottom"</span>: <span class="st">"x"</span>})</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>rrs_box.sel(wavelength_3d<span class="op">=</span><span class="dv">717</span>).plot(x<span class="op">=</span><span class="st">"longitude"</span>, y<span class="op">=</span><span class="st">"latitude"</span>, cmap<span class="op">=</span><span class="st">"jet"</span>, vmin<span class="op">=</span><span class="dv">0</span>, vmax<span class="op">=</span><span class="fl">0.01</span>, ax<span class="op">=</span>ax)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2-oci-file-structure_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 <p>Let’s plot the full “Rrs” spectrum for individual pixels. A visualization with all the pixels wouldn’t be useful, but limiting to a bounding box gives a simple way to subset pixels. Note that, since we still don’t have gridded data (i.e.&nbsp;our latitude and longitude coordinates are two-dimensional), we can’t <code>slice</code> on a built-in index. Without getting into anything complex, we can just box it out.</p>
-<div id="cc23c3cc-f9ca-4055-9667-b5c874de8da1" class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>rrs_box <span class="op">=</span> dataset[<span class="st">"Rrs"</span>].where(</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    (</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>        (dataset[<span class="st">"latitude"</span>] <span class="op">&gt;</span> <span class="fl">37.52</span>)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>        <span class="op">&amp;</span> (dataset[<span class="st">"latitude"</span>] <span class="op">&lt;</span> <span class="fl">37.55</span>)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        <span class="op">&amp;</span> (dataset[<span class="st">"longitude"</span>] <span class="op">&gt;</span> <span class="op">-</span><span class="fl">75.46</span>)</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        <span class="op">&amp;</span> (dataset[<span class="st">"longitude"</span>] <span class="op">&lt;</span> <span class="op">-</span><span class="fl">75.43</span>)</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    drop<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>rrs_box.sizes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <p>The line plotting method will only draw a line plot for 1D data, which we can get by stacking our two spatial dimensions and choosing to show the new “pixel dimension” as different colors.</p>
-<div id="4b989b67-fc8e-4e00-bd8b-50b3801dc6c4" class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>rrs_stack <span class="op">=</span> rrs_box.stack(</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"pixel"</span>: [<span class="st">"number_of_lines"</span>, <span class="st">"pixels_per_line"</span>]}, create_index<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> rrs_stack.plot.line(hue<span class="op">=</span><span class="st">"pixel"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="4b989b67-fc8e-4e00-bd8b-50b3801dc6c4" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>rrs_stack <span class="op">=</span> rrs_box.stack(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"pixel"</span>: [<span class="st">"number_of_lines"</span>, <span class="st">"pixels_per_line"</span>]}, create_index<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>rrs_valid <span class="op">=</span> rrs_stack.dropna(dim<span class="op">=</span><span class="st">"pixel"</span>, how<span class="op">=</span><span class="st">"all"</span>)  <span class="co"># drop pixels with all NaNs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="0bda837d-4afb-4d4d-bae7-5d54a7678ed5" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>rrs_box.sel(longitude<span class="op">=</span><span class="fl">76.2</span>, method<span class="op">=</span><span class="st">"nearest"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">KeyError</span>                                  Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[24], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">rrs_box</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">sel</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">longitude</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">76.2</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">method</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">"</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">nearest</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">"</span><span class="ansi-yellow-bg">)</span>
+
+File <span class="ansi-green-fg">/srv/conda/envs/notebook/lib/python3.12/site-packages/xarray/core/dataarray.py:1690</span>, in <span class="ansi-cyan-fg">DataArray.sel</span><span class="ansi-blue-fg">(self, indexers, method, tolerance, drop, **indexers_kwargs)</span>
+<span class="ansi-green-fg ansi-bold">   1574</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span><span style="color:rgb(188,188,188)"> </span><span style="color:rgb(0,0,255)">sel</span>(
+<span class="ansi-green-fg ansi-bold">   1575</span>     <span style="color:rgb(0,135,0)">self</span>,
+<span class="ansi-green-fg ansi-bold">   1576</span>     indexers: Mapping[Any, Any] <span style="color:rgb(98,98,98)">|</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span> <span style="color:rgb(98,98,98)">=</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>,
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-fg ansi-bold">   1580</span>     <span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span>indexers_kwargs: Any,
+<span class="ansi-green-fg ansi-bold">   1581</span> ) <span style="color:rgb(98,98,98)">-</span><span style="color:rgb(98,98,98)">&gt;</span> Self:
+<span class="ansi-green-fg ansi-bold">   1582</span> <span style="color:rgb(188,188,188)">    </span><span style="font-style:italic;color:rgb(175,0,0)">"""Return a new DataArray whose data is given by selecting index</span>
+<span class="ansi-green-fg ansi-bold">   1583</span> <span style="font-style:italic;color:rgb(175,0,0)">    labels along the specified dimension(s).</span>
+<span class="ansi-green-fg ansi-bold">   1584</span> 
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-fg ansi-bold">   1688</span> <span style="font-style:italic;color:rgb(175,0,0)">    Dimensions without coordinates: points</span>
+<span class="ansi-green-fg ansi-bold">   1689</span> <span style="font-style:italic;color:rgb(175,0,0)">    """</span>
+<span class="ansi-green-fg">-&gt; 1690</span>     ds <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">_to_temp_dataset</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">sel</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-fg ansi-bold">   1691</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">indexers</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">indexers</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">   1692</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">drop</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">drop</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">   1693</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">method</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">method</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">   1694</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">tolerance</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">tolerance</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">   1695</span> <span class="ansi-yellow-bg">        </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">indexers_kwargs</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg ansi-bold">   1696</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg ansi-bold">   1697</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_from_temp_dataset(ds)
+
+File <span class="ansi-green-fg">/srv/conda/envs/notebook/lib/python3.12/site-packages/xarray/core/dataset.py:2890</span>, in <span class="ansi-cyan-fg">Dataset.sel</span><span class="ansi-blue-fg">(self, indexers, method, tolerance, drop, **indexers_kwargs)</span>
+<span class="ansi-green-fg ansi-bold">   2822</span> <span style="font-style:italic;color:rgb(175,0,0)">"""Returns a new dataset with each array indexed by tick labels</span>
+<span class="ansi-green-fg ansi-bold">   2823</span> <span style="font-style:italic;color:rgb(175,0,0)">along the specified dimension(s).</span>
+<span class="ansi-green-fg ansi-bold">   2824</span> 
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-fg ansi-bold">   2887</span> 
+<span class="ansi-green-fg ansi-bold">   2888</span> <span style="font-style:italic;color:rgb(175,0,0)">"""</span>
+<span class="ansi-green-fg ansi-bold">   2889</span> indexers <span style="color:rgb(98,98,98)">=</span> either_dict_or_kwargs(indexers, indexers_kwargs, <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">sel</span><span style="color:rgb(175,0,0)">"</span>)
+<span class="ansi-green-fg">-&gt; 2890</span> query_results <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">map_index_queries</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-fg ansi-bold">   2891</span> <span class="ansi-yellow-bg">    </span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">indexers</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">indexers</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">method</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">method</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">tolerance</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">tolerance</span>
+<span class="ansi-green-fg ansi-bold">   2892</span> <span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg ansi-bold">   2894</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> drop:
+<span class="ansi-green-fg ansi-bold">   2895</span>     no_scalar_variables <span style="color:rgb(98,98,98)">=</span> {}
+
+File <span class="ansi-green-fg">/srv/conda/envs/notebook/lib/python3.12/site-packages/xarray/core/indexing.py:188</span>, in <span class="ansi-cyan-fg">map_index_queries</span><span class="ansi-blue-fg">(obj, indexers, method, tolerance, **indexers_kwargs)</span>
+<span class="ansi-green-fg ansi-bold">    185</span>     options <span style="color:rgb(98,98,98)">=</span> {<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">method</span><span style="color:rgb(175,0,0)">"</span>: method, <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">tolerance</span><span style="color:rgb(175,0,0)">"</span>: tolerance}
+<span class="ansi-green-fg ansi-bold">    187</span> indexers <span style="color:rgb(98,98,98)">=</span> either_dict_or_kwargs(indexers, indexers_kwargs, <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">map_index_queries</span><span style="color:rgb(175,0,0)">"</span>)
+<span class="ansi-green-fg">--&gt; 188</span> grouped_indexers <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">group_indexers_by_index</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">obj</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">indexers</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">options</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg ansi-bold">    190</span> results <span style="color:rgb(98,98,98)">=</span> []
+<span class="ansi-green-fg ansi-bold">    191</span> <span style="font-weight:bold;color:rgb(0,135,0)">for</span> index, labels <span style="font-weight:bold;color:rgb(175,0,255)">in</span> grouped_indexers:
+
+File <span class="ansi-green-fg">/srv/conda/envs/notebook/lib/python3.12/site-packages/xarray/core/indexing.py:147</span>, in <span class="ansi-cyan-fg">group_indexers_by_index</span><span class="ansi-blue-fg">(obj, indexers, options)</span>
+<span class="ansi-green-fg ansi-bold">    145</span>     grouped_indexers[index_id][key] <span style="color:rgb(98,98,98)">=</span> label
+<span class="ansi-green-fg ansi-bold">    146</span> <span style="font-weight:bold;color:rgb(0,135,0)">elif</span> key <span style="font-weight:bold;color:rgb(175,0,255)">in</span> obj<span style="color:rgb(98,98,98)">.</span>coords:
+<span class="ansi-green-fg">--&gt; 147</span>     <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">KeyError</span>(<span style="color:rgb(175,0,0)">f</span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">no index found for coordinate </span><span style="font-weight:bold;color:rgb(175,95,135)">{</span>key<span style="font-weight:bold;color:rgb(175,95,135)">!r}</span><span style="color:rgb(175,0,0)">"</span>)
+<span class="ansi-green-fg ansi-bold">    148</span> <span style="font-weight:bold;color:rgb(0,135,0)">elif</span> key <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="font-weight:bold;color:rgb(175,0,255)">in</span> obj<span style="color:rgb(98,98,98)">.</span>dims:
+<span class="ansi-green-fg ansi-bold">    149</span>     <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">KeyError</span>(
+<span class="ansi-green-fg ansi-bold">    150</span>         <span style="color:rgb(175,0,0)">f</span><span style="color:rgb(175,0,0)">"</span><span style="font-weight:bold;color:rgb(175,95,135)">{</span>key<span style="font-weight:bold;color:rgb(175,95,135)">!r}</span><span style="color:rgb(175,0,0)"> is not a valid dimension or coordinate for </span><span style="color:rgb(175,0,0)">"</span>
+<span class="ansi-green-fg ansi-bold">    151</span>         <span style="color:rgb(175,0,0)">f</span><span style="color:rgb(175,0,0)">"</span><span style="font-weight:bold;color:rgb(175,95,135)">{</span>obj<span style="color:rgb(98,98,98)">.</span><span style="color:rgb(0,0,135)">__class__</span><span style="color:rgb(98,98,98)">.</span><span style="color:rgb(0,0,135)">__name__</span><span style="font-weight:bold;color:rgb(175,95,135)">}</span><span style="color:rgb(175,0,0)"> with dimensions </span><span style="font-weight:bold;color:rgb(175,95,135)">{</span>obj<span style="color:rgb(98,98,98)">.</span>dims<span style="font-weight:bold;color:rgb(175,95,135)">!r}</span><span style="color:rgb(175,0,0)">"</span>
+<span class="ansi-green-fg ansi-bold">    152</span>     )
+
+<span class="ansi-red-fg">KeyError</span>: "no index found for coordinate 'longitude'"</pre>
+</div>
+</div>
+</div>
+<div id="fdb3b023-5cfa-4a25-bdfa-d497e724dceb" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> rrs_valid.plot.line(hue<span class="op">=</span><span class="st">"pixel"</span>, add_legend<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2-oci-file-structure_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="ecb17707-0ad7-4ec4-a78c-db6531573f38" class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We will go over how to plot Rrs spectra with accurate wavelength values on the x-axis in an upcoming notebook.</p>
 <p><a href="#toc">Back to top</a> <a name="l3"></a> ## 4. Inspecting OCI L3 File Structure</p>
 <p>At Level-3 there are binned (B) and mapped (M) products available for OCI. The L3M remote sensing reflectance (Rrs) files contain global maps of Rrs. We’ll use the same <code>earthaccess</code> method to find the data.</p>
 <div id="0eea7754-b139-46f8-aa71-5c7c212d5b22" class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>tspan <span class="op">=</span> (<span class="st">"2024-04-16"</span>, <span class="st">"2024-04-20"</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>bbox <span class="op">=</span> (<span class="op">-</span><span class="fl">76.75</span>, <span class="fl">36.97</span>, <span class="op">-</span><span class="fl">75.74</span>, <span class="fl">39.01</span>)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> earthaccess.search_data(</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    short_name<span class="op">=</span><span class="st">"PACE_OCI_L3M_RRS_NRT"</span>,</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    temporal<span class="op">=</span>tspan,</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    bounding_box<span class="op">=</span>bbox,</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>tspan <span class="op">=</span> (<span class="st">"2024-04-16"</span>, <span class="st">"2024-04-20"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>bbox <span class="op">=</span> (<span class="op">-</span><span class="fl">76.75</span>, <span class="fl">36.97</span>, <span class="op">-</span><span class="fl">75.74</span>, <span class="fl">39.01</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> earthaccess.search_data(</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    short_name<span class="op">=</span><span class="st">"PACE_OCI_L3M_RRS_NRT"</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    temporal<span class="op">=</span>tspan,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    bounding_box<span class="op">=</span>bbox,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="af0d2439-5f91-4cb2-ae0e-50e6b1db2219" class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>paths <span class="op">=</span> earthaccess.<span class="bu">open</span>(results)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    paths[<span class="dv">0</span>].f.bucket</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">AttributeError</span>:</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="st">"The result opened without an S3FileSystem."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>paths <span class="op">=</span> earthaccess.<span class="bu">open</span>(results)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    paths[<span class="dv">0</span>].f.bucket</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">AttributeError</span>:</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="st">"The result opened without an S3FileSystem."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>OCI L3 data do not have any groups, so we can open the dataset without the <code>group</code> argument. Let’s take a look at the first file.</p>
 <div id="c2f3e09f" class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> xr.open_dataset(paths[<span class="dv">0</span>])</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>dataset</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> xr.open_dataset(paths[<span class="dv">0</span>])</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>dataset</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Notice that OCI L3M data has <code>lat</code> and <code>lon</code> coordinates, so it’s easy to slice out a bounding box and map the “Rrs_442” variable.</p>
 <div id="2fef3d3d" class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>ccrs.PlateCarree())</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>ax.coastlines()</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>ax.gridlines(draw_labels<span class="op">=</span>{<span class="st">"left"</span>: <span class="st">"y"</span>, <span class="st">"bottom"</span>: <span class="st">"x"</span>})</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>rrs_442 <span class="op">=</span> dataset[<span class="st">"Rrs_442"</span>].sel({<span class="st">"lat"</span>: <span class="bu">slice</span>(<span class="op">-</span><span class="dv">25</span>, <span class="op">-</span><span class="dv">45</span>), <span class="st">"lon"</span>: <span class="bu">slice</span>(<span class="dv">10</span>, <span class="dv">30</span>)})</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> rrs_442.plot(cmap<span class="op">=</span><span class="st">"viridis"</span>, vmin<span class="op">=</span><span class="dv">0</span>, ax<span class="op">=</span>ax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>ccrs.PlateCarree())</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>ax.coastlines()</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>ax.gridlines(draw_labels<span class="op">=</span>{<span class="st">"left"</span>: <span class="st">"y"</span>, <span class="st">"bottom"</span>: <span class="st">"x"</span>})</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>rrs_442 <span class="op">=</span> dataset[<span class="st">"Rrs_442"</span>].sel({<span class="st">"lat"</span>: <span class="bu">slice</span>(<span class="op">-</span><span class="dv">25</span>, <span class="op">-</span><span class="dv">45</span>), <span class="st">"lon"</span>: <span class="bu">slice</span>(<span class="dv">10</span>, <span class="dv">30</span>)})</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> rrs_442.plot(cmap<span class="op">=</span><span class="st">"viridis"</span>, vmin<span class="op">=</span><span class="dv">0</span>, ax<span class="op">=</span>ax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Also becuase the L3M variables have <code>lat</code> and <code>lon</code> coordinates, it’s possible to stack multiple granules along a new dimension that corresponds to time. Instead of <code>xr.open_dataset</code>, we use <code>xr.open_mfdataset</code> to create a single <code>xarray.Dataset</code> (the “mf” in <code>open_mfdataset</code> stands for multiple files) from an array of paths.</p>
 <p>We also use a new search filter available in <code>earthaccess.search_data</code>: the <code>granule_name</code> argument accepts strings with the “*” wildcard. We need this to distinguish daily (“DAY”) from eight-day (“8D”) composites, as well as to get the 0.1 degree resolution projections.</p>
 <div id="f9f915da-ffb7-466a-a1c5-210cf7eac832" class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>tspan <span class="op">=</span> (<span class="st">"2024-04-12"</span>, <span class="st">"2024-04-24"</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> earthaccess.search_data(</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    short_name<span class="op">=</span><span class="st">"PACE_OCI_L3M_CHL_NRT"</span>,</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    temporal<span class="op">=</span>tspan,</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    granule_name<span class="op">=</span><span class="st">"*.DAY.*.0p1deg.*"</span>,</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>tspan <span class="op">=</span> (<span class="st">"2024-04-12"</span>, <span class="st">"2024-04-24"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> earthaccess.search_data(</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    short_name<span class="op">=</span><span class="st">"PACE_OCI_L3M_CHL_NRT"</span>,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    temporal<span class="op">=</span>tspan,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    granule_name<span class="op">=</span><span class="st">"*.DAY.*.0p1deg.*"</span>,</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="6fdfc144-ce5f-449c-936b-964f438dd009" class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>paths <span class="op">=</span> earthaccess.<span class="bu">open</span>(results)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    paths[<span class="dv">0</span>].f.bucket</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">AttributeError</span>:</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="st">"The result opened without an S3FileSystem."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>paths <span class="op">=</span> earthaccess.<span class="bu">open</span>(results)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    paths[<span class="dv">0</span>].f.bucket</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">AttributeError</span>:</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="st">"The result opened without an S3FileSystem."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>paths</code> list is sorted temporally by default, which means the shape of the <code>paths</code> array specifies the way we need to tile the files together into larger arrays. We specify <code>combine="nested"</code> to combine the files according to the shape of the array of files (or file-like objects), even though <code>paths</code> is not a “nested” list in this case. The <code>concat_dim="date"</code> argument generates a new dimension in the combined dataset, because “date” is not an existing dimension in the individual files.</p>
 <div id="51bf908c-3234-4872-a5b9-6cff79c23815" class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> xr.open_mfdataset(</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    paths,</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    combine<span class="op">=</span><span class="st">"nested"</span>,</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    concat_dim<span class="op">=</span><span class="st">"date"</span>,</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>dataset</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> xr.open_mfdataset(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    paths,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    combine<span class="op">=</span><span class="st">"nested"</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    concat_dim<span class="op">=</span><span class="st">"date"</span>,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>dataset</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A common reason to generate a single dataset from multiple, daily images is to create a composite. Compare the map from a single day …</p>
 <div id="5594233a-af30-4918-8ee1-370ea85bfb44" class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>chla <span class="op">=</span> np.log10(dataset[<span class="st">"chlor_a"</span>])</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>chla.attrs.update(</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"units"</span>: <span class="ss">f'lg(</span><span class="sc">{</span>dataset[<span class="st">"chlor_a"</span>]<span class="sc">.</span>attrs[<span class="st">"units"</span>]<span class="sc">}</span><span class="ss">)'</span>,</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> chla.sel({<span class="st">"date"</span>: <span class="dv">0</span>}).plot(aspect<span class="op">=</span><span class="dv">2</span>, size<span class="op">=</span><span class="dv">4</span>, cmap<span class="op">=</span><span class="st">"GnBu_r"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>chla <span class="op">=</span> np.log10(dataset[<span class="st">"chlor_a"</span>])</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>chla.attrs.update(</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"units"</span>: <span class="ss">f'lg(</span><span class="sc">{</span>dataset[<span class="st">"chlor_a"</span>]<span class="sc">.</span>attrs[<span class="st">"units"</span>]<span class="sc">}</span><span class="ss">)'</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> chla.sel({<span class="st">"date"</span>: <span class="dv">0</span>}).plot(aspect<span class="op">=</span><span class="dv">2</span>, size<span class="op">=</span><span class="dv">4</span>, cmap<span class="op">=</span><span class="st">"GnBu_r"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>… to a map of average values, skipping “NaN” values that result from clouds.</p>
 <div id="3f8d5f93-a537-4c14-8ef0-75f4acc937d9" class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>chla_avg <span class="op">=</span> chla.mean(<span class="st">"date"</span>)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>chla_avg.attrs.update(</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"long_name"</span>: chla.attrs[<span class="st">"long_name"</span>],</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"units"</span>: <span class="ss">f'lg(</span><span class="sc">{</span>chla<span class="sc">.</span>attrs[<span class="st">"units"</span>]<span class="sc">}</span><span class="ss">)'</span>,</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> chla_avg.plot(aspect<span class="op">=</span><span class="dv">2</span>, size<span class="op">=</span><span class="dv">4</span>, cmap<span class="op">=</span><span class="st">"GnBu_r"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>chla_avg <span class="op">=</span> chla.mean(<span class="st">"date"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>chla_avg.attrs.update(</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"long_name"</span>: chla.attrs[<span class="st">"long_name"</span>],</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"units"</span>: <span class="ss">f'lg(</span><span class="sc">{</span>chla<span class="sc">.</span>attrs[<span class="st">"units"</span>]<span class="sc">}</span><span class="ss">)'</span>,</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> chla_avg.plot(aspect<span class="op">=</span><span class="dv">2</span>, size<span class="op">=</span><span class="dv">4</span>, cmap<span class="op">=</span><span class="st">"GnBu_r"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="alert alert-info" role="alert">
 <p>

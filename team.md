@@ -43,7 +43,7 @@ title: Our Team
 <div>
 ### Ryan Vandermeulen
 
-<img src="images/Eli.png" alt="Ryan" style="width:75%; ; border-radius: 50%;">
+<img src="images/ryan.png" alt="Ryan" style="width:75%; ; border-radius: 50%;">
 
 [NOAA Fisheries](https://www.fisheries.noaa.gov/)
 

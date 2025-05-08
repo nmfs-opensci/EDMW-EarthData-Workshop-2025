@@ -3,11 +3,9 @@ title: "EDMW 2025 - Introduction to using earth data in the cloud for scientific
 subtitle: "PACE hyperspectral ocean color data"
 ---
 
-## Register
-
 ## Zoom link
 
-EDM Workshop website: Once you get the access link and are added to the sched event site, you can go to [website](https://2025noaaedmw.sched.com) and log in. Once you are logged in, navigate to Workshop 4A [Part I](https://2025noaaedmw.sched.com/event/1z0CM/4a-workshop-introduction-to-using-earth-data-in-the-cloud-for-scientific-workflows-pace-hyperspectral-ocean-color-data-part-i) and [Part II](https://2025noaaedmw.sched.com/event/1z0CM/4a-workshop-introduction-to-using-earth-data-in-the-cloud-for-scientific-workflows-pace-hyperspectral-ocean-color-data-part-ii) and add them to your schedule. 
+EDM Workshop website: Once you are added to the sched event site, you can go to [website](https://2025noaaedmw.sched.com) and log in. Once you are logged in, navigate to Workshop 4A [Part I](https://2025noaaedmw.sched.com/event/1z0CM/4a-workshop-introduction-to-using-earth-data-in-the-cloud-for-scientific-workflows-pace-hyperspectral-ocean-color-data-part-i) and [Part II](https://2025noaaedmw.sched.com/event/1z0CM/4a-workshop-introduction-to-using-earth-data-in-the-cloud-for-scientific-workflows-pace-hyperspectral-ocean-color-data-part-ii) and add them to your schedule. 
 
 ### Prerequisites
 
@@ -19,7 +17,6 @@ If you want to follow along with our tutorials during the workshop on our Jupyte
 
 *Do I need to use the Jupyter Hub?* No. You can run the tutorials in Colab, Binder, or download and run on your own computer.
 
-*I am an R user. Do I need Python installed if I run on my own computer?* No. You will use the `reticulate` R package for any Python code that you need to run. *I don't need to install Python for that to work?* No, you do not. `reticulate` will do the needed setup for you.
 
 <img src="images/cloud-overview.png" style="width:250px; float:right;">
 Welcome to the NOAA Fisheries workshop focused on geospatial analysis using ocean 'big data'. Today, we are focused on using PACE hyperspectral ocean color data from NASA [EarthData](https://www.earthdata.nasa.gov/).

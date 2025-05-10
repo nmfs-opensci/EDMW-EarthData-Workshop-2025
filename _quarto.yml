@@ -27,18 +27,15 @@ website:
     toc-expand: false
     contents:
       - section: "Welcome"
-        href: index.md
+        href: index.qmd
         contents:
-          - team.md
-          - schedule.md
-          - setup.qmd
-          - section: Orientation
-            contents:
-            - text: Earthdata login
-              href: content/02-earthdata.md
-            - text: JupyterHub and Lab
-              href: content/01-intro-to-jupyterhub.md
-          - coc.md
+          - content/schedule.md
+          - content/setup.md
+          - content/team.md
+          - text: Why cloud(-native) data?
+            href: content/why-cloud.qmd
+          - text: Jupyter Hub and Lab
+            href: content/jupyterhub.md
       - section: "Lectures"
         href: lectures/index.md
         contents:
@@ -58,6 +55,8 @@ website:
             href: tutorials/Tutorial_4_kd.ipynb
           - text: MOANA
             href: tutorials/Tutorial_3_moana-erddap.ipynb
+      - content/resources.md
+      - coc.md
       - text: <img width=100px>
       - text: <img src="/images/noaa_emblem_logo-2022.png" width=100px>
         href: https://fisheries.noaa.gov

@@ -1,0 +1,34 @@
+---
+title: "EDMW 2025 - Introduction to using earth data in the cloud for scientific workflows"
+subtitle: "PACE hyperspectral ocean color data"
+---
+
+::: {style="vertical-align: middle; text-align:center; border-style: solid;   border-color: blue;   border-width: 5px;   padding: 5px; font-size: 120%;"}
+Welcome to the NOAA Fisheries workshop focused on geospatial analysis using ocean ‘big data’. Today, we are focused on data from the NASA [Phytoplankton, Aerosol, Cloud and ocean Ecosystem](https://pace.oceansciences.org/) mission. This workshop is for those who are new to working with earth data in the cloud. We will be working in Python, but you will be given notebooks so you do not need to write code. This workshop will also introduce working with Jupyter Hubs, Jupyter Lab and the Pangeo Python tooling for 'big data' geospatial analysis.
+
+![](content/img/satellite.jpg){width="300"}
+:::
+
+<br />
+
+## Register and Zoom Link
+
+**Before the EDM Workshop** [Register by filling out this form](). You will receive an email to invite you to the [EDM Workshop Sched website](https://2025noaaedmw.sched.com/list/simple_). Once you can log into the [Sched event website](https://2025noaaedmw.sched.com), navigate to Workshop 4A [Part I](https://2025noaaedmw.sched.com/event/1z0CM/4a-workshop-introduction-to-using-earth-data-in-the-cloud-for-scientific-workflows-pace-hyperspectral-ocean-color-data-part-i) and [Part II](https://2025noaaedmw.sched.com/event/1z0CM/4a-workshop-introduction-to-using-earth-data-in-the-cloud-for-scientific-workflows-pace-hyperspectral-ocean-color-data-part-ii) and add them to your schedule. You will then be able to see the Zoom links.
+
+## PACE Ocean Color products
+
+-   What is the color of the ocean? (Rrs)
+-   What/who is there? (phytoplankton composition, SPM)
+-   How much of it is there? (chlorophyll concentration, particulate/phytoplankton carbon etc.)
+-   Are they shiny/colorful? (IOPs)
+-   How much light is there? (PAR/Kd)
+-   What are the phytoplankton doing? (Primary productivity)
+-   How are they doing? (Fluorescence Line Height)
+
+<figure>
+
+<img src="images/pace-fish-figure-1.png"/>
+
+</figure>
+
+

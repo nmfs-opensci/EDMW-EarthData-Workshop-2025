@@ -1,10 +1,39 @@
 [
   {
-    "objectID": "content/01-intro-to-cloud.html",
-    "href": "content/01-intro-to-cloud.html",
-    "title": "Intro the Cloud",
-    "section": "",
-    "text": "Today we will be showing how to “stream cloud data without downloads” using data in NASA Earth Data and on ERDDAP servers.\n\nLecture on NASA earth data in the cloud by Michele Thornton (NASA Openscapes) Video"
+    "objectID": "content/why-cloud.html#server-versus-object-storage",
+    "href": "content/why-cloud.html#server-versus-object-storage",
+    "title": "Why Cloud(-Native) Data?",
+    "section": "Server versus Object Storage",
+    "text": "Server versus Object Storage\nLet’s use a metaphor of a customers wanting to get sandwiches. A server system (ERDDAP/OPeNDAP) is like a restaurant while the cloud-native data in object storage buckets (S3, GCS, etc) is like a food court with pre-prepared sandwiches.\n\n\n\n\n\n\n\n\nModel\nMetaphor\nHow It Works\n\n\n\n\nERDDAP / OPeNDAP\nRestaurant with multiple waiters but one kitchen that prepares the sandwiches\nEach client request is handled by a thread (waiter), but all data is read from the same disk (kitchen). Concurrent access is limited by server I/O.\n\n\nCloud-Native in Object Storage (S3/GCS)\nFood court with many self-serve stations and pre-prepared sandwiches\nClients fetch just the data chunks they need directly from cloud storage. No central bottleneck — reads happen in parallel and scale with demand.\n\n\n\n\nKey difference\n\nCloud-native formats and object storage buckets remove the kitchen bottleneck by letting each client serve themselves from pre-prepared, independently accessible data chunks.\nCloud-native formats^* is ‘pre-packaged’ into to chunks that ready for grab and go. Cloud-native can also be thought of as ‘read-optimized’.\n\n\nExamples of cloud-native formats: Zarr, GeoTIFF, legacy netCDFs with a sidecar file (kerchunk, VirtualiZarr) that let’s you grab chunks",
+    "crumbs": [
+      "JupyterHub",
+      "Welcome",
+      "Why cloud(-native) data?"
+    ]
+  },
+  {
+    "objectID": "content/why-cloud.html#cloud-native-is-read-optimized",
+    "href": "content/why-cloud.html#cloud-native-is-read-optimized",
+    "title": "Why Cloud(-Native) Data?",
+    "section": "Cloud-Native is Read-Optimized",
+    "text": "Cloud-Native is Read-Optimized\nThis means (among other things) chunked data.",
+    "crumbs": [
+      "JupyterHub",
+      "Welcome",
+      "Why cloud(-native) data?"
+    ]
+  },
+  {
+    "objectID": "content/why-cloud.html#why-not-just-download-the-data",
+    "href": "content/why-cloud.html#why-not-just-download-the-data",
+    "title": "Why Cloud(-Native) Data?",
+    "section": "Why not just download the data?",
+    "text": "Why not just download the data?\nHow will you work with data larger than memory?",
+    "crumbs": [
+      "JupyterHub",
+      "Welcome",
+      "Why cloud(-native) data?"
+    ]
   },
   {
     "objectID": "tutorials/Tutorial_4_kd.html#interacting-with-diffuse-light-attenuation-coefficients.",
@@ -35,7 +64,7 @@
     "href": "tutorials/Tutorial_4_kd.html#a-standard-run-of-the-mill-rainbow",
     "title": "Tutorial 4: What lies beneath the surface?",
     "section": "A standard, run-of-the-mill rainbow",
-    "text": "A standard, run-of-the-mill rainbow\nWhere do bad rainbows go? (They go to Prism) They get a light sentence though, it’s only so they can have time to reflect…\n…\n…\nRight. First thing, we need a reference spectrum. As mentioned above, this is spectral downwelling irradiance just below the sea surface, \\(E_{s}^{-}({\\lambda})\\). If you’re interested in the details, this was calculated from the ASTM G173-03 Reference Spectra Derived from SMARTS v. 2.9.2, additionally corrected for an average sun angle for satellites, diffuse contributions, and crossing the air-sea boundary.\n\nimport pandas as pd\n\n# Load the CSV file\ndf_es = pd.read_csv('Es_spectrum.csv')\nwave_Es = df_es['wave'].values\nEs = df_es['Es'].values\n\nJust in case you like to see what this looks like so it’s not some abstract concept, let’s take a quick look. This is a quantified representation of the sun’s intensity of light at different wavelengths, after passing through the atmosphere and sitting at the very tip top surface layer of ocean water. We’re getting a little fancy with the rainbow colors, but it helps illustrate the point. Refer to the commented out portion for a simpler representation.\n\nimport matplotlib.pyplot as plt\nfrom matplotlib.collections import PolyCollection\nimport numpy as np\n\n# Simple line plot\n#plt.plot(wave_Es, Es, 'o-', label='Es') \n#plt.xlabel('Wavelength (nm)')\n#plt.ylabel('Irradiance (W m$^{-2}$ nm$^{-1}$)')\n#plt.title('Spectral Irradiance just beneath the sea surface (PACE wavelengths)')\n#plt.tight_layout()\n#plt.show()\n\n# Fancy plot with rainbows, because rainbows are rad\n# Normalize wavelengths for colormap\nnorm = plt.Normalize(wave_Es.min(), wave_Es.max())\ncolors = plt.cm.rainbow(norm(wave_Es[:-1]))  # one color per segment\n\n# Build segments for PolyCollection\nverts = []\nfor i in range(len(wave_Es) - 1):\n    verts.append([\n        (wave_Es[i], 0), (wave_Es[i], Es[i]),\n        (wave_Es[i+1], Es[i+1]), (wave_Es[i+1], 0)\n    ])\n\npoly = PolyCollection(verts, facecolors=colors, alpha=0.5)\n\n# Plot\nfig, ax = plt.subplots(figsize=(7, 4))\nax.add_collection(poly)\nax.plot(wave_Es, Es, 'k-o', label='Es')  # line on top for visibility\n\nax.set_xlim(wave_Es.min(), wave_Es.max())\nax.set_ylim(0, max(Es) * 1.1)\nax.set_xlabel('Wavelength (nm)')\nax.set_ylabel('Irradiance (W m$^{-2}$ nm$^{-1}$)')\nax.set_title('Spectral Irradiance just beneath the sea surface (PACE wavelengths)')\nplt.tight_layout()\nplt.show()",
+    "text": "A standard, run-of-the-mill rainbow\nWhere do bad rainbows go? (They go to Prism) They get a light sentence though, it’s only so they can have time to reflect…\n…\n…\nRight. First thing, we need a reference spectrum. As mentioned above, this is spectral downwelling irradiance just below the sea surface, \\(E_{s}^{-}({\\lambda})\\). If you’re interested in the details, this was calculated from the ASTM G173-03 Reference Spectra Derived from SMARTS v. 2.9.2, additionally corrected for an average sun angle for satellites, diffuse contributions, and crossing the air-sea boundary. We have saved this in a file for you.\n\nimport pandas as pd\n\n# Load the CSV file\ndf_es = pd.read_csv('Es_spectrum.csv')\ndf_es\n\n\n\n\n\n\n\n\nwave\nEs\n\n\n\n\n0\n351\n0.43348\n\n\n1\n361\n0.43439\n\n\n2\n385\n0.47793\n\n\n3\n413\n0.92794\n\n\n4\n425\n0.93371\n\n\n5\n442\n1.06030\n\n\n6\n460\n1.16610\n\n\n7\n475\n1.18530\n\n\n8\n490\n1.15240\n\n\n9\n510\n1.16820\n\n\n10\n532\n1.15060\n\n\n11\n555\n1.14720\n\n\n12\n583\n1.13660\n\n\n13\n618\n1.06760\n\n\n14\n640\n1.06230\n\n\n15\n655\n0.96797\n\n\n16\n665\n1.03840\n\n\n17\n678\n1.02910\n\n\n18\n711\n0.96479\n\n\n\n\n\n\n\nJust in case you like to see what this looks like so it’s not some abstract concept, let’s take a quick look. This is a quantified representation of the sun’s intensity of light at different wavelengths, after passing through the atmosphere and sitting at the very tip top surface layer of ocean water. We’re getting a little fancy with the rainbow colors, but it helps illustrate the point. Refer to the commented out portion for a simpler representation.\n\nimport matplotlib.pyplot as plt\nfrom matplotlib.collections import PolyCollection\nimport numpy as np\n\n# Normalize wavelengths for color mapping; df_es is the Es data we loaded above\nnorm = plt.Normalize(df_es['wave'].min(), df_es['wave'].max())\ncolors = plt.cm.rainbow(norm(df_es['wave'].iloc[:-1]))\n\n# Build colored polygon segments\nverts = [\n    [(w1, 0), (w1, e1), (w2, e2), (w2, 0)]\n    for (w1, e1), (w2, e2) in zip(df_es[['wave', 'Es']].values[:-1], df_es[['wave', 'Es']].values[1:])\n]\n\npoly = PolyCollection(verts, facecolors=colors, alpha=0.5)\n\n# Plot\nfig, ax = plt.subplots(figsize=(7, 4))\nax.add_collection(poly)\nax.plot(df_es['wave'], df_es['Es'], 'k-o', label='Es')  # overlay line\n\nax.set_xlim(df_es['wave'].min(), df_es['wave'].max())\nax.set_ylim(0, df_es['Es'].max() * 1.1)\nax.set_xlabel('Wavelength (nm)')\nax.set_ylabel('Irradiance (W m$^{-2}$ nm$^{-1}$)')\nax.set_title('Spectral Irradiance just beneath the sea surface (PACE wavelengths)')\nplt.tight_layout()\nplt.show()",
     "crumbs": [
       "JupyterHub",
       "Tutorials",
@@ -47,7 +76,7 @@
     "href": "tutorials/Tutorial_4_kd.html#lock-and-load-the-pace-data",
     "title": "Tutorial 4: What lies beneath the surface?",
     "section": "Lock and load the PACE data",
-    "text": "Lock and load the PACE data\n\nimport earthaccess\nimport xarray as xr\nauth = earthaccess.login()\n# are we authenticated?\nif not auth.authenticated:\n    # ask for credentials and persist them in a .netrc file\n    auth.login(strategy=\"interactive\", persist=True)\n\n\nresults = earthaccess.search_data(\n    short_name = \"PACE_OCI_L3M_KD\",\n    temporal = (\"2024-09-01\", \"2024-09-30\"),\n    granule_name=\"*.MO.*.0p1deg.*\"\n)\n\nThere are fancy ways of finding the “short_name” above, but if you’re not familiar with them and in a hurry, find your dataset here: https://www.earthdata.nasa.gov/data/catalog?keyword=PACE%20OCI&platforms_h[0][basis]=Space-based%20Platforms&science_keywords_h[0][topic]=Oceans\n\n# Create a fileset\nfileset = earthaccess.open(results);\n\nimport h5netcdf\nwith h5netcdf.File(fileset[0]) as file:\n    groups = list(file)\ngroups\n\n\n\n\n\n\n\n\n\n\n['processing_control', 'wavelength', 'Kd', 'lat', 'lon', 'palette']\n\n\n\n# ---- Load Libraries ----\nimport numpy as np\nimport xarray as xr\nimport cartopy\nimport cartopy.crs as ccrs\nfrom matplotlib import colors\nfrom scipy.integrate import trapezoid\n\n# Load relevant datasets\ndataset = xr.open_dataset(fileset[0])\n\n# Assign core variables\nlatitude = dataset[\"lat\"]\nlongitude = dataset[\"lon\"]\nKd = dataset[\"Kd\"]\nwavelengths = dataset[\"wavelength\"]",
+    "text": "Lock and load the PACE data\n\nAuthenticate\n\nimport earthaccess\nauth = earthaccess.login()\n# are we authenticated?\nif not auth.authenticated:\n    # ask for credentials and persist them in a .netrc file\n    auth.login(strategy=\"interactive\", persist=True)\n\n\n\nSearch for data\nLoad the monthly Level 3 Kd data.\n\nresults = earthaccess.search_data(\n    short_name = \"PACE_OCI_L3M_KD\",\n    temporal = (\"2024-09-01\", \"2024-09-30\"),\n    granule_name=\"*.MO.*.0p1deg.*\"\n)\nlen(results)\n\n1\n\n\nThere are fancy ways of finding the “short_name” above, but if you’re not familiar with them and in a hurry, find your dataset here: https://www.earthdata.nasa.gov/data/catalog?keyword=PACE%20OCI&platforms_h[0][basis]=Space-based%20Platforms&science_keywords_h[0][topic]=Oceans\n\n\nLoad the data\n\n# Create a fileset\nfileset = earthaccess.open(results);\n\n\n\n\n\n\n\n\n\n\n\n# load the dataset\nimport xarray as xr\ndataset = xr.open_dataset(fileset[0])\ndataset\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&lt;xarray.Dataset&gt; Size: 493MB\nDimensions:     (wavelength: 19, lat: 1800, lon: 3600, rgb: 3,\n                 eightbitcolor: 256)\nCoordinates:\n  * wavelength  (wavelength) float64 152B 351.0 361.0 385.0 ... 678.0 711.0\n  * lat         (lat) float32 7kB 89.95 89.85 89.75 ... -89.75 -89.85 -89.95\n  * lon         (lon) float32 14kB -179.9 -179.9 -179.8 ... 179.8 179.9 180.0\nDimensions without coordinates: rgb, eightbitcolor\nData variables:\n    Kd          (lat, lon, wavelength) float32 492MB ...\n    palette     (rgb, eightbitcolor) uint8 768B ...\nAttributes: (12/64)\n    product_name:                      PACE_OCI.20240901_20240930.L3m.MO.KD.V...\n    instrument:                        OCI\n    title:                             OCI Level-3 Standard Mapped Image\n    project:                           Ocean Biology Processing Group (NASA/G...\n    platform:                          PACE\n    source:                            satellite observations from OCI-PACE\n    ...                                ...\n    identifier_product_doi:            10.5067/PACE/OCI/L3M/KD/3.0\n    keywords:                          Earth Science &gt; Oceans &gt; Ocean Optics ...\n    keywords_vocabulary:               NASA Global Change Master Directory (G...\n    data_bins:                         3223664\n    data_minimum:                      0.015999999\n    data_maximum:                      6.0000024xarray.DatasetDimensions:wavelength: 19lat: 1800lon: 3600rgb: 3eightbitcolor: 256Coordinates: (3)wavelength(wavelength)float64351.0 361.0 385.0 ... 678.0 711.0long_name :wavelengthsunits :nmvalid_min :0valid_max :20000array([351., 361., 385., 413., 425., 442., 460., 475., 490., 510., 532., 555.,\n       583., 618., 640., 655., 665., 678., 711.])lat(lat)float3289.95 89.85 89.75 ... -89.85 -89.95long_name :Latitudeunits :degrees_northstandard_name :latitudevalid_min :-90.0valid_max :90.0array([ 89.95    ,  89.85    ,  89.75    , ..., -89.75    , -89.850006,\n       -89.950005], shape=(1800,), dtype=float32)lon(lon)float32-179.9 -179.9 ... 179.9 180.0long_name :Longitudeunits :degrees_eaststandard_name :longitudevalid_min :-180.0valid_max :180.0array([-179.95   , -179.85   , -179.75   , ...,  179.75   ,  179.85   ,\n        179.95001], shape=(3600,), dtype=float32)Data variables: (2)Kd(lat, lon, wavelength)float32...long_name :Diffuse attenuation coefficientunits :m^-1valid_min :50valid_max :30000reference :Lee, Z.P., M. Darecki, K.L. Carder, C.O.Davis, D. Stramski, W.J. Rhea, Diffuse Attenuation coefficient of downwelling irradiance: An evaluation of remote sensing methods. (2005) doi:10.1029/2004JC002573; Zhongping Lee, Chuanmin Hu, Shaoling Shang, Keping Du, Marlon Lewis, Robert Arnone, and Robert Brewin, \"Penetration of UV-visible solar radiation in the global oceans: Insights from ocean color remote sensing\". (2013) doi:10.1002/jgrc.20308display_scale :logdisplay_min :0.01display_max :5.0[123120000 values with dtype=float32]palette(rgb, eightbitcolor)uint8...[768 values with dtype=uint8]Indexes: (3)wavelengthPandasIndexPandasIndex(Index([351.0, 361.0, 385.0, 413.0, 425.0, 442.0, 460.0, 475.0, 490.0, 510.0,\n       532.0, 555.0, 583.0, 618.0, 640.0, 655.0, 665.0, 678.0, 711.0],\n      dtype='float64', name='wavelength'))latPandasIndexPandasIndex(Index([ 89.94999694824219,   89.8499984741211,              89.75,\n         89.6500015258789,  89.55000305175781,  89.44999694824219,\n         89.3499984741211,              89.25,   89.1500015258789,\n        89.05000305175781,\n       ...\n       -89.05000305175781,  -89.1500015258789,             -89.25,\n       -89.35000610351562, -89.45000457763672, -89.55000305175781,\n        -89.6500015258789,             -89.75, -89.85000610351562,\n       -89.95000457763672],\n      dtype='float32', name='lat', length=1800))lonPandasIndexPandasIndex(Index([ -179.9499969482422, -179.85000610351562,             -179.75,\n       -179.64999389648438,  -179.5500030517578,  -179.4499969482422,\n       -179.35000610351562,             -179.25, -179.14999389648438,\n        -179.0500030517578,\n       ...\n         179.0500030517578,  179.15000915527344,              179.25,\n        179.35000610351562,  179.45001220703125,   179.5500030517578,\n        179.65000915527344,              179.75,  179.85000610351562,\n        179.95001220703125],\n      dtype='float32', name='lon', length=3600))Attributes: (64)product_name :PACE_OCI.20240901_20240930.L3m.MO.KD.V3_0.Kd.0p1deg.ncinstrument :OCItitle :OCI Level-3 Standard Mapped Imageproject :Ocean Biology Processing Group (NASA/GSFC/OBPG)platform :PACEsource :satellite observations from OCI-PACEtemporal_range :monthprocessing_version :3.0date_created :2025-03-06T17:09:51.000Zhistory :l3mapgen par=PACE_OCI.20240901_20240930.L3m.MO.KD.V3_0.Kd.0p1deg.nc.param l2_flag_names :ATMFAIL,LAND,HILT,HISATZEN,STRAYLIGHT,CLDICE,COCCOLITH,LOWLW,CHLWARN,CHLFAIL,NAVWARN,MAXAERITER,HISOLZEN,NAVFAIL,FILTER,HIGLINTtime_coverage_start :2024-08-31T23:38:51.000Ztime_coverage_end :2024-10-01T01:48:47.000Zstart_orbit_number :0end_orbit_number :0map_projection :Equidistant Cylindricallatitude_units :degrees_northlongitude_units :degrees_eastnorthernmost_latitude :90.0southernmost_latitude :-90.0westernmost_longitude :-180.0easternmost_longitude :180.0geospatial_lat_max :90.0geospatial_lat_min :-90.0geospatial_lon_max :180.0geospatial_lon_min :-180.0latitude_step :0.1longitude_step :0.1sw_point_latitude :-89.95sw_point_longitude :-179.95spatialResolution :11.131949 kmgeospatial_lon_resolution :11.131949 kmgeospatial_lat_resolution :11.131949 kmgeospatial_lat_units :degrees_northgeospatial_lon_units :degrees_eastnumber_of_lines :1800number_of_columns :3600measure :Meansuggested_image_scaling_minimum :0.01suggested_image_scaling_maximum :5.0suggested_image_scaling_type :LOGsuggested_image_scaling_applied :No_lastModified :2025-03-06T17:09:51.000ZConventions :CF-1.6 ACDD-1.3institution :NASA Goddard Space Flight Center, Ocean Ecology Laboratory, Ocean Biology Processing Groupstandard_name_vocabulary :CF Standard Name Table v36naming_authority :gov.nasa.gsfc.sci.oceandataid :3.0/L3/PACE_OCI.20240901_20240930.L3b.MO.KD.V3_0.nclicense :https://science.nasa.gov/earth-science/earth-science-data/data-information-policy/creator_name :NASA/GSFC/OBPGpublisher_name :NASA/GSFC/OBPGcreator_email :data@oceancolor.gsfc.nasa.govpublisher_email :data@oceancolor.gsfc.nasa.govcreator_url :https://oceandata.sci.gsfc.nasa.govpublisher_url :https://oceandata.sci.gsfc.nasa.govprocessing_level :L3 Mappedcdm_data_type :grididentifier_product_doi_authority :http://dx.doi.orgidentifier_product_doi :10.5067/PACE/OCI/L3M/KD/3.0keywords :Earth Science &gt; Oceans &gt; Ocean Optics &gt; Attenuation/Transmissionkeywords_vocabulary :NASA Global Change Master Directory (GCMD) Science Keywordsdata_bins :3223664data_minimum :0.015999999data_maximum :6.0000024\n\n\nWe can see it has coordinates wavelength, lat and lon and variables Kd and palette.",
     "crumbs": [
       "JupyterHub",
       "Tutorials",
@@ -55,11 +84,11 @@
     ]
   },
   {
-    "objectID": "tutorials/Tutorial_4_kd.html#the-world-is-at-your-fingertips",
-    "href": "tutorials/Tutorial_4_kd.html#the-world-is-at-your-fingertips",
+    "objectID": "tutorials/Tutorial_4_kd.html#create-a-kd-map",
+    "href": "tutorials/Tutorial_4_kd.html#create-a-kd-map",
     "title": "Tutorial 4: What lies beneath the surface?",
-    "section": "The world is at your fingertips",
-    "text": "The world is at your fingertips\nLet’s start by choosing a single wavelength, and making a map of Kd from PACE. 490 nm is a “heritage” color band that has been used as a standard for multispectral satellite missions.\n\n# Clean the data: mask invalid or non-positive Kd values\nKd_490 = Kd.sel(wavelength=490.0, method=\"nearest\")\nKd_490_clean = Kd_490.where(Kd_490 &gt; 0)  # xarray masking\n\n# Convert to log scale\nKd_log = np.log10(Kd_490_clean)\nKd_log = np.flipud(Kd_log)\n\n# Plot with imshow\nplt.figure(figsize=(10, 5))\nax = plt.axes(projection=cartopy.crs.PlateCarree())\nax.gridlines(draw_labels={\"bottom\": \"x\", \"left\": \"y\"})\nplt.imshow(\n    Kd_log,\n    origin='lower',\n    cmap='jet',\n    extent=[longitude.min(), longitude.max(), latitude.min(), latitude.max()],\n    vmin=-2, vmax=0  # e.g., log10(0.01) to log10(1.0)\n)\nplt.colorbar(label='log₁₀(Kd) [log(1/m)]')\nplt.title('Diffuse Attenuation Coefficient at 490 nm (log scale)')\nplt.xlabel('Longitude')\nplt.ylabel('Latitude')\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nLower Kd values = lower rate of light attenuation = light goes deeper into the water\nHigher Kd values = more rapid attenutation of light = light doesn’t go as deep",
+    "section": "Create a Kd map",
+    "text": "Create a Kd map\nLet’s start by choosing a single wavelength, and making a map of Kd from PACE. 490 nm is a “heritage” color band that has been used as a standard for multispectral satellite missions.\n\nimport matplotlib.pyplot as plt\nimport cartopy.crs as ccrs\nimport numpy as np\n\n# Extract and clean the Kd value at 490 nm\nKd_490 = dataset[\"Kd\"].sel(wavelength=490.0, method=\"nearest\")\nKd_490_clean = Kd_490.where(Kd_490 &gt; 0)\nKd_log = np.log10(Kd_490_clean)\n\n# Plot using xarray's built-in .plot() with Cartopy\nfig, ax = plt.subplots(figsize=(10, 5), subplot_kw={'projection': ccrs.PlateCarree()})\nKd_log.plot(\n    ax=ax,\n    transform=ccrs.PlateCarree(),\n    cmap='jet',\n    vmin=-2,\n    vmax=0,\n    cbar_kwargs={'label': 'log₁₀(Kd) [log(1/m)]'}\n)\nax.coastlines()\nax.set_title('Diffuse Attenuation Coefficient at 490 nm (log scale)')\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nLower Kd values = lower rate of light attenuation = light goes deeper into the water\nHigher Kd values = more rapid attenutation of light = light doesn’t go as deep",
     "crumbs": [
       "JupyterHub",
       "Tutorials",
@@ -71,7 +100,7 @@
     "href": "tutorials/Tutorial_4_kd.html#pick-a-point-any-point",
     "title": "Tutorial 4: What lies beneath the surface?",
     "section": "Pick a point, any point",
-    "text": "Pick a point, any point\nYou can change the coordiantes below if you’d like, but what this is going to do is extract the Kd data at all wavelengths for that specified point on the map.\n\n# target coordinates\ntarget_lat = 30.0\ntarget_lon = -60.0\n\n# get lat/lon arrays\nlat_vals = latitude.values  # shape (1800,)\nlon_vals = longitude.values  # shape (3600,)\n\n# create 2D meshgrid of coordinate distances\nlat_grid, lon_grid = np.meshgrid(lat_vals, lon_vals, indexing='ij')\n\n# calculate distance from target point\ndist = np.abs(lat_grid - target_lat) + np.abs(lon_grid - target_lon)  \n\n# find the indices of the minimum distance\ni, j = np.unravel_index(np.argmin(dist), dist.shape)\n\nKd_pixel = Kd.isel(lat=i, lon=j)  # shape: (wavelength,)\nwavelengths_vals = Kd_pixel['wavelength'].values\nKd_vals = Kd_pixel.values\n\nWe’re then going to choose three wavelengths, one red (678 nm), one green (555 nm), one blue-ish (490 nm). Using the reference irradiance data we imported earlier, we’re going to use those \\(K_{d}({\\lambda})\\) terms from PACE to propagate the light (\\(E_{d}({\\lambda},z)\\)) downward. Then we’ll see what that looks like in a profile plot.\n\n# Find indices of desired wavelengths (or nearest)\nidx_490 = np.abs(wavelengths_vals - 490).argmin()\nidx_555 = np.abs(wavelengths_vals - 555).argmin()\nidx_678 = np.abs(wavelengths_vals - 678).argmin()\n\n# Extract Kd and Es for each wavelength\nKd_490, Kd_555, Kd_678 = Kd_vals[idx_490], Kd_vals[idx_555], Kd_vals[idx_678]\nEd_0_490, Ed_0_555, Ed_0_678 = Es[idx_490], Es[idx_555], Es[idx_678]\n\n# Create depth array (e.g., 0 to 200 m in 2 m steps)\ndepths = np.arange(0, 200, 2)\n\n# Compute Ed profiles\nEd_490 = Ed_0_490 * np.exp(-Kd_490 * depths)\nEd_555 = Ed_0_555 * np.exp(-Kd_555 * depths)\nEd_678 = Ed_0_678 * np.exp(-Kd_678 * depths)\n\n# Plot\nplt.figure(figsize=(6, 8))\nplt.plot(Ed_490, depths, '-b', label='490 nm')\nplt.plot(Ed_555, depths, '-g', label='555 nm')\nplt.plot(Ed_678, depths, '-r', label='678 nm')\n\nplt.gca().invert_yaxis()\nplt.xlabel(\"Downward Irradiance, Ed (arb. units)\")\nplt.ylabel(\"Depth (m)\")\nplt.title(\"Vertical Profiles of Ed at Selected Wavelengths\")\nplt.legend()\nplt.grid(True)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nWhat we can see here is that attenuation rates are not very steep for blue light, meaning blue light goes pretty far into the water column. This is a good indicator that we’re dealing with open ocean waters. An honerable mention to green light, of course, who made it down about 75 meters before disappearing. Way to go green, we’re all rooting for you. Then there’s red. What are you doing red? Well, it turns out that even in the absence of a lot of absorbing and scattering particles, the very nature of pure water means it is going to absorb red light pretty quickly, so it left the party a bit early.",
+    "text": "Pick a point, any point\nThis is going to do is extract the Kd data for wavelengths at a specified point on the map. Kd is a xarray Dataset and has the method “nearest” for finding values nearest to a target.\n\n# Define target coordinates and wavelengths\ntarget_lat = 30.0\ntarget_lon = -60.0\nwavelengths_target = [490.0, 555.0, 678.0]\n\n# Select nearest Kd pixel\nKd_pixel = Kd.sel(lat=target_lat, lon=target_lon, method=\"nearest\")\n\n# Kd for all wavelengths\nKd_pixel.values\n\narray([0.1002, 0.0834, 0.0372, 0.0244, 0.0226, 0.0228, 0.024 , 0.0242,\n       0.0268, 0.0438, 0.0576, 0.0746, 0.1192, 0.3188, 0.3644, 0.4296,\n       0.4958, 0.5372, 0.973 ], dtype=float32)\n\n\nWe’re then going to choose three wavelengths, one red (678 nm), one green (555 nm), one blue-ish (490 nm). Using the reference irradiance data we imported earlier, we’re going to use those \\(K_{d}({\\lambda})\\) terms from PACE to propagate the light (\\(E_{d}({\\lambda},z)\\)) downward. Then we’ll see what that looks like in a profile plot.\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# Define target wavelengths\nwavelengths_target = [490.0, 555.0, 678.0]\n\n# Select Kd values at target wavelengths\nKd_sel = Kd_pixel.sel(wavelength=wavelengths_target, method=\"nearest\")\n\n# Match Es values from df_es\nEs_sel = df_es.set_index('wave').loc[[round(w) for w in Kd_sel['wavelength'].values], 'Es'].values\n\n# Create depth array\ndepths = np.arange(0, 200, 2)\n\n# Compute Ed profiles\nEd_profiles = [E0 * np.exp(-Kd_val * depths) for E0, Kd_val in zip(Es_sel, Kd_sel.values)]\n\n# Plot\ncolors = ['b', 'g', 'r']\nlabels = [f\"{wl:.0f} nm\" for wl in Kd_sel['wavelength'].values]\n\nplt.figure(figsize=(6, 8))\nfor Ed, label, color in zip(Ed_profiles, labels, colors):\n    plt.plot(Ed, depths, f'-{color}', label=label)\n\nplt.gca().invert_yaxis()\nplt.xlabel(\"Downward Irradiance, Ed (arb. units)\")\nplt.ylabel(\"Depth (m)\")\nplt.title(\"Vertical Profiles of Ed at Selected Wavelengths\")\nplt.legend()\nplt.grid(True)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nWhat we can see here is that attenuation rates are not very steep for blue light, meaning blue light goes pretty far into the water column. This is a good indicator that we’re dealing with open ocean waters. An honerable mention to green light, of course, who made it down about 75 meters before disappearing. Way to go green, we’re all rooting for you. Then there’s red. What are you doing red? Well, it turns out that even in the absence of a lot of absorbing and scattering particles, the very nature of pure water means it is going to absorb red light pretty quickly, so it left the party a bit early.",
     "crumbs": [
       "JupyterHub",
       "Tutorials",
@@ -83,7 +112,7 @@
     "href": "tutorials/Tutorial_4_kd.html#lets-look-at-this-another-way",
     "title": "Tutorial 4: What lies beneath the surface?",
     "section": "Let’s look at this another way",
-    "text": "Let’s look at this another way\nSince we’ve got all this cool extra information from PACE, let’s go ahead and make sure we get use out of those additional wavelengths. In the case below, we’ll look at the whole spectrum of downwelling irradiance that we’ve calculated, and examine how it changes over some nominal depth intervals.\n\ndepths = [1, 10, 25, 50, 100, 200]\nattenuated_spectra = {}\n\nfor z in depths:\n    attenuated_spectra[z] = Es * np.exp(-Kd_vals * z)\n\nplt.figure(figsize=(10, 6))\n\n# Plot Es (surface spectrum)\nplt.plot(wavelengths_vals, Es, 'k--', label='Surface (Es)')\n\n# Plot each Ed(z)\nfor z in depths:\n    plt.plot(wavelengths_vals, attenuated_spectra[z], label=f'Ed @ {z} m')\n\nlat_val = latitude[i].item()\nlon_val = longitude[j].item()\n\nplt.xlabel(\"Wavelength (nm)\")\nplt.ylabel(\"Irradiance (arb. units)\")\nplt.title(f\"Spectral Downwelling Irradiance vs. Depth\\nLat: {lat_val:.2f}°, Lon: {lon_val:.2f}°\")\nplt.grid(True)\nplt.legend()\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nYou can clearly see the anti-social red light absolutely refusing to joint its friends into the deep. As such, the deeper you go, other wavelengths of light eventually attenuatre as well, creating a dominance of blue light into the depths. This is the case for the open ocean. For funzies, feel free to go back and put in some different coordiantes, perhaps closer to the coast. A very different pattern will emerge here, as we’ll ilustrate below.",
+    "text": "Let’s look at this another way\nSince we’ve got all this cool extra information from PACE, let’s go ahead and make sure we get use out of those additional wavelengths. In the case below, we’ll look at the whole spectrum of downwelling irradiance that we’ve calculated, and examine how it changes over some nominal depth intervals.\n\n# Plot for all wavelengths at the target lat/lon\nwavelengths_vals = Kd_pixel['wavelength'].values\nKd_vals = Kd_pixel.values\n\n# Match Es using rounded wavelengths\nEs_vals = df_es.set_index('wave').loc[[round(w) for w in wavelengths_vals], 'Es'].values\n\n# Define depths and compute attenuated spectra\ndepths = [1, 10, 25, 50, 100, 200]\nattenuated_spectra = {\n    z: Es_vals * np.exp(-Kd_vals * z) for z in depths\n}\n\n# Plot\nplt.figure(figsize=(10, 6))\nplt.plot(wavelengths_vals, Es_vals, 'k--', label='Surface (Es)')\n\nfor z in depths:\n    plt.plot(wavelengths_vals, attenuated_spectra[z], label=f'Ed @ {z} m')\n\n# Extract selected lat/lon for title\nlat_val = float(Kd_pixel['lat'].values)\nlon_val = float(Kd_pixel['lon'].values)\n\nplt.xlabel(\"Wavelength (nm)\")\nplt.ylabel(\"Irradiance (arb. units)\")\nplt.title(f\"Spectral Downwelling Irradiance vs. Depth\\nLat: {lat_val:.2f}°, Lon: {lon_val:.2f}°\")\nplt.grid(True)\nplt.legend()\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nYou can clearly see the anti-social red light absolutely refusing to joint its friends into the deep. As such, the deeper you go, other wavelengths of light eventually attenuatre as well, creating a dominance of blue light into the depths. This is the case for the open ocean. For funzies, feel free to go back and put in some different coordiantes, perhaps closer to the coast. A very different pattern will emerge here, as we’ll ilustrate below.",
     "crumbs": [
       "JupyterHub",
       "Tutorials",
@@ -95,7 +124,31 @@
     "href": "tutorials/Tutorial_4_kd.html#lets-paint-the-town-rainbow",
     "title": "Tutorial 4: What lies beneath the surface?",
     "section": "Let’s paint the town rainbow!",
-    "text": "Let’s paint the town rainbow!\nLet’s try a more integrated approach, so we can really see what is happening to the light with depth. We’re going to extract two points - our open ocean example we used above, and then a point near the productive waters in the Patagonian shelf upwelling system. Doing a lot of the things we did earlier in the tutorial, we’re going to restructure the data a tiny bit, so we get a higher (depth) resolution profile. In this instance, we’ll generate an \\(E_{d}({\\lambda},z)\\) spectrum every 2 meters, over 100 meters of depth. After stacking this, we’ll plot it more like a cross-section of light, illustrating the 4D nature of the PACE \\(K_{d}({\\lambda})\\) products.\n\n# open ocean coordinates\ntarget_lat_open = 30.0\ntarget_lon_open = -60.0\n\n# coastal coordinates\ntarget_lat_coastal = -45.0\ntarget_lon_coastal = -60.0\n\n# calculate distance from target point\ndist_open = np.abs(lat_grid - target_lat_open) + np.abs(lon_grid - target_lon_open) \ndist_coastal = np.abs(lat_grid - target_lat_coastal) + np.abs(lon_grid - target_lon_coastal)\n\n# find the indices of the minimum distance\ni, j = np.unravel_index(np.argmin(dist_open), dist_open.shape)\nk, l = np.unravel_index(np.argmin(dist_coastal), dist_coastal.shape)\n\nKd_pixel_open = Kd.isel(lat=i, lon=j)  # shape: (wavelength,)\nwavelengths_vals = Kd_pixel_open['wavelength'].values\nKd_vals_open = Kd_pixel_open.values\nKd_pixel_coastal = Kd.isel(lat=k, lon=l)  # shape: (wavelength,)\nKd_vals_coastal = Kd_pixel_coastal.values\n\ndepths = np.arange(0, 100, 2)\n\n# Pre-allocate arrays for better performance and compatibility with plotting\nattenuated_spectra_open = np.zeros((len(depths), len(wavelengths_vals)))\nattenuated_spectra_coastal = np.zeros((len(depths), len(wavelengths_vals)))\n\nfor i, z in enumerate(depths):\n    attenuated_spectra_open[i, :] = Es * np.exp(-Kd_vals_open * z)\n    attenuated_spectra_coastal[i, :] = Es * np.exp(-Kd_vals_coastal * z)\n\n#from matplotlib.cm import get_cmap\nfrom matplotlib.colors import Normalize\n\n# Normalize wavelengths to [0, 1] for colormap\nnorm = Normalize(vmin=wavelengths_vals.min(), vmax=wavelengths_vals.max())\nrgb_colors = plt.colormaps['nipy_spectral'](norm(wavelengths_vals))[:, :3]\n\n# Normalize Ed at surface for comparison\nopen_norm = attenuated_spectra_open / attenuated_spectra_open[0, :]\ncoastal_norm = attenuated_spectra_coastal / attenuated_spectra_coastal[0, :]\n\n# Optional: Mask out low-light values for better contrast\nopen_norm[open_norm &lt; 1e-3] = np.nan\ncoastal_norm[coastal_norm &lt; 1e-3] = np.nan\n\n# Function to create RGB image\ndef spectra_to_rgb(spectra, rgb_colors):\n    return spectra[..., np.newaxis] * rgb_colors[np.newaxis, :, :]\n\n# Generate RGB images\nrgb_open = spectra_to_rgb(open_norm, rgb_colors)\nrgb_coastal = spectra_to_rgb(coastal_norm, rgb_colors)\n\n# Plot\nfig, axs = plt.subplots(1, 2, figsize=(12, 6), sharey=True)\n\n# We turned everything else black, so let's change the text to white\nfor ax in axs:\n    ax.set_facecolor('black')\n    ax.tick_params(colors='white')                     # Tick labels\n    ax.xaxis.label.set_color('white')                  # X-axis label\n    ax.yaxis.label.set_color('white')                  # Y-axis label\n    ax.title.set_color('white')                        # Title text\n    for spine in ax.spines.values():\n        spine.set_edgecolor('white')                   # Axes spines\n\nfig.patch.set_facecolor('black')        # Figure background\nfor ax in axs:\n    ax.set_facecolor('black')           # Plot (axes) background\n\nfor ax, rgb_img, title in zip(axs, [rgb_open, rgb_coastal], [\"Open Ocean\", \"Coastal Waters\"]):\n    ax.imshow(rgb_img, aspect='auto',\n              extent=[wavelengths_vals.min(), wavelengths_vals.max(), depths.max(), depths.min()])\n    ax.set_title(f\"Light Penetration in {title}\")\n    ax.set_xlabel(\"Wavelength (nm)\")\n\naxs[0].set_ylabel(\"Depth (m)\")\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nNotice how the blue light didn’t go down very far in the “Coastal Waters”? The reason for this is because greedy little phytoplankton are preferentially absorbing this blue light to fuel photosynthesis. We think of algae as green plants, but what we’re seeing here is that they appear inherently green to our eyes only becuase they are utilizng all the other wavelengths of light except for green! Other things can absorb blue light as well, like chromophoric dissolved organic matter and detritus, further changing the differential attenuation rates. Now, attenuation doesn’t just mean absorption of light. Light is also being scattered, perhaps multiple times. Particles can scatter light back out of the water and prevent it from going deeper, which also contributes to attenuation. Depending on the size and shape of that particle, it may be that it helps the light scatter multiple times, thereby increasing it’s chance of being absorbed on the way back up! While we’re only seeing a surface reflectance value from space, it represents a complex series of physical processes with light and the environment beneath the surface.\nThere you have it! Spectral light attenutation of downwelling irradiance. Now you have the ability to quantitatively characterize the subsurface light field for any depth across the entire ocean. Go PACE!",
+    "text": "Let’s paint the town rainbow!\nLet’s try a more integrated approach, so we can really see what is happening to the light with depth. We’re going to extract two points - our open ocean example we used above, and then a point near the productive waters in the Patagonian shelf upwelling system. Doing a lot of the things we did earlier in the tutorial, we’re going to restructure the data a tiny bit, so we get a higher (depth) resolution profile. In this instance, we’ll generate an \\(E_{d}({\\lambda},z)\\) spectrum every 2 meters, over 100 meters of depth. After stacking this, we’ll plot it more like a cross-section of light, illustrating the 4D nature of the PACE \\(K_{d}({\\lambda})\\) products.\n\nimport matplotlib.pyplot as plt\nimport cartopy.crs as ccrs\nimport cartopy.feature as cfeature\n\n# Define coordinate targets\nopen_coord = {'lat': 30.0, 'lon': -60.0}\ncoastal_coord = {'lat': -45.0, 'lon': -60.0}\n\n# Set up map\nfig = plt.figure(figsize=(8, 6))\nax = plt.axes(projection=ccrs.PlateCarree())\n\n# Add geographic features\nax.coastlines()\nax.add_feature(cfeature.BORDERS, linestyle=':')\ngl = ax.gridlines(draw_labels=True)\ngl.top_labels = gl.right_labels = False\n\n# Set extent to cover both points\nlat_min = min(open_coord['lat'], coastal_coord['lat']) - 20\nlat_max = max(open_coord['lat'], coastal_coord['lat']) + 20\nlon_min = min(open_coord['lon'], coastal_coord['lon']) - 20\nlon_max = max(open_coord['lon'], coastal_coord['lon']) + 30\nax.set_extent([lon_min, lon_max, lat_min, lat_max], crs=ccrs.PlateCarree())\n\n# Plot points\nax.plot(open_coord['lon'], open_coord['lat'], 'ro', markersize=8, transform=ccrs.PlateCarree())\nax.text(open_coord['lon'] + 1, open_coord['lat'], 'Open Ocean', color='red', transform=ccrs.PlateCarree())\n\nax.plot(coastal_coord['lon'], coastal_coord['lat'], 'bo', markersize=8, transform=ccrs.PlateCarree())\nax.text(coastal_coord['lon'] + 1, coastal_coord['lat'], 'Coastal', color='blue', transform=ccrs.PlateCarree())\n\n# Title\nplt.title(\"Target Locations: Open Ocean and Coastal Waters\")\nplt.tight_layout()\nplt.show()",
+    "crumbs": [
+      "JupyterHub",
+      "Tutorials",
+      "Kd"
+    ]
+  },
+  {
+    "objectID": "tutorials/Tutorial_4_kd.html#lets-make-a-plot",
+    "href": "tutorials/Tutorial_4_kd.html#lets-make-a-plot",
+    "title": "Tutorial 4: What lies beneath the surface?",
+    "section": "Let’s make a plot!",
+    "text": "Let’s make a plot!\n\nfrom matplotlib.colors import Normalize\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# Define coordinate targets\nopen_coord = {'lat': 30.0, 'lon': -60.0}\ncoastal_coord = {'lat': -45.0, 'lon': -60.0}\n\n# Select pixels using xarray's nearest neighbor method\nKd_open = Kd.sel(**open_coord, method=\"nearest\")\nKd_coastal = Kd.sel(**coastal_coord, method=\"nearest\")\n\n# Extract wavelengths and Kd values\nwavelengths_vals = Kd_open['wavelength'].values\nKd_vals_open = Kd_open.values\nKd_vals_coastal = Kd_coastal.values\n\n# Match Es values by nearest wavelength\nEs_vals = df_es.set_index('wave').loc[[round(w) for w in wavelengths_vals], 'Es'].values\n\n# Create depth array\ndepths = np.arange(0, 100, 2)\n\n# Compute attenuated spectra (shape: [depth, wavelength])\nattenuated_spectra_open = np.array([Es_vals * np.exp(-Kd_vals_open * z) for z in depths])\nattenuated_spectra_coastal = np.array([Es_vals * np.exp(-Kd_vals_coastal * z) for z in depths])\n\n# Normalize for visualization\nnorm = Normalize(vmin=wavelengths_vals.min(), vmax=wavelengths_vals.max())\nrgb_colors = plt.colormaps['nipy_spectral'](norm(wavelengths_vals))[:, :3]\n\nopen_norm = attenuated_spectra_open / attenuated_spectra_open[0, :]\ncoastal_norm = attenuated_spectra_coastal / attenuated_spectra_coastal[0, :]\nopen_norm[open_norm &lt; 1e-3] = np.nan\ncoastal_norm[coastal_norm &lt; 1e-3] = np.nan\n\n# Convert to RGB image\ndef spectra_to_rgb(spectra, rgb_colors):\n    return spectra[..., np.newaxis] * rgb_colors[np.newaxis, :, :]\n\nrgb_open = sptra_to_rgb(open_norm, rgb_colors)\nrgb_coastal = spectra_to_rgb(coastal_norm, rgb_colors)\n\n# Plot\nfig, axs = plt.subplots(1, 2, figsize=(12, 6), sharey=True)\nfor ax in axs:\n    ax.set_facecolor('black')\n    ax.tick_params(colors='white')\n    ax.xaxis.label.set_color('white')\n    ax.yaxis.label.set_color('white')\n    ax.title.set_color('white')\n    for spine in ax.spines.values():\n        spine.set_edgecolor('white')\n\nfig.patch.set_facecolor('black')\n\nfor ax, rgb_img, title in zip(axs, [rgb_open, rgb_coastal], [\"Open Ocean\", \"Coastal Waters\"]):\n    ax.imshow(rgb_img, aspect='auto',\n              extent=[wavelengths_vals.min(), wavelengths_vals.max(), depths.max(), depths.min()])\n    ax.set_title(f\"Light Penetration in {title}\")\n    ax.set_xlabel(\"Wavelength (nm)\")\n\naxs[0].set_ylabel(\"Depth (m)\")\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nNotice how the blue light didn’t go down very far in the “Coastal Waters”? The reason for this is because greedy little phytoplankton are preferentially absorbing this blue light to fuel photosynthesis. We think of algae as green plants, but what we’re seeing here is that they appear inherently green to our eyes only becuase they are utilizng all the other wavelengths of light except for green! Other things can absorb blue light as well, like chromophoric dissolved organic matter and detritus, further changing the differential attenuation rates. Now, attenuation doesn’t just mean absorption of light. Light is also being scattered, perhaps multiple times. Particles can scatter light back out of the water and prevent it from going deeper, which also contributes to attenuation. Depending on the size and shape of that particle, it may be that it helps the light scatter multiple times, thereby increasing it’s chance of being absorbed on the way back up! While we’re only seeing a surface reflectance value from space, it represents a complex series of physical processes with light and the environment beneath the surface.\nThere you have it! Spectral light attenutation of downwelling irradiance. Now you have the ability to quantitatively characterize the subsurface light field for any depth across the entire ocean. Go PACE!",
+    "crumbs": [
+      "JupyterHub",
+      "Tutorials",
+      "Kd"
+    ]
+  },
+  {
+    "objectID": "tutorials/Tutorial_4_kd.html#lets-do-time",
+    "href": "tutorials/Tutorial_4_kd.html#lets-do-time",
+    "title": "Tutorial 4: What lies beneath the surface?",
+    "section": "Let’s do time!",
+    "text": "Let’s do time!\nSo far we have just looked at one month. Let’s look at all the months and see how light attenuation has changed over months in our coastal point. We have 13 months of data.\n\nresults = earthaccess.search_data(\n    short_name = \"PACE_OCI_L3M_KD\",\n    granule_name=\"*.MO.*.0p1deg.*\"\n)\nlen(results)\n\n13\n\n\n\nfileset = earthaccess.open(results)\n\n\n\n\n\n\n\n\n\n\n\nimport xarray as xr\nds_month = xr.open_mfdataset(fileset, combine='nested', concat_dim='time')\nds_month\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&lt;xarray.Dataset&gt; Size: 6GB\nDimensions:     (time: 13, lat: 1800, lon: 3600, wavelength: 19, rgb: 3,\n                 eightbitcolor: 256)\nCoordinates:\n  * wavelength  (wavelength) float64 152B 351.0 361.0 385.0 ... 678.0 711.0\n  * lat         (lat) float32 7kB 89.95 89.85 89.75 ... -89.75 -89.85 -89.95\n  * lon         (lon) float32 14kB -179.9 -179.9 -179.8 ... 179.8 179.9 180.0\nDimensions without coordinates: time, rgb, eightbitcolor\nData variables:\n    Kd          (time, lat, lon, wavelength) float32 6GB dask.array&lt;chunksize=(1, 16, 1024, 8), meta=np.ndarray&gt;\n    palette     (time, rgb, eightbitcolor) uint8 10kB dask.array&lt;chunksize=(1, 3, 256), meta=np.ndarray&gt;\nAttributes: (12/64)\n    product_name:                      PACE_OCI.20240301_20240331.L3m.MO.KD.V...\n    instrument:                        OCI\n    title:                             OCI Level-3 Standard Mapped Image\n    project:                           Ocean Biology Processing Group (NASA/G...\n    platform:                          PACE\n    source:                            satellite observations from OCI-PACE\n    ...                                ...\n    identifier_product_doi:            10.5067/PACE/OCI/L3M/KD/3.0\n    keywords:                          Earth Science &gt; Oceans &gt; Ocean Optics ...\n    keywords_vocabulary:               NASA Global Change Master Directory (G...\n    data_bins:                         3010346\n    data_minimum:                      0.015999997\n    data_maximum:                      6.000002xarray.DatasetDimensions:time: 13lat: 1800lon: 3600wavelength: 19rgb: 3eightbitcolor: 256Coordinates: (3)wavelength(wavelength)float64351.0 361.0 385.0 ... 678.0 711.0long_name :wavelengthsunits :nmvalid_min :0valid_max :20000array([351., 361., 385., 413., 425., 442., 460., 475., 490., 510., 532., 555.,\n       583., 618., 640., 655., 665., 678., 711.])lat(lat)float3289.95 89.85 89.75 ... -89.85 -89.95long_name :Latitudeunits :degrees_northstandard_name :latitudevalid_min :-90.0valid_max :90.0array([ 89.95    ,  89.85    ,  89.75    , ..., -89.75    , -89.850006,\n       -89.950005], shape=(1800,), dtype=float32)lon(lon)float32-179.9 -179.9 ... 179.9 180.0long_name :Longitudeunits :degrees_eaststandard_name :longitudevalid_min :-180.0valid_max :180.0array([-179.95   , -179.85   , -179.75   , ...,  179.75   ,  179.85   ,\n        179.95001], shape=(3600,), dtype=float32)Data variables: (2)Kd(time, lat, lon, wavelength)float32dask.array&lt;chunksize=(1, 16, 1024, 8), meta=np.ndarray&gt;long_name :Diffuse attenuation coefficientunits :m^-1valid_min :50valid_max :30000reference :Lee, Z.P., M. Darecki, K.L. Carder, C.O.Davis, D. Stramski, W.J. Rhea, Diffuse Attenuation coefficient of downwelling irradiance: An evaluation of remote sensing methods. (2005) doi:10.1029/2004JC002573; Zhongping Lee, Chuanmin Hu, Shaoling Shang, Keping Du, Marlon Lewis, Robert Arnone, and Robert Brewin, \"Penetration of UV-visible solar radiation in the global oceans: Insights from ocean color remote sensing\". (2013) doi:10.1002/jgrc.20308display_scale :logdisplay_min :0.01display_max :5.0\n\n\n\n\n\n\n\n\n\n\n\nArray\nChunk\n\n\n\n\nBytes\n5.96 GiB\n512.00 kiB\n\n\nShape\n(13, 1800, 3600, 19)\n(1, 16, 1024, 8)\n\n\nDask graph\n17628 chunks in 40 graph layers\n\n\nData type\nfloat32 numpy.ndarray\n\n\n\n\n                     13 1                                                                                                  19 3600 1800\n\n\n\n\npalette(time, rgb, eightbitcolor)uint8dask.array&lt;chunksize=(1, 3, 256), meta=np.ndarray&gt;\n\n\n\n\n\n\n\n\n\n\n\nArray\nChunk\n\n\n\n\nBytes\n9.75 kiB\n768 B\n\n\nShape\n(13, 3, 256)\n(1, 3, 256)\n\n\nDask graph\n13 chunks in 40 graph layers\n\n\nData type\nuint8 numpy.ndarray\n\n\n\n\n                                                 256 3 13\n\n\n\n\nIndexes: (3)wavelengthPandasIndexPandasIndex(Index([351.0, 361.0, 385.0, 413.0, 425.0, 442.0, 460.0, 475.0, 490.0, 510.0,\n       532.0, 555.0, 583.0, 618.0, 640.0, 655.0, 665.0, 678.0, 711.0],\n      dtype='float64', name='wavelength'))latPandasIndexPandasIndex(Index([ 89.94999694824219,   89.8499984741211,              89.75,\n         89.6500015258789,  89.55000305175781,  89.44999694824219,\n         89.3499984741211,              89.25,   89.1500015258789,\n        89.05000305175781,\n       ...\n       -89.05000305175781,  -89.1500015258789,             -89.25,\n       -89.35000610351562, -89.45000457763672, -89.55000305175781,\n        -89.6500015258789,             -89.75, -89.85000610351562,\n       -89.95000457763672],\n      dtype='float32', name='lat', length=1800))lonPandasIndexPandasIndex(Index([ -179.9499969482422, -179.85000610351562,             -179.75,\n       -179.64999389648438,  -179.5500030517578,  -179.4499969482422,\n       -179.35000610351562,             -179.25, -179.14999389648438,\n        -179.0500030517578,\n       ...\n         179.0500030517578,  179.15000915527344,              179.25,\n        179.35000610351562,  179.45001220703125,   179.5500030517578,\n        179.65000915527344,              179.75,  179.85000610351562,\n        179.95001220703125],\n      dtype='float32', name='lon', length=3600))Attributes: (64)product_name :PACE_OCI.20240301_20240331.L3m.MO.KD.V3_0.Kd.0p1deg.ncinstrument :OCItitle :OCI Level-3 Standard Mapped Imageproject :Ocean Biology Processing Group (NASA/GSFC/OBPG)platform :PACEsource :satellite observations from OCI-PACEtemporal_range :27-dayprocessing_version :3.0date_created :2025-03-06T17:08:54.000Zhistory :l3mapgen par=PACE_OCI.20240301_20240331.L3m.MO.KD.V3_0.Kd.0p1deg.nc.param l2_flag_names :ATMFAIL,LAND,HILT,HISATZEN,STRAYLIGHT,CLDICE,COCCOLITH,LOWLW,CHLWARN,CHLFAIL,NAVWARN,MAXAERITER,HISOLZEN,NAVFAIL,FILTER,HIGLINTtime_coverage_start :2024-03-05T00:08:58.000Ztime_coverage_end :2024-04-01T02:24:44.000Zstart_orbit_number :0end_orbit_number :0map_projection :Equidistant Cylindricallatitude_units :degrees_northlongitude_units :degrees_eastnorthernmost_latitude :90.0southernmost_latitude :-90.0westernmost_longitude :-180.0easternmost_longitude :180.0geospatial_lat_max :90.0geospatial_lat_min :-90.0geospatial_lon_max :180.0geospatial_lon_min :-180.0latitude_step :0.1longitude_step :0.1sw_point_latitude :-89.95sw_point_longitude :-179.95spatialResolution :11.131949 kmgeospatial_lon_resolution :11.131949 kmgeospatial_lat_resolution :11.131949 kmgeospatial_lat_units :degrees_northgeospatial_lon_units :degrees_eastnumber_of_lines :1800number_of_columns :3600measure :Meansuggested_image_scaling_minimum :0.01suggested_image_scaling_maximum :5.0suggested_image_scaling_type :LOGsuggested_image_scaling_applied :No_lastModified :2025-03-06T17:08:54.000ZConventions :CF-1.6 ACDD-1.3institution :NASA Goddard Space Flight Center, Ocean Ecology Laboratory, Ocean Biology Processing Groupstandard_name_vocabulary :CF Standard Name Table v36naming_authority :gov.nasa.gsfc.sci.oceandataid :3.0/L3/PACE_OCI.20240301_20240331.L3b.MO.KD.V3_0.nclicense :https://science.nasa.gov/earth-science/earth-science-data/data-information-policy/creator_name :NASA/GSFC/OBPGpublisher_name :NASA/GSFC/OBPGcreator_email :data@oceancolor.gsfc.nasa.govpublisher_email :data@oceancolor.gsfc.nasa.govcreator_url :https://oceandata.sci.gsfc.nasa.govpublisher_url :https://oceandata.sci.gsfc.nasa.govprocessing_level :L3 Mappedcdm_data_type :grididentifier_product_doi_authority :http://dx.doi.orgidentifier_product_doi :10.5067/PACE/OCI/L3M/KD/3.0keywords :Earth Science &gt; Oceans &gt; Ocean Optics &gt; Attenuation/Transmissionkeywords_vocabulary :NASA Global Change Master Directory (GCMD) Science Keywordsdata_bins :3010346data_minimum :0.015999997data_maximum :6.000002\n\n\nFor the first plot, we will look at Ed over time at 3 wavelengths.\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nimport pandas as pd\n\n# Load file\ndf_es = pd.read_csv('Es_spectrum.csv')\ndf_es\n\n# Target lat/lon and wavelengths\ntarget_lat = -45.0\ntarget_lon = -60.0\nwavelengths_target = [420.0, 490.0, 555.0]\ndepths = [1, 10]\n\n# Select Kd(time, wavelength) at pixel\nKd_pixel = ds_month['Kd'].sel(lat=target_lat, lon=target_lon, method=\"nearest\")\nKd_sel = Kd_pixel.sel(wavelength=wavelengths_target, method=\"nearest\")  # shape: (time, wavelength)\n\n# Match Es values\nactual_wavelengths = Kd_sel['wavelength'].values\nEs_vals = df_es.set_index('wave').loc[[round(w) for w in actual_wavelengths], 'Es'].values\n\n# Time\ntime_vals = pd.to_datetime(ds_month['time'].values)\n\n# Compute Ed(time, depth, wavelength)\nfig, axs = plt.subplots(1, 3, figsize=(15, 5), sharey=True)\n\nfor i, (ax, wl, E0) in enumerate(zip(axs, actual_wavelengths, Es_vals)):\n    Kd_wl = Kd_sel.isel(wavelength=i).values  # (time,)\n    for z in depths:\n        Ed_time = E0 * np.exp(-Kd_wl * z)\n        ax.plot(time_vals, Ed_time, label=f\"{z} m\")\n    \n    ax.set_title(f\"{int(wl)} nm\")\n    ax.set_xlabel(\"Time\")\n    if i == 0:\n        ax.set_ylabel(\"Ed (arb. units)\")\n    ax.grid(True)\n    ax.legend(title=\"Depth\", fontsize='small')\n\n# Annotate\nlat_val = float(Kd_sel['lat'].values)\nlon_val = float(Kd_sel['lon'].values)\nfig.suptitle(f\"Spectral Irradiance Over Time\\nLat: {lat_val:.2f}°, Lon: {lon_val:.2f}°\", fontsize=14)\nplt.tight_layout(rect=[0, 0, 1, 0.95])\nplt.show()\n\nFor the second plot we will look at Ed at 10m for all wavelengths.|\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nimport pandas as pd\nimport matplotlib.cm as cm\nimport matplotlib.colors as mcolors\n\n# load file\ndf_es = pd.read_csv('Es_spectrum.csv')\ndf_es\n\n# Target coastal location and depth\ntarget_lat = -45.0\ntarget_lon = -60.0\nz = 10  # depth in meters\n\n# Select Kd(time, wavelength) at nearest lat/lon\nKd_pixel = ds_month['Kd'].sel(lat=target_lat, lon=target_lon, method=\"nearest\")\nwavelengths_vals = Kd_pixel['wavelength'].values\nKd_vals = Kd_pixel.values  # shape: (time, wavelength)\n\n# Match Es using rounded wavelengths\nEs_vals = df_es.set_index('wave').loc[[round(w) for w in wavelengths_vals], 'Es'].values\n\n# Compute Ed at 10 m\nEd_10m = Es_vals * np.exp(-Kd_vals * z)\n\n# Time labels\ntime_labels = pd.date_range(\"2024-03\", periods=13, freq=\"MS\").strftime('%b %Y')\n\n# Define a colormap across time steps\ncmap = plt.colormaps.get_cmap('viridis')\ncolors = [cmap(i / (len(time_labels) - 1)) for i in range(len(time_labels))]\n\n# Plot\nplt.figure(figsize=(10, 6))\nfor i, (label, color) in enumerate(zip(time_labels, colors)):\n    plt.plot(wavelengths_vals, Ed_10m[i], label=label, color=color)\n\n# Annotations\nlat_val = float(Kd_pixel['lat'].values)\nlon_val = float(Kd_pixel['lon'].values)\n\nplt.xlabel(\"Wavelength (nm)\")\nplt.ylabel(\"Irradiance @ 10 m (arb. units)\")\nplt.title(f\"Spectral Irradiance at 10 m by Month\\nLat: {lat_val:.2f}°, Lon: {lon_val:.2f}°\")\nplt.grid(True)\nplt.legend(loc='upper right', ncol=2, fontsize='small', title=\"Month\")\nplt.tight_layout()\nplt.show()",
     "crumbs": [
       "JupyterHub",
       "Tutorials",
@@ -239,7 +292,7 @@
     "href": "tutorials/Tutorial_1_access.html#get-started",
     "title": "Earthdata Search and Discovery",
     "section": "Get Started",
-    "text": "Get Started\n\nImport Required Packages\n\nimport earthaccess \nimport xarray as xr\n\n\nauth = earthaccess.login()\n# are we authenticated?\nif not auth.authenticated:\n    # ask for credentials and persist them in a .netrc file\n    auth.login(strategy=\"interactive\", persist=True)\n\n\n\nSearch for data\nWe want to search NASA Earth Data for collections using the OCI instrument. Use https://search.earthdata.nasa.gov/search?fi=OCI\nThere are multiple keywords we can use to discovery data from collections. The table below contains the short_name, concept_id, and doi for some collections we are interested in for other exercises. Each of these can be used to search for data or information related to the collection we are interested in.\n\n\n\nDescription\nShortname\nCollection Concept ID\n\n\n\n\nLevel 2 Apparent Optical Properties\nPACE_OCI_L2_AOP\nC3385049983-OB_CLOUD\n\n\nLevel 3 RRS\nPACE_OCI_L3M_RRS\nC3385050676-OB_CLOUD\n\n\n\nHow can we find the shortname or concept_id for collections not in the table above?. Let’s take a quick detour.\nhttps://search.earthdata.nasa.gov/search\n\n\nSearch by collection - Level 2 data\n\n# Level 2 data\nresults = earthaccess.search_data(\n    short_name = 'PACE_OCI_L2_AOP',\n    temporal = (\"2025-03-05\", \"2025-03-05\")\n)\nlen(results)\n\n143\n\n\nWhy are there so many?? Swath data that is in spatial chunks. We need to specify a bounding box.\n\n# Level 2 data\nresults = earthaccess.search_data(\n    short_name = 'PACE_OCI_L2_AOP',\n    temporal = (\"2025-03-05\", \"2025-03-05\"),\n    bounding_box = (-98.0, 27.0, -96.0, 31.0)\n)\nlen(results)\n\n1\n\n\n\n\nSearch by collection - Level 3 data\nGlobal data so there should be one file per day, right?\n\n# Level 3 data\nresults = earthaccess.search_data(\n    short_name = 'PACE_OCI_L3M_RRS',\n    temporal = (\"2025-03-05\", \"2025-03-05\")\n)\nlen(results)\n\n6\n\n\nWhy so many? There are month, 8-day, day and 2 resolutions. You need to look at the filename formats and filter to get the files you want.\n\n# Level 3 data\nresults = earthaccess.search_data(\n    short_name = 'PACE_OCI_L3M_RRS',\n    temporal = (\"2025-03-05\", \"2025-03-05\"),\n    granule_name=\"*.MO.*.0p1deg.*\"\n)\nlen(results)\n\n1\n\n\n\n\nRefining the search\nHere are the common arguments for earthaccess.search_data():\n\nbounding_box is a lat/lon box, e.g. (xmin=-73.5, ymin=33.5, xmax=-43.5, ymax=43.5)\ntemporal is a date range, e.g. (\"2020-01-16\", \"2020-12-16\")\ncloud_cover is a range (0, 10)\ngranule_name is a matching filter, e.g. \"*.DAY.*.0p1deg.*\"\nshort_name or collection_id\n\n\n\nWorking with earthaccess returns\nFollowing the search for data, you’ll likely take one of two pathways with those results. You may choose to download the assets that have been returned to you or you may choose to continue working with the search results within the Python environment.\n\ntype(results[0])\n\nearthaccess.results.DataGranule\n\n\n\nresults[0]\n\n\n    \n            \n            \n    \n      \n        \n          \n            Data: PACE_OCI.20250305.L3m.DAY.RRS.V3_0.Rrs.0p1deg.nc\n            Size: 141.34 MB\n            Cloud Hosted: True\n          \n          \n            \n          \n        \n      \n    \n    \n\n\n\nDownload earthaccess results\nIn some cases you may want to download your assets. earthaccess makes downloading the data from the search results very easy using the earthaccess.download() function.\ndownloaded_files = earthaccess.download( results[0:9], local_path=‘data’, )\nearthaccess does a lot of heavy lifting for us. It identifies the downloadable links, passes our Earthdata Login credentials, and saves the files with the proper names.\n\n\nWork in the cloud\nAlternatively we can work with the metadata without downloading and only load the data into memory (or download) when we need to compute with it or plot it.\nThe data_links() methods gets us the url to the data. The data_links() method can also be used to get the s3 URI when we want to perform direct s3 access of the data in the cloud. To get the s3 URI, pass access = 'direct' to the method. Note, for NASA data, you need to be in AWS us-west-2 for direct access to work.\n\nresults[0].data_links(access = 'direct')\n\n['s3://ob-cumulus-prod-public/PACE_OCI.20250305.L3m.DAY.RRS.V3_0.Rrs.0p1deg.nc']\n\n\nWe can pass or read the data url into libraries like xarray, rioxarray, or gdal, but we would need to deal with the authentication. earthaccess has a built-in module for easily reading these data links in and takes care of authentication for us.\nWe use earthaccess’s open() method make a connection the cloud resource so we can work with the files. To get the first file, we use results[0:1].\n\nfileset = earthaccess.open(results)\n\n\n\n\n\n\n\n\n\n\n\nds = xr.open_dataset(fileset[0], chunks={})\nds\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&lt;xarray.Dataset&gt; Size: 4GB\nDimensions:     (wavelength: 172, lat: 1800, lon: 3600, rgb: 3,\n                 eightbitcolor: 256)\nCoordinates:\n  * wavelength  (wavelength) float64 1kB 346.0 348.0 351.0 ... 714.0 717.0 719.0\n  * lat         (lat) float32 7kB 89.95 89.85 89.75 ... -89.75 -89.85 -89.95\n  * lon         (lon) float32 14kB -179.9 -179.9 -179.8 ... 179.8 179.9 180.0\nDimensions without coordinates: rgb, eightbitcolor\nData variables:\n    Rrs         (lat, lon, wavelength) float32 4GB dask.array&lt;chunksize=(16, 1024, 8), meta=np.ndarray&gt;\n    palette     (rgb, eightbitcolor) uint8 768B dask.array&lt;chunksize=(3, 256), meta=np.ndarray&gt;\nAttributes: (12/64)\n    product_name:                      PACE_OCI.20250301_20250331.L3m.MO.RRS....\n    instrument:                        OCI\n    title:                             OCI Level-3 Standard Mapped Image\n    project:                           Ocean Biology Processing Group (NASA/G...\n    platform:                          PACE\n    source:                            satellite observations from OCI-PACE\n    ...                                ...\n    identifier_product_doi:            10.5067/PACE/OCI/L3M/RRS/3.0\n    keywords:                          Earth Science &gt; Oceans &gt; Ocean Optics ...\n    keywords_vocabulary:               NASA Global Change Master Directory (G...\n    data_bins:                         3394416\n    data_minimum:                      -0.010000003\n    data_maximum:                      0.1xarray.DatasetDimensions:wavelength: 172lat: 1800lon: 3600rgb: 3eightbitcolor: 256Coordinates: (3)wavelength(wavelength)float64346.0 348.0 351.0 ... 717.0 719.0long_name :wavelengthsunits :nmvalid_min :0valid_max :20000array([346., 348., 351., 353., 356., 358., 361., 363., 366., 368., 371., 373.,\n       375., 378., 380., 383., 385., 388., 390., 393., 395., 398., 400., 403.,\n       405., 408., 410., 413., 415., 418., 420., 422., 425., 427., 430., 432.,\n       435., 437., 440., 442., 445., 447., 450., 452., 455., 457., 460., 462.,\n       465., 467., 470., 472., 475., 477., 480., 482., 485., 487., 490., 492.,\n       495., 497., 500., 502., 505., 507., 510., 512., 515., 517., 520., 522.,\n       525., 527., 530., 532., 535., 537., 540., 542., 545., 547., 550., 553.,\n       555., 558., 560., 563., 565., 568., 570., 573., 575., 578., 580., 583.,\n       586., 588., 613., 615., 618., 620., 623., 625., 627., 630., 632., 635.,\n       637., 640., 641., 642., 643., 645., 646., 647., 648., 650., 651., 652.,\n       653., 655., 656., 657., 658., 660., 661., 662., 663., 665., 666., 667.,\n       668., 670., 671., 672., 673., 675., 676., 677., 678., 679., 681., 682.,\n       683., 684., 686., 687., 688., 689., 691., 692., 693., 694., 696., 697.,\n       698., 699., 701., 702., 703., 704., 706., 707., 708., 709., 711., 712.,\n       713., 714., 717., 719.])lat(lat)float3289.95 89.85 89.75 ... -89.85 -89.95long_name :Latitudeunits :degrees_northstandard_name :latitudevalid_min :-90.0valid_max :90.0array([ 89.95    ,  89.85    ,  89.75    , ..., -89.75    , -89.850006,\n       -89.950005], shape=(1800,), dtype=float32)lon(lon)float32-179.9 -179.9 ... 179.9 180.0long_name :Longitudeunits :degrees_eaststandard_name :longitudevalid_min :-180.0valid_max :180.0array([-179.95   , -179.85   , -179.75   , ...,  179.75   ,  179.85   ,\n        179.95001], shape=(3600,), dtype=float32)Data variables: (2)Rrs(lat, lon, wavelength)float32dask.array&lt;chunksize=(16, 1024, 8), meta=np.ndarray&gt;long_name :Remote sensing reflectanceunits :sr^-1standard_name :surface_ratio_of_upwelling_radiance_emerging_from_sea_water_to_downwelling_radiative_flux_in_airvalid_min :-30000valid_max :25000display_scale :lineardisplay_min :0.0display_max :0.025\n\n\n\n\n\n\n\n\n\n\n\nArray\nChunk\n\n\n\n\nBytes\n4.15 GiB\n512.00 kiB\n\n\nShape\n(1800, 3600, 172)\n(16, 1024, 8)\n\n\nDask graph\n9944 chunks in 2 graph layers\n\n\nData type\nfloat32 numpy.ndarray\n\n\n\n\n                                                                                                       172 3600 1800\n\n\n\n\npalette(rgb, eightbitcolor)uint8dask.array&lt;chunksize=(3, 256), meta=np.ndarray&gt;\n\n\n\n\n\n\n\n\n\n\n\nArray\nChunk\n\n\n\n\nBytes\n768 B\n768 B\n\n\nShape\n(3, 256)\n(3, 256)\n\n\nDask graph\n1 chunks in 2 graph layers\n\n\nData type\nuint8 numpy.ndarray\n\n\n\n\n         256 3\n\n\n\n\nIndexes: (3)wavelengthPandasIndexPandasIndex(Index([346.0, 348.0, 351.0, 353.0, 356.0, 358.0, 361.0, 363.0, 366.0, 368.0,\n       ...\n       706.0, 707.0, 708.0, 709.0, 711.0, 712.0, 713.0, 714.0, 717.0, 719.0],\n      dtype='float64', name='wavelength', length=172))latPandasIndexPandasIndex(Index([ 89.94999694824219,   89.8499984741211,              89.75,\n         89.6500015258789,  89.55000305175781,  89.44999694824219,\n         89.3499984741211,              89.25,   89.1500015258789,\n        89.05000305175781,\n       ...\n       -89.05000305175781,  -89.1500015258789,             -89.25,\n       -89.35000610351562, -89.45000457763672, -89.55000305175781,\n        -89.6500015258789,             -89.75, -89.85000610351562,\n       -89.95000457763672],\n      dtype='float32', name='lat', length=1800))lonPandasIndexPandasIndex(Index([ -179.9499969482422, -179.85000610351562,             -179.75,\n       -179.64999389648438,  -179.5500030517578,  -179.4499969482422,\n       -179.35000610351562,             -179.25, -179.14999389648438,\n        -179.0500030517578,\n       ...\n         179.0500030517578,  179.15000915527344,              179.25,\n        179.35000610351562,  179.45001220703125,   179.5500030517578,\n        179.65000915527344,              179.75,  179.85000610351562,\n        179.95001220703125],\n      dtype='float32', name='lon', length=3600))Attributes: (64)product_name :PACE_OCI.20250301_20250331.L3m.MO.RRS.V3_0.Rrs.0p1deg.ncinstrument :OCItitle :OCI Level-3 Standard Mapped Imageproject :Ocean Biology Processing Group (NASA/GSFC/OBPG)platform :PACEsource :satellite observations from OCI-PACEtemporal_range :monthprocessing_version :3.0date_created :2025-04-23T19:55:06.000Zhistory :l3mapgen par=PACE_OCI.20250301_20250331.L3m.MO.RRS.V3_0.Rrs.0p1deg.nc.param l2_flag_names :ATMFAIL,LAND,HILT,HISATZEN,STRAYLIGHT,CLDICE,COCCOLITH,LOWLW,CHLWARN,CHLFAIL,NAVWARN,MAXAERITER,HISOLZEN,NAVFAIL,FILTER,HIGLINTtime_coverage_start :2025-03-01T00:30:30.000Ztime_coverage_end :2025-04-01T02:17:04.000Zstart_orbit_number :0end_orbit_number :0map_projection :Equidistant Cylindricallatitude_units :degrees_northlongitude_units :degrees_eastnorthernmost_latitude :90.0southernmost_latitude :-90.0westernmost_longitude :-180.0easternmost_longitude :180.0geospatial_lat_max :90.0geospatial_lat_min :-90.0geospatial_lon_max :180.0geospatial_lon_min :-180.0latitude_step :0.1longitude_step :0.1sw_point_latitude :-89.95sw_point_longitude :-179.95spatialResolution :11.131949 kmgeospatial_lon_resolution :11.131949 kmgeospatial_lat_resolution :11.131949 kmgeospatial_lat_units :degrees_northgeospatial_lon_units :degrees_eastnumber_of_lines :1800number_of_columns :3600measure :Meansuggested_image_scaling_minimum :0.0suggested_image_scaling_maximum :0.025suggested_image_scaling_type :LINEARsuggested_image_scaling_applied :No_lastModified :2025-04-23T19:55:06.000ZConventions :CF-1.6 ACDD-1.3institution :NASA Goddard Space Flight Center, Ocean Ecology Laboratory, Ocean Biology Processing Groupstandard_name_vocabulary :CF Standard Name Table v36naming_authority :gov.nasa.gsfc.sci.oceandataid :3.0/L3/PACE_OCI.20250301_20250331.L3b.MO.RRS.V3_0.nclicense :https://science.nasa.gov/earth-science/earth-science-data/data-information-policy/creator_name :NASA/GSFC/OBPGpublisher_name :NASA/GSFC/OBPGcreator_email :data@oceancolor.gsfc.nasa.govpublisher_email :data@oceancolor.gsfc.nasa.govcreator_url :https://oceandata.sci.gsfc.nasa.govpublisher_url :https://oceandata.sci.gsfc.nasa.govprocessing_level :L3 Mappedcdm_data_type :grididentifier_product_doi_authority :http://dx.doi.orgidentifier_product_doi :10.5067/PACE/OCI/L3M/RRS/3.0keywords :Earth Science &gt; Oceans &gt; Ocean Optics &gt; Reflectancekeywords_vocabulary :NASA Global Change Master Directory (GCMD) Science Keywordsdata_bins :3394416data_minimum :-0.010000003data_maximum :0.1\n\n\n\nds_size_gb = ds.nbytes / 1e9\nprint(f\"Dataset size: {ds_size_gb:.2f} GB\")\n\nDataset size: 4.46 GB\n\n\nWe can plot this object.\n\nds['Rrs'].sel(wavelength=346, lat=slice(47, 25), lon=slice(-98, -66)).plot();\n\n\n\n\n\n\n\n\n\n\n\nChunks\nThe data are cloud-optimized (read optimized) so that we don’t have to read the whole file into memory to work with it and we don’t have to download the whole thing if we don’t need to.\n\nds.chunks\n\nFrozen({'lat': (16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 8), 'lon': (1024, 1024, 1024, 528), 'wavelength': (8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4), 'rgb': (3,), 'eightbitcolor': (256,)})\n\n\nChunking let’s us work with big datasets without blowing up our memory. This task takes awhile but it doesn’t blow up our little 2Gb RAM virtual machines. xarray and dask are smart and work through the task chunk by chunk.\n\n%%time\n# Pick a variable and a wavelength value\nvarname = list(ds.data_vars)[0]\none_wl = ds[varname].isel(wavelength=0) # select the first wavelength\nval = one_wl.mean(dim=(\"lat\", \"lon\")).compute()\n\nIf we tried to load the data into memory, we would crash our kernel (max out the RAM).\n\n%%time\n# THIS WILL CRASH THE KERNEL\n# load it into memory\nunchunked_slice = one_wl.load()\nval = unchunked_slice.mean(dim=(\"lat\", \"lon\"))",
+    "text": "Get Started\n\nImport Required Packages\n\nimport earthaccess \nimport xarray as xr\n\n\nauth = earthaccess.login()\n# are we authenticated?\nif not auth.authenticated:\n    # ask for credentials and persist them in a .netrc file\n    auth.login(strategy=\"interactive\", persist=True)\n\n\n\nSearch for data\nWe want to search NASA Earth Data for collections using the OCI instrument. Use https://search.earthdata.nasa.gov/search?fi=OCI\nThere are multiple keywords we can use to discovery data from collections. The table below contains the short_name, concept_id, and doi for some collections we are interested in for other exercises. Each of these can be used to search for data or information related to the collection we are interested in.\n\n\n\nDescription\nShortname\nCollection Concept ID\n\n\n\n\nLevel 2 Apparent Optical Properties\nPACE_OCI_L2_AOP\nC3385049983-OB_CLOUD\n\n\nLevel 3 RRS\nPACE_OCI_L3M_RRS\nC3385050676-OB_CLOUD\n\n\n\nHow can we find the shortname or concept_id for collections not in the table above?. Let’s take a quick detour.\nhttps://search.earthdata.nasa.gov/search\n\n\nSearch by collection - Level 2 data\n\n# Level 2 data\nresults = earthaccess.search_data(\n    short_name = 'PACE_OCI_L2_AOP',\n    temporal = (\"2025-03-05\", \"2025-03-05\")\n)\nlen(results)\n\n143\n\n\nWhy are there so many?? Swath data that is in spatial chunks. We need to specify a bounding box.\n\n# Level 2 data\nresults = earthaccess.search_data(\n    short_name = 'PACE_OCI_L2_AOP',\n    temporal = (\"2025-03-05\", \"2025-03-05\"),\n    bounding_box = (-98.0, 27.0, -96.0, 31.0)\n)\nlen(results)\n\n1\n\n\n\n\nSearch by collection - Level 3 data\nGlobal data so there should be one file per day, right?\n\n# Level 3 data\nresults = earthaccess.search_data(\n    short_name = 'PACE_OCI_L3M_RRS',\n    temporal = (\"2025-03-05\", \"2025-03-05\")\n)\nlen(results)\n\n6\n\n\nWhy so many? There are month, 8-day, day and 2 resolutions. You need to look at the filenames and filter to get the files you want.\n\n# all the file names\n[res.data_links() for res in results]\n\n[['https://obdaac-tea.earthdatacloud.nasa.gov/ob-cumulus-prod-public/PACE_OCI.20250226_20250305.L3m.8D.RRS.V3_0.Rrs.0p1deg.nc'],\n ['https://obdaac-tea.earthdatacloud.nasa.gov/ob-cumulus-prod-public/PACE_OCI.20250226_20250305.L3m.8D.RRS.V3_0.Rrs.4km.nc'],\n ['https://obdaac-tea.earthdatacloud.nasa.gov/ob-cumulus-prod-public/PACE_OCI.20250301_20250331.L3m.MO.RRS.V3_0.Rrs.4km.nc'],\n ['https://obdaac-tea.earthdatacloud.nasa.gov/ob-cumulus-prod-public/PACE_OCI.20250301_20250331.L3m.MO.RRS.V3_0.Rrs.0p1deg.nc'],\n ['https://obdaac-tea.earthdatacloud.nasa.gov/ob-cumulus-prod-public/PACE_OCI.20250305.L3m.DAY.RRS.V3_0.Rrs.0p1deg.nc'],\n ['https://obdaac-tea.earthdatacloud.nasa.gov/ob-cumulus-prod-public/PACE_OCI.20250305.L3m.DAY.RRS.V3_0.Rrs.4km.nc']]\n\n\n\n# Level 3 data\nresults = earthaccess.search_data(\n    short_name = 'PACE_OCI_L3M_RRS',\n    temporal = (\"2025-03-05\", \"2025-03-05\"),\n    granule_name=\"*.MO.*.0p1deg.*\"\n)\nlen(results)\n\n1\n\n\n\n\nRefining the search\nHere are the common arguments for earthaccess.search_data():\n\nbounding_box is a lat/lon box, e.g. (xmin=-73.5, ymin=33.5, xmax=-43.5, ymax=43.5)\ntemporal is a date range, e.g. (\"2020-01-16\", \"2020-12-16\")\ncloud_cover is a range (0, 10)\ngranule_name is a matching filter, e.g. \"*.DAY.*.0p1deg.*\"\nshort_name or collection_id\n\n\n\nWorking with earthaccess returns\nFollowing the search for data, you’ll likely take one of two pathways with those results. You may choose to download the assets that have been returned to you or you may choose to continue working with the search results within the Python environment.\n\ntype(results[0])\n\nearthaccess.results.DataGranule\n\n\n\nresults[0]\n\n\n    \n            \n            \n    \n      \n        \n          \n            Data: PACE_OCI.20250305.L3m.DAY.RRS.V3_0.Rrs.0p1deg.nc\n            Size: 141.34 MB\n            Cloud Hosted: True\n          \n          \n            \n          \n        \n      \n    \n    \n\n\n\nDownload earthaccess results\nIn some cases you may want to download your assets. earthaccess makes downloading the data from the search results very easy using the earthaccess.download() function.\ndownloaded_files = earthaccess.download( results[0:9], local_path=‘data’, )\nearthaccess does a lot of heavy lifting for us. It identifies the downloadable links, passes our Earthdata Login credentials, and saves the files with the proper names.\n\n\nWork in the cloud\nAlternatively we can work with the metadata without downloading and only load the data into memory (or download) when we need to compute with it or plot it. We use earthaccess‘s open() method to create a ’fileset’ to the cloud objects and then open that with xarray.\n\nfileset = earthaccess.open(results)\n\n\n\n\n\n\n\n\n\n\n\nds = xr.open_dataset(fileset[0], chunks={})\nds\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&lt;xarray.Dataset&gt; Size: 4GB\nDimensions:     (wavelength: 172, lat: 1800, lon: 3600, rgb: 3,\n                 eightbitcolor: 256)\nCoordinates:\n  * wavelength  (wavelength) float64 1kB 346.0 348.0 351.0 ... 714.0 717.0 719.0\n  * lat         (lat) float32 7kB 89.95 89.85 89.75 ... -89.75 -89.85 -89.95\n  * lon         (lon) float32 14kB -179.9 -179.9 -179.8 ... 179.8 179.9 180.0\nDimensions without coordinates: rgb, eightbitcolor\nData variables:\n    Rrs         (lat, lon, wavelength) float32 4GB dask.array&lt;chunksize=(16, 1024, 8), meta=np.ndarray&gt;\n    palette     (rgb, eightbitcolor) uint8 768B dask.array&lt;chunksize=(3, 256), meta=np.ndarray&gt;\nAttributes: (12/64)\n    product_name:                      PACE_OCI.20250226_20250305.L3m.8D.RRS....\n    instrument:                        OCI\n    title:                             OCI Level-3 Standard Mapped Image\n    project:                           Ocean Biology Processing Group (NASA/G...\n    platform:                          PACE\n    source:                            satellite observations from OCI-PACE\n    ...                                ...\n    identifier_product_doi:            10.5067/PACE/OCI/L3M/RRS/3.0\n    keywords:                          Earth Science &gt; Oceans &gt; Ocean Optics ...\n    keywords_vocabulary:               NASA Global Change Master Directory (G...\n    data_bins:                         2431585\n    data_minimum:                      -0.010000002\n    data_maximum:                      0.10000001xarray.DatasetDimensions:wavelength: 172lat: 1800lon: 3600rgb: 3eightbitcolor: 256Coordinates: (3)wavelength(wavelength)float64346.0 348.0 351.0 ... 717.0 719.0long_name :wavelengthsunits :nmvalid_min :0valid_max :20000array([346., 348., 351., 353., 356., 358., 361., 363., 366., 368., 371., 373.,\n       375., 378., 380., 383., 385., 388., 390., 393., 395., 398., 400., 403.,\n       405., 408., 410., 413., 415., 418., 420., 422., 425., 427., 430., 432.,\n       435., 437., 440., 442., 445., 447., 450., 452., 455., 457., 460., 462.,\n       465., 467., 470., 472., 475., 477., 480., 482., 485., 487., 490., 492.,\n       495., 497., 500., 502., 505., 507., 510., 512., 515., 517., 520., 522.,\n       525., 527., 530., 532., 535., 537., 540., 542., 545., 547., 550., 553.,\n       555., 558., 560., 563., 565., 568., 570., 573., 575., 578., 580., 583.,\n       586., 588., 613., 615., 618., 620., 623., 625., 627., 630., 632., 635.,\n       637., 640., 641., 642., 643., 645., 646., 647., 648., 650., 651., 652.,\n       653., 655., 656., 657., 658., 660., 661., 662., 663., 665., 666., 667.,\n       668., 670., 671., 672., 673., 675., 676., 677., 678., 679., 681., 682.,\n       683., 684., 686., 687., 688., 689., 691., 692., 693., 694., 696., 697.,\n       698., 699., 701., 702., 703., 704., 706., 707., 708., 709., 711., 712.,\n       713., 714., 717., 719.])lat(lat)float3289.95 89.85 89.75 ... -89.85 -89.95long_name :Latitudeunits :degrees_northstandard_name :latitudevalid_min :-90.0valid_max :90.0array([ 89.95    ,  89.85    ,  89.75    , ..., -89.75    , -89.850006,\n       -89.950005], shape=(1800,), dtype=float32)lon(lon)float32-179.9 -179.9 ... 179.9 180.0long_name :Longitudeunits :degrees_eaststandard_name :longitudevalid_min :-180.0valid_max :180.0array([-179.95   , -179.85   , -179.75   , ...,  179.75   ,  179.85   ,\n        179.95001], shape=(3600,), dtype=float32)Data variables: (2)Rrs(lat, lon, wavelength)float32dask.array&lt;chunksize=(16, 1024, 8), meta=np.ndarray&gt;long_name :Remote sensing reflectanceunits :sr^-1standard_name :surface_ratio_of_upwelling_radiance_emerging_from_sea_water_to_downwelling_radiative_flux_in_airvalid_min :-30000valid_max :25000display_scale :lineardisplay_min :0.0display_max :0.025\n\n\n\n\n\n\n\n\n\n\n\nArray\nChunk\n\n\n\n\nBytes\n4.15 GiB\n512.00 kiB\n\n\nShape\n(1800, 3600, 172)\n(16, 1024, 8)\n\n\nDask graph\n9944 chunks in 2 graph layers\n\n\nData type\nfloat32 numpy.ndarray\n\n\n\n\n                                                                                                       172 3600 1800\n\n\n\n\npalette(rgb, eightbitcolor)uint8dask.array&lt;chunksize=(3, 256), meta=np.ndarray&gt;\n\n\n\n\n\n\n\n\n\n\n\nArray\nChunk\n\n\n\n\nBytes\n768 B\n768 B\n\n\nShape\n(3, 256)\n(3, 256)\n\n\nDask graph\n1 chunks in 2 graph layers\n\n\nData type\nuint8 numpy.ndarray\n\n\n\n\n         256 3\n\n\n\n\nIndexes: (3)wavelengthPandasIndexPandasIndex(Index([346.0, 348.0, 351.0, 353.0, 356.0, 358.0, 361.0, 363.0, 366.0, 368.0,\n       ...\n       706.0, 707.0, 708.0, 709.0, 711.0, 712.0, 713.0, 714.0, 717.0, 719.0],\n      dtype='float64', name='wavelength', length=172))latPandasIndexPandasIndex(Index([ 89.94999694824219,   89.8499984741211,              89.75,\n         89.6500015258789,  89.55000305175781,  89.44999694824219,\n         89.3499984741211,              89.25,   89.1500015258789,\n        89.05000305175781,\n       ...\n       -89.05000305175781,  -89.1500015258789,             -89.25,\n       -89.35000610351562, -89.45000457763672, -89.55000305175781,\n        -89.6500015258789,             -89.75, -89.85000610351562,\n       -89.95000457763672],\n      dtype='float32', name='lat', length=1800))lonPandasIndexPandasIndex(Index([ -179.9499969482422, -179.85000610351562,             -179.75,\n       -179.64999389648438,  -179.5500030517578,  -179.4499969482422,\n       -179.35000610351562,             -179.25, -179.14999389648438,\n        -179.0500030517578,\n       ...\n         179.0500030517578,  179.15000915527344,              179.25,\n        179.35000610351562,  179.45001220703125,   179.5500030517578,\n        179.65000915527344,              179.75,  179.85000610351562,\n        179.95001220703125],\n      dtype='float32', name='lon', length=3600))Attributes: (64)product_name :PACE_OCI.20250226_20250305.L3m.8D.RRS.V3_0.Rrs.0p1deg.ncinstrument :OCItitle :OCI Level-3 Standard Mapped Imageproject :Ocean Biology Processing Group (NASA/GSFC/OBPG)platform :PACEsource :satellite observations from OCI-PACEtemporal_range :8-dayprocessing_version :3.0date_created :2025-04-23T15:37:33.000Zhistory :l3mapgen par=PACE_OCI.20250226_20250305.L3m.8D.RRS.V3_0.Rrs.0p1deg.nc.param l2_flag_names :ATMFAIL,LAND,HILT,HISATZEN,STRAYLIGHT,CLDICE,COCCOLITH,LOWLW,CHLWARN,CHLFAIL,NAVWARN,MAXAERITER,HISOLZEN,NAVFAIL,FILTER,HIGLINTtime_coverage_start :2025-02-26T00:22:14.000Ztime_coverage_end :2025-03-06T01:49:44.000Zstart_orbit_number :0end_orbit_number :0map_projection :Equidistant Cylindricallatitude_units :degrees_northlongitude_units :degrees_eastnorthernmost_latitude :90.0southernmost_latitude :-90.0westernmost_longitude :-180.0easternmost_longitude :180.0geospatial_lat_max :90.0geospatial_lat_min :-90.0geospatial_lon_max :180.0geospatial_lon_min :-180.0latitude_step :0.1longitude_step :0.1sw_point_latitude :-89.95sw_point_longitude :-179.95spatialResolution :11.131949 kmgeospatial_lon_resolution :11.131949 kmgeospatial_lat_resolution :11.131949 kmgeospatial_lat_units :degrees_northgeospatial_lon_units :degrees_eastnumber_of_lines :1800number_of_columns :3600measure :Meansuggested_image_scaling_minimum :0.0suggested_image_scaling_maximum :0.025suggested_image_scaling_type :LINEARsuggested_image_scaling_applied :No_lastModified :2025-04-23T15:37:33.000ZConventions :CF-1.6 ACDD-1.3institution :NASA Goddard Space Flight Center, Ocean Ecology Laboratory, Ocean Biology Processing Groupstandard_name_vocabulary :CF Standard Name Table v36naming_authority :gov.nasa.gsfc.sci.oceandataid :3.0/L3/PACE_OCI.20250226_20250305.L3b.8D.RRS.V3_0.nclicense :https://science.nasa.gov/earth-science/earth-science-data/data-information-policy/creator_name :NASA/GSFC/OBPGpublisher_name :NASA/GSFC/OBPGcreator_email :data@oceancolor.gsfc.nasa.govpublisher_email :data@oceancolor.gsfc.nasa.govcreator_url :https://oceandata.sci.gsfc.nasa.govpublisher_url :https://oceandata.sci.gsfc.nasa.govprocessing_level :L3 Mappedcdm_data_type :grididentifier_product_doi_authority :http://dx.doi.orgidentifier_product_doi :10.5067/PACE/OCI/L3M/RRS/3.0keywords :Earth Science &gt; Oceans &gt; Ocean Optics &gt; Reflectancekeywords_vocabulary :NASA Global Change Master Directory (GCMD) Science Keywordsdata_bins :2431585data_minimum :-0.010000002data_maximum :0.10000001\n\n\n\nds_size_gb = ds.nbytes / 1e9\nprint(f\"Dataset size: {ds_size_gb:.2f} GB\")\n\nDataset size: 4.46 GB\n\n\nWe can plot this object.\n\nrrs = ds['Rrs'].sel(wavelength=346, lat=slice(47, 25), lon=slice(-98, -66))\nrrs.plot();\n\n\n\n\n\n\n\n\n\n\n\nChunks\nThe data are cloud-optimized (read optimized) so that we don’t have to read the whole file into memory to work with it and we don’t have to download the whole thing if we don’t need to.\n\nds.chunks\n\nFrozen({'lat': (16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 8), 'lon': (1024, 1024, 1024, 528), 'wavelength': (8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4), 'rgb': (3,), 'eightbitcolor': (256,)})\n\n\nChunking let’s us work with big datasets without blowing up our memory. This task takes awhile but it doesn’t blow up our little 2Gb RAM virtual machines. xarray and dask are smart and work through the task chunk by chunk.\n\n%%time\n# Pick a variable and a wavelength value\nvarname = list(ds.data_vars)[0]\n# select the first wavelength\none_wl = ds[varname].isel(wavelength=0)\n# under the hood, dask + xarray is computing the mean chunk by chunk\nval = one_wl.mean(dim=(\"lat\", \"lon\")).compute()\n\nIf we tried to load the data into memory, we would crash our kernel (max out the RAM).\n\n%%time\n# THIS WILL CRASH THE KERNEL\n# this tries to load the whole dataset all at once into memory\nunchunked_slice = one_wl.load()\n# this would be fast if the load step didn't crash the memory \nval = unchunked_slice.mean(dim=(\"lat\", \"lon\"))",
     "crumbs": [
       "JupyterHub",
       "Tutorials",
@@ -259,60 +312,119 @@
     ]
   },
   {
-    "objectID": "team.html#organizers-and-instructors",
-    "href": "team.html#organizers-and-instructors",
-    "title": "Our Team",
-    "section": "Organizers and Instructors",
-    "text": "Organizers and Instructors\n\n\nEli Holmes\n\nNOAA Fisheries\nwebpage • GitHub • ORCID\n\n\nRyan Vandermeulen\n\nNOAA Fisheries\nwebpage • ORCID",
+    "objectID": "lectures/index.html#resources-more-lectures",
+    "href": "lectures/index.html#resources-more-lectures",
+    "title": "Lectures",
+    "section": "Resources (more lectures)",
+    "text": "Resources (more lectures)\n\nPACE Mission Overview by Skye Caplan (Ocean Ecology Lab, NASA). 20min\nIntroduction to Plankton, Aerosol, Cloud, Ocean Ecosystem (PACE) Hyperspectral Observations for Water Quality Monitoring by ARSET Trainer Amita Mehta\nOcean Products by Ivona Cetinić (NASA PACE Team)\nOCB PACE Lectures 2022 A playlist of lectures.",
+    "crumbs": [
+      "JupyterHub",
+      "Lectures"
+    ]
+  },
+  {
+    "objectID": "content/setup.html#earth-data-login",
+    "href": "content/setup.html#earth-data-login",
+    "title": "Set-up",
+    "section": "Earth Data Login",
+    "text": "Earth Data Login\nTo get data from NASA Earth Data, you will need to register and get a username and password. Register here: https://urs.earthdata.nasa.gov/",
     "crumbs": [
       "JupyterHub",
       "Welcome",
-      "Our Team"
+      "Set-up"
     ]
   },
   {
-    "objectID": "schedule.html",
-    "href": "schedule.html",
-    "title": "Schedule",
-    "section": "",
-    "text": "All times Eastern. May 22, 2025\n\n10-10:10 Welcome!\n10:10-10:30am Introduction to hyperspectral ocean color data\n10:30-10:45am Overview of Level 2 and Level 3 PACE products\n10:45-11:30am Orientation on our JupyterHub\n11:30-11:40am BREAK\n11:40-12:00pm PACE Data Access via Earth Data and ERDDAP (earthaccess and xarray packages)\n12:00-12:20pm Tutorial 1: Remote-sensing reflectance (Rrs)\n12:20-12:40pm Tutorial 2: Diffuse attenuation coefficients (Kd)\n12:20-12:40pm Tutorial 3: Phytoplankton Community Composition (MOANA)\n12:40-1:00pm Q&A on PACE data and Fisheries and Ocean Ecosystem Applications",
+    "objectID": "content/setup.html#jupyter-hub",
+    "href": "content/setup.html#jupyter-hub",
+    "title": "Set-up",
+    "section": "Jupyter Hub",
+    "text": "Jupyter Hub\nIf you want to follow along with our tutorials during the workshop on our workshop Jupyter Hub https://workshop.nmfs-openscapes.2i2c.cloud/ then\n\nIf you are NOAA, click here (NOAA only) for instructions and to get the password (NOAA access only)\nIf you are not-NOAA, we will give the password to the workshop Jupyter Hub out at the start of the workshop.\n\nDo I need to use the Jupyter Hub? No. You can run the tutorials in Colab, Binder, Codespaces, another Jupyter Hub or download and run on your own computer. Or you can just listen!",
     "crumbs": [
       "JupyterHub",
       "Welcome",
-      "Schedule"
+      "Set-up"
     ]
   },
   {
-    "objectID": "index.html#zoom-link",
-    "href": "index.html#zoom-link",
-    "title": "EDMW 2025 - Introduction to using earth data in the cloud for scientific workflows",
-    "section": "Zoom link",
-    "text": "Zoom link\nBefore the EDM Workshop Register by filling out this form. You will receive an email to invite you to the EDM Workshop Sched website\nZoom Link Once you can log into the Sched event website, navigate to Workshop 4A Part I and Part II and add them to your schedule. You will then be able to see the Zoom links.",
+    "objectID": "content/setup.html#getting-the-tutorials",
+    "href": "content/setup.html#getting-the-tutorials",
+    "title": "Set-up",
+    "section": "Getting the tutorials",
+    "text": "Getting the tutorials\nOnce in the Jupyter Hub, you can open a terminal with File &gt; New &gt; Terminal. Then type this on the command line:\ncd ~\ngit clone https://github.com/nmfs-opensci/EDMW-2H-tutorials-2025\nAlternatively, go to a tutorial in https://nmfs-opensci.github.io/EDMW-EarthData-Workshop-2025/ and there are buttons to open the tutorial in different places.\nWe will be using a JupyterHub for the workshop but you can run the tutorials in Colab, Binder or on your own computer.",
     "crumbs": [
       "JupyterHub",
-      "Welcome"
+      "Welcome",
+      "Set-up"
     ]
   },
   {
-    "objectID": "index.html#prerequisites",
-    "href": "index.html#prerequisites",
-    "title": "EDMW 2025 - Introduction to using earth data in the cloud for scientific workflows",
-    "section": "Prerequisites",
-    "text": "Prerequisites\n\nEarth Data Login\nTo get data from NASA Earth Data, you will need to register and get a username and password. Register here: https://urs.earthdata.nasa.gov/\n\n\nJupyter Hub\nIf you want to follow along with our tutorials during the workshop on our workshop Jupyter Hub https://workshop.nmfs-openscapes.2i2c.cloud/ then\n\nIf you are NOAA, click here (NOAA only) for instructions and to get the password (NOAA access only)\nIf you are not-NOAA, we will give the password to the workshop Jupyter Hub out at the start of the workshop.\n\nDo I need to use the Jupyter Hub? No. You can run the tutorials in Colab, Binder, Codespaces, another Jupyter Hub or download and run on your own computer. Or you can just listen!\n\n\nGetting the tutorials\nOnce in the Jupyter Hub, you can open a terminal with File &gt; New &gt; Terminal. Then type this on the command line:\ncd ~\ngit clone https://github.com/nmfs-opensci/EDMW-2H-tutorials-2025\nAlternatively, go to a tutorial in https://nmfs-opensci.github.io/EDMW-EarthData-Workshop-2025/ and there are buttons to open the tutorial in different places.",
+    "objectID": "content/setup.html#jupyter-hub-setup",
+    "href": "content/setup.html#jupyter-hub-setup",
+    "title": "Set-up",
+    "section": "Jupyter Hub setup",
+    "text": "Jupyter Hub setup\n\nhttps://workshop.nmfs-openscapes.2i2c.cloud/\nClick here for instructions and to get the password (NOAA access only)\nOnce you are in, Click Start Server.",
     "crumbs": [
       "JupyterHub",
-      "Welcome"
+      "Welcome",
+      "Set-up"
     ]
   },
   {
-    "objectID": "index.html#thank-you-for-inspiration-and-content",
-    "href": "index.html#thank-you-for-inspiration-and-content",
-    "title": "EDMW 2025 - Introduction to using earth data in the cloud for scientific workflows",
+    "objectID": "content/setup.html#earthdata-login-account",
+    "href": "content/setup.html#earthdata-login-account",
+    "title": "Set-up",
+    "section": "Earthdata Login account",
+    "text": "Earthdata Login account\nYou will need this to get the PACE data and to get NASA Earth Data in general.\n\nCreate an Earthdata Login account (if you don’t already have one) at https://urs.earthdata.nasa.gov\nWrite down your username and password; you will need it often.",
+    "crumbs": [
+      "JupyterHub",
+      "Welcome",
+      "Set-up"
+    ]
+  },
+  {
+    "objectID": "content/setup.html#running-the-tutorials",
+    "href": "content/setup.html#running-the-tutorials",
+    "title": "Set-up",
+    "section": "Running the tutorials",
+    "text": "Running the tutorials\n\nNavigate to a tutorial in the EDMW workshop\nYou will see buttons for opening the tutorial in different ways. Choose the way that works for you. \nIf using the Jupyter Hub, click on the “Open in Jupyter Hub” button.",
+    "crumbs": [
+      "JupyterHub",
+      "Welcome",
+      "Set-up"
+    ]
+  },
+  {
+    "objectID": "content/resources.html#cloud-native-earth-data-access-and-computing",
+    "href": "content/resources.html#cloud-native-earth-data-access-and-computing",
+    "title": "Resources",
+    "section": "Cloud-Native Earth Data Access and Computing",
+    "text": "Cloud-Native Earth Data Access and Computing\n\nNASA Cloud Data Cookbook\nNMFS HackHours 2025\nNASA EarthData Cloudbook for many tutorials on using satellite data in Python and R and NASA Earth Data\nProject Pythia\nIOOS Python Cookbooks\nIOOS CodeLab collection of tutorials and examples of how to access and utilize the many IOOS technologies and data sources available.",
+    "crumbs": [
+      "JupyterHub",
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "content/resources.html#pace-tutorials",
+    "href": "content/resources.html#pace-tutorials",
+    "title": "Resources",
+    "section": "PACE tutorials",
+    "text": "PACE tutorials\n\nPACE website\nHyperspectral products for fisheries\nPACE Help Hub\nPACE HackWeek 2024 tutorials and lectures in Python\nPACE tutorials in the NOAA HackHours page",
+    "crumbs": [
+      "JupyterHub",
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "content/resources.html#thank-you-for-inspiration-and-content",
+    "href": "content/resources.html#thank-you-for-inspiration-and-content",
+    "title": "Resources",
     "section": "Thank you for inspiration and content!",
-    "text": "Thank you for inspiration and content!\nThank you to the open science community that has created software, teaching resources, and workflows that we have been able to build off of and be inspired by. These include: PACE HackWeek team • NASA Openscapes • OceanHackWeek • SnowEx Hackweek • eScience Institute, University of Washington • ICESat-2 Hackweek • Project Jupyter • Pangeo Project • CryoCloud",
+    "text": "Thank you for inspiration and content!\nThank you to the open science community that has created software, teaching resources, and workflows that we have been able to build off of and be inspired by. These include: NASA Openscapes • OceanHackWeek • SnowEx Hackweek • eScience Institute, University of Washington • ICESat-2 Hackweek • Project Jupyter • Pangeo Project • CryoCloud",
     "crumbs": [
       "JupyterHub",
-      "Welcome"
+      "Resources"
     ]
   },
   {
@@ -337,130 +449,6 @@
     "text": "Content\n\nThe R language and RStudio\nIntro to RStudio\nIntroduction to Git and GitHub"
   },
   {
-    "objectID": "content/01-intro-to-jupyterhub.html#log-into-the-jupyterhub",
-    "href": "content/01-intro-to-jupyterhub.html#log-into-the-jupyterhub",
-    "title": "Intro to JupyterHubs",
-    "section": "Log into the JupyterHub",
-    "text": "Log into the JupyterHub\nGo to https://workshop.nmfs-openscapes.2i2c.cloud/. Login with an email address and the password that we supply.\n\nImage type:\nWe will use the default Py-R - base geospatial image.\n\n\nVirtual Machine size\nYou’ll see something similar to this that allows you to choose a large virtual machine if your project needs it. For the tutorials, you will only need the Small Virtual Machine (default). Please only choose the large machines if you run out of RAM as the larger machines cost us more.\n\n\n\nMachine Profiles\n\n\n\n\nStart up\nAfter we select our server type and click on start, JupyterHub will allocate our instance in the cloud (on Azure). This may take several minutes.\n\n\n\nJupyterhub Spawning",
-    "crumbs": [
-      "JupyterHub",
-      "Welcome",
-      "Orientation",
-      "JupyterHub and Lab"
-    ]
-  },
-  {
-    "objectID": "content/01-intro-to-jupyterhub.html#the-launcher",
-    "href": "content/01-intro-to-jupyterhub.html#the-launcher",
-    "title": "Intro to JupyterHubs",
-    "section": "The Launcher",
-    "text": "The Launcher\nWhen you are in the Jupyter Lab tab (note the Jupyter Logo), you will see a Launcher page. If you don’t see this, go to File &gt; New Launcher or click the blue button on left.\n\n\n\nJupyterhub Launcher",
-    "crumbs": [
-      "JupyterHub",
-      "Welcome",
-      "Orientation",
-      "JupyterHub and Lab"
-    ]
-  },
-  {
-    "objectID": "content/01-intro-to-jupyterhub.html#open-a-terminal",
-    "href": "content/01-intro-to-jupyterhub.html#open-a-terminal",
-    "title": "Intro to JupyterHubs",
-    "section": "Open a terminal",
-    "text": "Open a terminal\nClick the “Terminal” button at the bottom. Copy in the following code:\ncd ~\ngit clone https://github.com/nmfs-opensci/EDMW-2H-tutorials-2025",
-    "crumbs": [
-      "JupyterHub",
-      "Welcome",
-      "Orientation",
-      "JupyterHub and Lab"
-    ]
-  },
-  {
-    "objectID": "content/01-intro-to-jupyterhub.html#end-your-session",
-    "href": "content/01-intro-to-jupyterhub.html#end-your-session",
-    "title": "Intro to JupyterHubs",
-    "section": "End your session",
-    "text": "End your session\nWhen you are finished working for the day it is important to log out of the Jupyter Hub. When you keep a session active it uses up cloud resources (costs money) and keeps a series of virtual machines deployed.\nFrom the Jupyter Lab tab\n\nFile -&gt; Hub Control Panel -&gt; Stop My Server",
-    "crumbs": [
-      "JupyterHub",
-      "Welcome",
-      "Orientation",
-      "JupyterHub and Lab"
-    ]
-  },
-  {
-    "objectID": "content/01-intro-to-jupyterhub.html#restart-your-server",
-    "href": "content/01-intro-to-jupyterhub.html#restart-your-server",
-    "title": "Intro to JupyterHubs",
-    "section": "Restart your server",
-    "text": "Restart your server\nSometimes the server will crash/stop. This can happen if too many people use a lot of memory all at once. If that happens, go to the Jupyter Lab tab and then File -&gt; Hub Control Panel -&gt; Stop My Server and then Start My Server. You shouldn’t lose your work unless you were uploading a file.",
-    "crumbs": [
-      "JupyterHub",
-      "Welcome",
-      "Orientation",
-      "JupyterHub and Lab"
-    ]
-  },
-  {
-    "objectID": "content/01-intro-to-jupyterhub.html#your-files",
-    "href": "content/01-intro-to-jupyterhub.html#your-files",
-    "title": "Intro to JupyterHubs",
-    "section": "Your files",
-    "text": "Your files\nWhen you start your server, you will have access to your own virtual drive space. No other users will be able to see or access your files. You can upload files to your virtual drive space and save files here. You can create folders to organize your files. You personal directory is home/jovyan. Everyone has the same home directory but your files are separate and cannot be seen by others.\nThere are a number of different ways to create new files. We will practice this in the RStudio lecture.\n\nWill I lose all of my work?\nLogging out will NOT cause any of your work to be lost or deleted. It simply shuts down some resources. It would be equivalent to turning off your desktop computer at the end of the day.",
-    "crumbs": [
-      "JupyterHub",
-      "Welcome",
-      "Orientation",
-      "JupyterHub and Lab"
-    ]
-  },
-  {
-    "objectID": "content/01-intro-to-jupyterhub.html#shared-files",
-    "href": "content/01-intro-to-jupyterhub.html#shared-files",
-    "title": "Intro to JupyterHubs",
-    "section": "Shared files",
-    "text": "Shared files\n\n\n\nShared folder\n\n\nIn the file panel, you will see a folder called shared. These are read-only shared files.\nYou will also see shared-public. This is a read-write folder for you to put files for everyone to see and use. You can create a team folder here for shared data and files. Note, everyone can see and change these so be careful to communicate with your team so multiple people don’t work on the same file at the same time. You can also create folders for each team member and agree not to change other team members files.",
-    "crumbs": [
-      "JupyterHub",
-      "Welcome",
-      "Orientation",
-      "JupyterHub and Lab"
-    ]
-  },
-  {
-    "objectID": "content/01-intro-to-jupyterhub.html#python-users",
-    "href": "content/01-intro-to-jupyterhub.html#python-users",
-    "title": "Intro to JupyterHubs",
-    "section": "**Python users",
-    "text": "**Python users\nYou can open a Jupyter Notebook by clicking on the “Python 3” box. In the Launcher tab:\n\n\n\nJupyterhub Launcher\n\n\nJupyter notebooks are a very common way to share Python code and tutorials. Get an overview of Jupyter Lab: Intro to Jupyter Lab Learn about the geosciences tools in Python",
-    "crumbs": [
-      "JupyterHub",
-      "Welcome",
-      "Orientation",
-      "JupyterHub and Lab"
-    ]
-  },
-  {
-    "objectID": "content/01-intro-to-jupyterhub.html#faq",
-    "href": "content/01-intro-to-jupyterhub.html#faq",
-    "title": "Intro to JupyterHubs",
-    "section": "FAQ",
-    "text": "FAQ\nWhy do we have the same home directory as /home/jovyan? /home/jovyan is the default home directory for ‘jupyter’ based images/dockers. It is the historic home directory for Jupyter deployments.\nCan other users see the files in my /home/jovyan folder? No, other users can not see your credentials.\n\nAcknowledgements\nSome sections of this document have been taken from hackweeks organized by the University of Washington eScience Institute and Openscapes.",
-    "crumbs": [
-      "JupyterHub",
-      "Welcome",
-      "Orientation",
-      "JupyterHub and Lab"
-    ]
-  },
-  {
-    "objectID": "DEVELOPERS.html#building-the-website",
-    "href": "DEVELOPERS.html#building-the-website",
-    "title": "2025 EDMW Workshop - PACE",
-    "section": "Building the website",
-    "text": "Building the website\n\nMake sure quarto add shafayetShafee/downloadthis extension is installed. Run from terminal.\nRender the website via Build tab or quarto render .\nPush to GitHub. There is not a GitHub Action set up."
-  },
-  {
     "objectID": "coc.html",
     "href": "coc.html",
     "title": "Code of Conduct",
@@ -468,7 +456,6 @@
     "text": "We are dedicated to providing a harassment-free learning experience for everyone regardless of gender, gender identity and expression, sexual orientation, disability, physical appearance, body size, race, age or religion. We do not tolerate harassment of participants in any form. Sexual language and imagery is not appropriate either in-person or virtual form, including the Discussion boards and Slack workspace. Participants (including event volunteers and organizers) violating these rules may be sanctioned or expelled from the event at the discretion of the organizers.",
     "crumbs": [
       "JupyterHub",
-      "Welcome",
       "Code of Conduct"
     ]
   },
@@ -480,7 +467,6 @@
     "text": "Definition of Harassment\nHarassment includes, but is not limited to:\n\nVerbal comments that reinforce social structures of domination related to gender, gender identity and expression, sexual orientation, disability, physical appearance, body size, race, age, religion.\nSexual images in public spaces\nDeliberate intimidation, stalking, or following\nHarassing photography or recording\nSustained disruption of talks or other events\nInappropriate physical contact\nUnwelcome sexual attention\nAdvocating for, or encouraging, any of the above behavior",
     "crumbs": [
       "JupyterHub",
-      "Welcome",
       "Code of Conduct"
     ]
   },
@@ -492,7 +478,6 @@
     "text": "Expectations\nParticipants asked to stop any harassing behavior are expected to comply immediately. If a participant engages in harassing behavior, the organizers retain the right to take any actions to keep the event a welcoming environment for all participants. This includes warning the offender or expulsion from the event.\nThe organizers may take action to redress anything designed to, or with the clear impact of, disrupting the event or making the environment hostile for any participants. We expect participants to follow these rules at all the event venues and event-related social activities.",
     "crumbs": [
       "JupyterHub",
-      "Welcome",
       "Code of Conduct"
     ]
   },
@@ -504,60 +489,161 @@
     "text": "Reporting a violation\nHarassment and other code of conduct violations reduce the value of the event for everyone. If someone makes you or anyone else feel unsafe or unwelcome, please report it as soon as possible.\nIf you feel comfortable contacting someone associated with our event, you may speak with one of the event organizers in person or contact an organizer on a private Slack channel.",
     "crumbs": [
       "JupyterHub",
-      "Welcome",
       "Code of Conduct"
     ]
+  },
+  {
+    "objectID": "DEVELOPERS.html#building-the-website",
+    "href": "DEVELOPERS.html#building-the-website",
+    "title": "2025 EDMW Workshop - PACE",
+    "section": "Building the website",
+    "text": "Building the website\n\nMake sure quarto add shafayetShafee/downloadthis extension is installed. Run from terminal.\nRender the website via Build tab or quarto render .\nPush to GitHub. There is not a GitHub Action set up."
   },
   {
     "objectID": "content/02-earthdata.html#getting-an-earthdata-login",
     "href": "content/02-earthdata.html#getting-an-earthdata-login",
     "title": "Earthdata Login",
     "section": "Getting an Earthdata login",
-    "text": "Getting an Earthdata login\nIf you do not already have an Earthdata login, then navigate to the Earthdata Login page, a username and password, and then record this somewhere for use during the tutorials:",
-    "crumbs": [
-      "JupyterHub",
-      "Welcome",
-      "Orientation",
-      "Earthdata login"
-    ]
+    "text": "Getting an Earthdata login\nIf you do not already have an Earthdata login, then navigate to the Earthdata Login page, a username and password, and then record this somewhere for use during the tutorials:"
   },
   {
     "objectID": "content/02-earthdata.html#save-your-.netrc-file",
     "href": "content/02-earthdata.html#save-your-.netrc-file",
     "title": "Earthdata Login",
     "section": "Save your .netrc file",
-    "text": "Save your .netrc file\nThe Python code we use will ask you for your username and password, but you can also store your credentials on the Jupyter Hub in your .netrc file. A .netrc file is a standard file for storing credentials for cloud data servers. Run this in a terminal on the Jupyter Hub.\necho \"machine urs.earthdata.nasa.gov login EARTHDATA_LOGIN password EARTHDATA_PASSWORD\" &gt; ~/.netrc\nchmod 0600 .netrc",
+    "text": "Save your .netrc file\nThe Python code we use will ask you for your username and password, but you can also store your credentials on the Jupyter Hub in your .netrc file. A .netrc file is a standard file for storing credentials for cloud data servers. Run this in a terminal on the Jupyter Hub.\necho \"machine urs.earthdata.nasa.gov login EARTHDATA_LOGIN password EARTHDATA_PASSWORD\" &gt; ~/.netrc\nchmod 0600 .netrc"
+  },
+  {
+    "objectID": "content/jupyterhub.html#what-is-a-jupyter-hub",
+    "href": "content/jupyterhub.html#what-is-a-jupyter-hub",
+    "title": "Intro to the Jupyter Hub",
+    "section": "What is a Jupyter Hub?",
+    "text": "What is a Jupyter Hub?",
     "crumbs": [
       "JupyterHub",
       "Welcome",
-      "Orientation",
-      "Earthdata login"
+      "Jupyter Hub and Lab"
     ]
   },
   {
-    "objectID": "content/resources.html",
-    "href": "content/resources.html",
-    "title": "Resources",
-    "section": "",
-    "text": "Cloud-Native Earth Data Access and Computing\n\nNASA Cloud Data Cookbook\nNMFS HackHours 2025\nNASA EarthData Cloudbook for many tutorials on using satellite data in Python and R and NASA Earth Data\nProject Pythia\nIOOS Python Cookbooks\nIOOS CodeLab collection of tutorials and examples of how to access and utilize the many IOOS technologies and data sources available.\n\n\n\nPACE tutorials\n\nPACE website\nHyperspectral products for fisheries\nPACE Help Hub\nPACE HackWeek 2024 tutorials and lectures in Python\nPACE tutorials in the NOAA HackHours page"
-  },
-  {
-    "objectID": "lectures/index.html#resources-more-lectures",
-    "href": "lectures/index.html#resources-more-lectures",
-    "title": "Lectures",
-    "section": "Resources (more lectures)",
-    "text": "Resources (more lectures)\n\nPACE Mission Overview by Skye Caplan (Ocean Ecology Lab, NASA). 20min\nIntroduction to Plankton, Aerosol, Cloud, Ocean Ecosystem (PACE) Hyperspectral Observations for Water Quality Monitoring by ARSET Trainer Amita Mehta\nOcean Products by Ivona Cetinić (NASA PACE Team)\nOCB PACE Lectures 2022 A playlist of lectures.",
+    "objectID": "content/jupyterhub.html#log-into-the-jupyter-hub",
+    "href": "content/jupyterhub.html#log-into-the-jupyter-hub",
+    "title": "Intro to the Jupyter Hub",
+    "section": "Log into the Jupyter Hub",
+    "text": "Log into the Jupyter Hub\nGo to https://workshop.nmfs-openscapes.2i2c.cloud/. Login with an email address and the password that we supply.",
     "crumbs": [
       "JupyterHub",
-      "Lectures"
+      "Welcome",
+      "Jupyter Hub and Lab"
     ]
   },
   {
-    "objectID": "support.html#thank-you-for-inspiration-and-content",
-    "href": "support.html#thank-you-for-inspiration-and-content",
-    "title": "Acknowledgements",
-    "section": "Thank you for inspiration and content!",
-    "text": "Thank you for inspiration and content!\nThank you to the open science community that has created software, teaching resources, and workflows that we have been able to build off of and be inspired by. These include: NASA Openscapes • OceanHackWeek • SnowEx Hackweek • eScience Institute, University of Washington • ICESat-2 Hackweek • Project Jupyter • Pangeo Project • CryoCloud"
+    "objectID": "content/jupyterhub.html#selecting-your-server",
+    "href": "content/jupyterhub.html#selecting-your-server",
+    "title": "Intro to the Jupyter Hub",
+    "section": "Selecting your server",
+    "text": "Selecting your server\n\n\nImage type:\nWe will use the default Py-R - base geospatial image.\n\n\nResource Allocation\nWe will use the default 1.9 Gb RAM or 3.8 Gb RAM (MOANA tutorial).\n\n\nStart up\nAfter we select our server type and click on start, JupyterHub will allocate our instance in the cloud (on Azure). This may take several minutes.",
+    "crumbs": [
+      "JupyterHub",
+      "Welcome",
+      "Jupyter Hub and Lab"
+    ]
+  },
+  {
+    "objectID": "content/jupyterhub.html#the-launcher",
+    "href": "content/jupyterhub.html#the-launcher",
+    "title": "Intro to the Jupyter Hub",
+    "section": "The Launcher",
+    "text": "The Launcher\nWhen you are in the Jupyter Lab tab (note the Jupyter Logo), you will see a Launcher page. If you don’t see this, go to File &gt; New Launcher or click the blue button on left.",
+    "crumbs": [
+      "JupyterHub",
+      "Welcome",
+      "Jupyter Hub and Lab"
+    ]
+  },
+  {
+    "objectID": "content/jupyterhub.html#get-the-tutorials",
+    "href": "content/jupyterhub.html#get-the-tutorials",
+    "title": "Intro to the Jupyter Hub",
+    "section": "Get the tutorials",
+    "text": "Get the tutorials\n\nIn the Jupyter Hub\n\nClone the repo. Click the “Terminal” button at the bottom. Copy in the following code:\n\ncd ~\ngit clone https://github.com/nmfs-opensci/EDMW-4A-tutorials-2025\n\nOpen\n\nGo to the folder icon and look for EDMW-4A-tutorials-2025. Click on that and you will see the tutorials listed. Double click on a tutorial name to open.\n\n\n\nfolder open\n\n\n\n\nNot in the Jupyter Hub?\n\n\n\ntutorial buttons",
+    "crumbs": [
+      "JupyterHub",
+      "Welcome",
+      "Jupyter Hub and Lab"
+    ]
+  },
+  {
+    "objectID": "content/jupyterhub.html#jupyter-lab-basics",
+    "href": "content/jupyterhub.html#jupyter-lab-basics",
+    "title": "Intro to the Jupyter Hub",
+    "section": "Jupyter Lab basics",
+    "text": "Jupyter Lab basics\n\nRunning a code cell\nRunning all code cells\nAdd a new code cell\nDeleting a code cell\nRestarting your kernel\nChanging the kernel (we will not need to do this)\nChanging the code type (we will not need to do this)",
+    "crumbs": [
+      "JupyterHub",
+      "Welcome",
+      "Jupyter Hub and Lab"
+    ]
+  },
+  {
+    "objectID": "content/jupyterhub.html#end-your-session",
+    "href": "content/jupyterhub.html#end-your-session",
+    "title": "Intro to the Jupyter Hub",
+    "section": "End your session",
+    "text": "End your session\nWhen you are finished working for the day it is important to log out of the Jupyter Hub. When you keep a session active it uses up cloud resources (costs money) and keeps a series of virtual machines deployed.\nFile -&gt; Hub Control Panel -&gt; Stop My Server",
+    "crumbs": [
+      "JupyterHub",
+      "Welcome",
+      "Jupyter Hub and Lab"
+    ]
+  },
+  {
+    "objectID": "content/jupyterhub.html#your-files",
+    "href": "content/jupyterhub.html#your-files",
+    "title": "Intro to the Jupyter Hub",
+    "section": "Your files",
+    "text": "Your files\nWhen you start your server, you will have access to your own virtual drive space. No other users will be able to see or access your files. You can upload files to your virtual drive space and save files here. You can create folders to organize your files. You personal directory is home/jovyan. Everyone has the same home directory but your files are separate and cannot be seen by others.\nThere are a number of different ways to create new files. We will practice this in the RStudio lecture.\n\nWill I lose all of my work?\nLogging out will NOT cause any of your work to be lost or deleted. It simply shuts down some resources. It would be equivalent to turning off your desktop computer at the end of the day.",
+    "crumbs": [
+      "JupyterHub",
+      "Welcome",
+      "Jupyter Hub and Lab"
+    ]
+  },
+  {
+    "objectID": "content/jupyterhub.html#faq",
+    "href": "content/jupyterhub.html#faq",
+    "title": "Intro to the Jupyter Hub",
+    "section": "FAQ",
+    "text": "FAQ\nWhy do we have the same home directory as /home/jovyan? /home/jovyan is the default home directory for ‘jupyter’ based images/dockers. It is the historic home directory for Jupyter deployments.\nCan other users see the files in my /home/jovyan folder? No, other users can not see your credentials.",
+    "crumbs": [
+      "JupyterHub",
+      "Welcome",
+      "Jupyter Hub and Lab"
+    ]
+  },
+  {
+    "objectID": "content/schedule.html",
+    "href": "content/schedule.html",
+    "title": "Schedule",
+    "section": "",
+    "text": "All times Eastern. May 22, 2025\n\n10-10:10 Welcome!\n10:10-10:30am Introduction to hyperspectral ocean color data\n10:30-10:45am Overview of Level 2 and Level 3 PACE products\n10:45-11:30am Orientation on our JupyterHub\n11:30-11:40am BREAK\n11:40-12:00pm PACE Data Access via Earth Data and ERDDAP (earthaccess and xarray packages)\n12:00-12:20pm Tutorial 1: Remote-sensing reflectance (Rrs)\n12:20-12:40pm Tutorial 2: Diffuse attenuation coefficients (Kd)\n12:20-12:40pm Tutorial 3: Phytoplankton Community Composition (MOANA)\n12:40-1:00pm Q&A on PACE data and Fisheries and Ocean Ecosystem Applications",
+    "crumbs": [
+      "JupyterHub",
+      "Welcome",
+      "Schedule"
+    ]
+  },
+  {
+    "objectID": "content/team.html#organizers-and-instructors",
+    "href": "content/team.html#organizers-and-instructors",
+    "title": "Our Team",
+    "section": "Organizers and Instructors",
+    "text": "Organizers and Instructors\n\n\nEli Holmes\n\nNOAA Fisheries\nwebpage • GitHub • ORCID\n\n\nRyan Vandermeulen\n\nNOAA Fisheries\nwebpage • ORCID",
+    "crumbs": [
+      "JupyterHub",
+      "Welcome",
+      "Our Team"
+    ]
   },
   {
     "objectID": "tutorials/Tutorial_0_search.html#summary",
@@ -576,7 +662,19 @@
     "href": "tutorials/Tutorial_0_search.html#earthdata-login-account",
     "title": "NASA Earthdata Catalog",
     "section": "Earthdata Login account",
-    "text": "Earthdata Login account\nAn Earthdata Login account is required to access data from NASA Earthdata. Please visit https://urs.earthdata.nasa.gov to register and manage your Earthdata Login account. This account is free to create and only takes a moment to set up.\nOnce you have an account, test that you can log in.\n\nimport earthaccess\nauth = earthaccess.login()\n# are we authenticated?\nif not auth.authenticated:\n    # ask for credentials and persist them in a .netrc file\n    auth.login(strategy=\"interactive\", persist=True)\n\n\nThe Earthdata catalog search page\nHow can we find the shortname, concept_id, and doi for collections not in the table above?. We can find these on the NASA Earthdata catalog search page and data collection pages.\nLet’s head to https://search.earthdata.nasa.gov/search. Here is the front page. On the top left, you can type in text to search and below you can filter on specific criteria, like sensor. On the right are lists of data collections. Let’s look at the information for a data collection.\n\n\n\nsearch-earthdata.png\n\n\n\n\nData collection details\nHere I did a search for “MUR-JPL-L4-GLOB-v4.1” and the GHRSST Level 4 dataset is at the top. In the far right, you see 3 dots (in the red box). Click on that to go to the collection details page.\n\n\n\nsearch-collection-details.png\n\n\nThe collection details page has some keywords that can be used to specify a collection. In the red box, is the shortname, version and doi.\n\n\n\nsearch-collection-details.png\n\n\nClick on the View More Info to find the collection concept_id.\n\n\n\nsearch-collection-id.png\n\n\n\n\nExample of some collection identifiers\n\n\n\n\n\n\n\n\nShortname\nCollection Concept ID\nDOI\n\n\n\n\nMUR-JPL-L4-GLOB-v4.1\nC1996881146-POCLOUD\n10.5067/GHGMR-4FJ04\n\n\nAVHRR_OI-NCEI-L4-GLOB-v2.1\nC2036881712-POCLOUD\n10.5067/GHAAO-4BC21",
+    "text": "Earthdata Login account\nAn Earthdata Login account is required to access data from NASA Earthdata. Please visit https://urs.earthdata.nasa.gov to register and manage your Earthdata Login account. This account is free to create and only takes a moment to set up.\nOnce you have an account, test that you can log in.\n\nimport earthaccess\nauth = earthaccess.login()\n# are we authenticated?\nif not auth.authenticated:\n    # ask for credentials and persist them in a .netrc file\n    auth.login(strategy=\"interactive\", persist=True)\n\n\nThe Earthdata catalog search page\nHow can we find the shortname and/or concept_id for data collections?. We can find these on the NASA Earthdata catalog search page and data collection pages.\nLet’s head to https://search.earthdata.nasa.gov/search. Here is the front page. On the top left, you can type in text to search and below you can filter on specific criteria, like instrument. On the right are lists of data collections. Let’s look at the information for a data collection.\n\n\n\nsearch-earthdata.png\n\n\n\n\nData collection details\nHere I did a search for “MUR-JPL-L4-GLOB-v4.1” and the GHRSST Level 4 dataset is at the top. In the far right, you see 3 dots (in the red box). Click on that to go to the collection details page.\n\n\n\nsearch-collection-details.png\n\n\nThe collection details page has some keywords that can be used to specify a collection. In the red box, is the shortname, version and doi.\n\n\n\nsearch-collection-details.png\n\n\nClick on the View More Info to find the collection concept_id.\n\n\n\nsearch-collection-id.png\n\n\n\n\nExample of some collection identifiers\n\n\n\n\n\n\n\n\nShortname\nCollection Concept ID\nDOI\n\n\n\n\nMUR-JPL-L4-GLOB-v4.1\nC1996881146-POCLOUD\n10.5067/GHGMR-4FJ04\n\n\nAVHRR_OI-NCEI-L4-GLOB-v2.1\nC2036881712-POCLOUD\n10.5067/GHAAO-4BC21",
+    "crumbs": [
+      "JupyterHub",
+      "Tutorials",
+      "Search"
+    ]
+  },
+  {
+    "objectID": "tutorials/Tutorial_0_search.html#try-this-for-pace",
+    "href": "tutorials/Tutorial_0_search.html#try-this-for-pace",
+    "title": "NASA Earthdata Catalog",
+    "section": "Try this for PACE",
+    "text": "Try this for PACE\nPaste this into a browser.\nhttps://search.earthdata.nasa.gov/search?fi=OCI&fl=3%2B-%2BGridded%2BObservations\n\nFilter on instrument “OCI”\nFilter of processing level 4\nScroll through the collections to find what you want",
     "crumbs": [
       "JupyterHub",
       "Tutorials",
@@ -760,51 +858,25 @@
     "text": "Just a tiny bit more context, please\nWe still could use a bit of help contextualizing the above image, so let’s just make a little legend for it. Since we’re in tri-color space, let’s use the very useful, and in my opinion, underutilized ternary plot. These are fun little plots that show the relative contribution of three variables relative to one another. It helps us determine how to interpret the purple, teal, pink, and orange areas you see on the map.\n\nfrom matplotlib.patches import Polygon\n\n# Define triangle vertices (RGB space: R=Syn, G=Pico, B=Pro)\ntriangle = np.array([\n    [0.5, np.sqrt(3)/2],  # top = Pico (Green)\n    [0, 0],               # bottom left = Syn (Red)\n    [1, 0]                # bottom right = Pro (Blue)\n])\n\n# Create barycentric coordinates for triangle\nres = 150\nbary_coords = np.array([\n    [i / res, j / res, 1 - i / res - j / res]\n    for i in range(res + 1)\n    for j in range(res + 1 - i)\n])\nrgb_vals = bary_coords[:, [1, 0, 2]]  # R=Syn, G=Pico, B=Pro\nrgb_vals = np.clip(rgb_vals, 0, 1)\n\n# Convert to triangle (x, y) coordinates\nxy_coords = (bary_coords[:, 0:1] * triangle[0] +\n             bary_coords[:, 1:2] * triangle[1] +\n             bary_coords[:, 2:3] * triangle[2])\n\n# Plot the ternary color key\nfig, ax = plt.subplots(figsize=(4, 4))\nax.set_aspect('equal')\nax.axis('off')\n\nax.scatter(xy_coords[:, 0], xy_coords[:, 1], c=rgb_vals, s=2)\nax.add_patch(Polygon(triangle, closed=True, edgecolor='black', fill=False))\n\n# Labels\nax.text(0.5, np.sqrt(3)/2 + 0.05, \"Picoeukaryotes\\n(Green)\", ha='center', fontsize=9)\nax.text(-0.05, -0.05, \"Synechococcus\\n(Red)\", ha='right', fontsize=9)\nax.text(1.05, -0.05, \"Prochlorococcus\\n(Blue)\", ha='left', fontsize=9)\n\nplt.title(\"Ternary Color Legend - (Phytoplankton Dominance)\", fontsize=10, pad=30)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nThere you have it! PACE’s first phytoplankton class algorithm. Note, even if these specific critters are not of particular interest to you, they are excellent indicators of underlying oceanographic processes (MOANA uses SST as an input as well). If you are a highly migratory species traversing the open seas, these boundaries may very well be influencial."
   },
   {
-    "objectID": "setup.html",
-    "href": "setup.html",
-    "title": "Set-up",
-    "section": "",
-    "text": "We will be using a JupyterHub for the workshop but you can run the tutorials in Colab, Binder or on your own computer.",
+    "objectID": "index.html#register-and-zoom-link",
+    "href": "index.html#register-and-zoom-link",
+    "title": "EDMW 2025 - Introduction to using earth data in the cloud for scientific workflows",
+    "section": "Register and Zoom Link",
+    "text": "Register and Zoom Link\nBefore the EDM Workshop Register by filling out this form. You will receive an email to invite you to the EDM Workshop Sched website. Once you can log into the Sched event website, navigate to Workshop 4A Part I and Part II and add them to your schedule. You will then be able to see the Zoom links.",
     "crumbs": [
       "JupyterHub",
-      "Welcome",
-      "Set-up"
+      "Welcome"
     ]
   },
   {
-    "objectID": "setup.html#jupyter-hub-setup",
-    "href": "setup.html#jupyter-hub-setup",
-    "title": "Set-up",
-    "section": "Jupyter Hub setup",
-    "text": "Jupyter Hub setup\n\nhttps://workshop.nmfs-openscapes.2i2c.cloud/\nClick here for instructions and to get the password (NOAA access only)\nOnce you are in, Click Start Server.",
+    "objectID": "index.html#pace-ocean-color-products",
+    "href": "index.html#pace-ocean-color-products",
+    "title": "EDMW 2025 - Introduction to using earth data in the cloud for scientific workflows",
+    "section": "PACE Ocean Color products",
+    "text": "PACE Ocean Color products\n\nWhat is the color of the ocean? (Rrs)\nWhat/who is there? (phytoplankton composition, SPM)\nHow much of it is there? (chlorophyll concentration, particulate/phytoplankton carbon etc.)\nAre they shiny/colorful? (IOPs)\nHow much light is there? (PAR/Kd)\nWhat are the phytoplankton doing? (Primary productivity)\nHow are they doing? (Fluorescence Line Height)",
     "crumbs": [
       "JupyterHub",
-      "Welcome",
-      "Set-up"
-    ]
-  },
-  {
-    "objectID": "setup.html#earthdata-login-account",
-    "href": "setup.html#earthdata-login-account",
-    "title": "Set-up",
-    "section": "Earthdata Login account",
-    "text": "Earthdata Login account\nYou will need this to get the PACE data and to get NASA Earth Data in general.\n\nCreate an Earthdata Login account (if you don’t already have one) at https://urs.earthdata.nasa.gov\nWrite down your username and password; you will need it often.",
-    "crumbs": [
-      "JupyterHub",
-      "Welcome",
-      "Set-up"
-    ]
-  },
-  {
-    "objectID": "setup.html#running-the-tutorials",
-    "href": "setup.html#running-the-tutorials",
-    "title": "Set-up",
-    "section": "Running the tutorials",
-    "text": "Running the tutorials\n\nNavigate to a tutorial in the EDMW workshop\nYou will see buttons for opening the tutorial in different ways. Choose the way that works for you. \nIf using the Jupyter Hub, click on the “Open in Jupyter Hub” button.",
-    "crumbs": [
-      "JupyterHub",
-      "Welcome",
-      "Set-up"
+      "Welcome"
     ]
   }
 ]

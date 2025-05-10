@@ -49,15 +49,15 @@ website:
       - section: "Tutorials"
         contents:
           - text: Search
-            href: tutorials/python/Tutorial_0_search.ipynb
+            href: tutorials/Tutorial_0_search.ipynb
           - text: Data Access
-            href: tutorials/python/Tutorial_1_access.ipynb
+            href: tutorials/Tutorial_1_access.ipynb
           - text: Rrs and AVW
-            href: tutorials/python/Tutorial_2_Rrs_AVW.ipynb
-          - text: MOANA
-            href: tutorials/python/Tutorial_3_moana-erddap.ipynb
+            href: tutorials/Tutorial_2_Rrs_AVW.ipynb
           - text: Kd
-            href: tutorials/python/Tutorial_4_kd.ipynb
+            href: tutorials/Tutorial_4_kd.ipynb
+          - text: MOANA
+            href: tutorials/Tutorial_3_moana-erddap.ipynb
       - text: <img width=100px>
       - text: <img src="/images/noaa_emblem_logo-2022.png" width=100px>
         href: https://fisheries.noaa.gov

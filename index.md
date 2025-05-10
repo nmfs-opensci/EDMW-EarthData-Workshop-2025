@@ -5,42 +5,36 @@ subtitle: "PACE hyperspectral ocean color data"
 
 ## Zoom link
 
-EDM Workshop website: Once you are added to the sched event site, you can go to [website](https://2025noaaedmw.sched.com) and log in. Once you are logged in, navigate to Workshop 4A [Part I](https://2025noaaedmw.sched.com/event/1z0CM/4a-workshop-introduction-to-using-earth-data-in-the-cloud-for-scientific-workflows-pace-hyperspectral-ocean-color-data-part-i) and [Part II](https://2025noaaedmw.sched.com/event/1z0CM/4a-workshop-introduction-to-using-earth-data-in-the-cloud-for-scientific-workflows-pace-hyperspectral-ocean-color-data-part-ii) and add them to your schedule. 
+**Before the EDM Workshop** [Register by filling out this form](). You will receive an email to invite you to the [EDM Workshop Sched website](https://2025noaaedmw.sched.com/list/simple_)
 
-### Prerequisites
+**Zoom Link** Once you can log into the [Sched event website](https://2025noaaedmw.sched.com), navigate to Workshop 4A [Part I](https://2025noaaedmw.sched.com/event/1z0CM/4a-workshop-introduction-to-using-earth-data-in-the-cloud-for-scientific-workflows-pace-hyperspectral-ocean-color-data-part-i) and [Part II](https://2025noaaedmw.sched.com/event/1z0CM/4a-workshop-introduction-to-using-earth-data-in-the-cloud-for-scientific-workflows-pace-hyperspectral-ocean-color-data-part-ii) and add them to your schedule. You will then be able to see the Zoom links. 
 
-If you want to follow along with our tutorials during the workshop on our Jupyter Hub:
+## Prerequisites
 
-[Click here](https://docs.google.com/document/d/1YS3Vg0w4kR4PPttToNtTccJN1IfVArT5sOCg-K4_kb4/edit?usp=sharing) (NOAA only) for instructions and to get the password (NOAA access only)
+### Earth Data Login
 
-*What if I am non-NOAA?* We will give the password to the Jupyter Hub out during the workshop. NOAA staff are welcome to get on beforehand.
+To get data from NASA Earth Data, you will need to register and get a username and password. Register here: <https://urs.earthdata.nasa.gov/>
 
-*Do I need to use the Jupyter Hub?* No. You can run the tutorials in Colab, Binder, or download and run on your own computer.
+### Jupyter Hub
 
+If you want to follow along with our tutorials during the workshop on our workshop Jupyter Hub <https://workshop.nmfs-openscapes.2i2c.cloud/> then
 
-<img src="images/cloud-overview.png" style="width:250px; float:right;">
-Welcome to the NOAA Fisheries workshop focused on geospatial analysis using ocean 'big data'. Today, we are focused on using PACE hyperspectral ocean color data from NASA [EarthData](https://www.earthdata.nasa.gov/).
+1. If you are NOAA, [click here](https://docs.google.com/document/d/1YS3Vg0w4kR4PPttToNtTccJN1IfVArT5sOCg-K4_kb4/edit?usp=sharing) (NOAA only) for instructions and to get the password (NOAA access only)
+2. If you are not-NOAA, we will give the password to the workshop Jupyter Hub out at the start of the workshop. 
 
-This workshop is focused on those who are brand new to working with earth data in the cloud and with geospatial packages. You will be introduced to cloud access to PACE hyperspectral  data via Python and vizualization in Python or R. This workshop will also introduce working with [JupyterHubs](https://jupyter.org/hub). We will Jupyter Lab (Python) and RStudio (R) within our JupyterHub. 
+*Do I need to use the Jupyter Hub?* No. You can run the tutorials in Colab, Binder, Codespaces, another Jupyter Hub or download and run on your own computer. Or you can just listen!
 
-[SCHEDULE](schedule.html) (see nav bar to left)
+### Getting the tutorials
 
-## Resources
+Once in the Jupyter Hub, you can open a terminal with File > New > Terminal. Then type this on the command line:
 
-### PACE tutorials
+```
+cd ~
+git clone https://github.com/nmfs-opensci/EDMW-2H-tutorials-2025
+```
 
-* [PACE website](https://pace.gsfc.nasa.gov/)
-* [PACE Help Hub](https://oceancolor.gsfc.nasa.gov/resources/docs/tutorials/)
-* [PACE HackWeek 2024 tutorials and lectures](https://pacehackweek.github.io/pace-2024/intro.html) in Python
-* [PACE tutorials in the NOAA HackHours page](https://nmfs-opensci.github.io/NMFSHackDays-2025/topics-2025/2025-PACE/)
-* [Hyperspectral products for fisheries](https://ocean-satellite-tools.github.io/fish-pace/)
+Alternatively, go to a tutorial in <https://nmfs-opensci.github.io/EDMW-EarthData-Workshop-2025/> and there are buttons to open the tutorial in different places.
 
-### General tutorials
-
-* [NASA EarthData Cloudbook](https://nasa-openscapes.github.io/earthdata-cloud-cookbook/) for many tutorials on using satellite data in Python and R and NASA Earth Data
-* [Project Pythia](https://cookbooks.projectpythia.org/)
-* [IOOS Python Cookbooks](https://ioos.github.io/ioos_code_lab/content/code_gallery/gallery.html)
-* [IOOS CodeLab](https://ioos.github.io/ioos_code_lab/content/intro.html) collection of tutorials and examples of how to access and utilize the many IOOS technologies and data sources available.
 
 ## Thank you for inspiration and content!
 

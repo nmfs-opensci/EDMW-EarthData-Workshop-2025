@@ -69,6 +69,10 @@ This means (among other things) chunked data.
 
 ## Why not just download the data?
 
-How will you work with data larger than memory?
+How will you work with massive data files and data sets? How will you get them?
 
 ![](./img/fy24-projection-chart.png)
+
+Tackle it in chunks using infrastructure that allows you to work next to the data in the cloud.
+
+![](./img/piranhas.jpg)

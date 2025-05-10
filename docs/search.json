@@ -28,7 +28,7 @@
     "href": "content/why-cloud.html#why-not-just-download-the-data",
     "title": "Why Cloud(-Native) Data?",
     "section": "Why not just download the data?",
-    "text": "Why not just download the data?\nHow will you work with data larger than memory?",
+    "text": "Why not just download the data?\nHow will you work with massive data files and data sets? How will you get them?\n\nTackle it in chunks using infrastructure that allows you to work next to the data in the cloud.",
     "crumbs": [
       "JupyterHub",
       "Welcome",

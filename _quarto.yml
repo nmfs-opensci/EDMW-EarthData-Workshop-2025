@@ -39,8 +39,8 @@ website:
       - section: "Lectures"
         href: lectures/index.md
         contents:
-          - text: Intro to PACE
-            href: lectures/Intro-to-PACE.pdf
+          - text: Intro to Hyperspectral
+            href: lectures/Intro-to-hyperspectral.pdf
           - text: PACE Products
             href: lectures/PACE-Products.pdf
       - section: "Tutorials"

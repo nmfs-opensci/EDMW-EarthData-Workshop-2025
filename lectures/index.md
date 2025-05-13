@@ -2,6 +2,12 @@
 title: Lectures
 ---
 
+## EDMW Lectures
+
+* [Introduction to Hyperspectral Ocean Color Data](https://nmfs-opensci.github.io/EDMW-EarthData-Workshop-2025/lectures/Intro-to-hyperspectral.pdf)
+
+* [Introduction to PACE Products](https://nmfs-opensci.github.io/EDMW-EarthData-Workshop-2025/lectures/PACE-Products.pdf)
+
 ## Resources (more lectures)
 
 * [PACE Mission Overview](https://www.youtube.com/watch?v=KDEd8Yti598) by Skye Caplan (Ocean Ecology Lab, NASA). 20min

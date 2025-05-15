@@ -14,7 +14,7 @@ title: Resources
 ## PACE tutorials
 
 * [PACE website](https://pace.gsfc.nasa.gov/)
-* [Hyperspectral products for fisheries](https://ocean-satellite-tools.github.io/fish-pace/)
+* [Hyperspectral products for fisheries](https://ocean-satellite-tools.github.io/hyper-fish-book/)
 * [PACE Help Hub](https://oceancolor.gsfc.nasa.gov/resources/docs/tutorials/)
 * [PACE HackWeek 2024 tutorials and lectures](https://pacehackweek.github.io/pace-2024/intro.html) in Python
 * [PACE tutorials in the NOAA HackHours page](https://nmfs-opensci.github.io/NMFSHackDays-2025/topics-2025/2025-PACE/)

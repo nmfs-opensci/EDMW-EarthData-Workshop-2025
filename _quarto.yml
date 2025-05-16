@@ -4,6 +4,13 @@ project:
   render:
     - "*.*"
 
+resources:
+  - tutorials/*.csv
+  - tutorials/interactive_kd.html
+  - lectures/*.pdf
+  - widgets/jupyterhub_link_widget.html
+  - widgets/widget-popout.html
+
 execute:
   freeze: auto
   

@@ -9,6 +9,7 @@ default-image-extension: ""
 resources:
   - tutorials/*.csv
   - tutorials/interactive_kd.html
+  - tutorials/Tutorial_3_moana-erddap.ipynb
   - lectures/*.pdf
   - widgets/jupyterhub_link_widget.html
   - widgets/widget-popout.html

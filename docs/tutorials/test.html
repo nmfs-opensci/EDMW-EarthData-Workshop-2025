@@ -1012,56 +1012,6 @@ Attributes: (12/71)
 <p>A central theme of working with PACE data revolves around wrangling multiple dimensions of data into something you can conceptualize. Viewing three separate maps makes it a bit difficult to see the interactions between the different phytoplankton classes. This is important - we want to know where these boundaries are colliding, because this indicates that something is changing with the underlying oceanography.</p>
 <p>Let’s try something a little different here. Instead of making three separate plots, let’s stack them all and make a false “true color” image by substituting the usual red, green, and blue radiance channels with <em>Synechococcus</em> (red), Picoeukaryotes (green), and <em>Proclorococcus</em> (blue). Can it be done?</p>
 <p>Yes, but with a tiny bit of nuance here. We talked earlier about how higher cell counts does not unequivocally mean that this is a “dominant” class. We can do something called histogram stretching, which is a little trick some folks use to make their true color images pop a little more. Basically, for each phytoplankton class, let’s take all the data between the 2% and 98% percentile range, and normalize those data to the respective median. This ensure all phytoplankton classes are now on a level playing field when we stack them up. Higher or lower values no longer represent absolute cell counts, they now represent higher or lower weights relative to their central tendency. The same trick is often done for making “true color” images to make them pop a little more. Let’s give it a try:</p>
-<div id="a1641e73-c25d-4564-a28e-f1bb8dd7b2a6" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.feature <span class="im">as</span> cfeature</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> robust_normalize(arr):</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    vmin, vmax <span class="op">=</span> np.nanpercentile(arr, [<span class="dv">2</span>, <span class="dv">98</span>])</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.clip((arr <span class="op">-</span> vmin) <span class="op">/</span> (vmax <span class="op">-</span> vmin), <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>pro_norm <span class="op">=</span> robust_normalize(pro_da.values)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>syn_norm <span class="op">=</span> robust_normalize(syn_da.values)</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>pico_norm <span class="op">=</span> robust_normalize(pico_da.values)</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Stack into an RGB image (shape: lat x lon x 3)</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>rgb_image <span class="op">=</span> np.stack([syn_norm, pico_norm, pro_norm], axis<span class="op">=-</span><span class="dv">1</span>)  <span class="co"># R=Syn, G=Pico, B=Pro</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Set pixels with all zeros (e.g., NaNs) to black</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>rgb_image[np.isnan(rgb_image)] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>rgb_image <span class="op">=</span> np.flipud(rgb_image)</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the RGB image</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>), subplot_kw<span class="op">=</span>{<span class="st">'projection'</span>: ccrs.PlateCarree()})</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Relative Dominance of Phytoplankton Groups (RGB Blending)"</span>)</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>ax.coastlines()</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>ax.add_feature(cfeature.BORDERS, linewidth<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>gl <span class="op">=</span> ax.gridlines(draw_labels<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>gl.right_labels <span class="op">=</span> gl.top_labels <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Use imshow with full extent</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>extent <span class="op">=</span> [pro_da.longitude.<span class="bu">min</span>(), pro_da.longitude.<span class="bu">max</span>(), pro_da.latitude.<span class="bu">min</span>(), pro_da.latitude.<span class="bu">max</span>()]</span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>ax.imshow(rgb_image, origin<span class="op">=</span><span class="st">'lower'</span>, extent<span class="op">=</span>extent, transform<span class="op">=</span>ccrs.PlateCarree())</span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Show only north of the equator</span></span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>ax.set_extent([pro_da.longitude.<span class="bu">min</span>(), pro_da.longitude.<span class="bu">max</span>(), <span class="dv">0</span>, pro_da.latitude.<span class="bu">max</span>()], crs<span class="op">=</span>ccrs.PlateCarree())</span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>ax.set_extent([pro_da.longitude.<span class="bu">min</span>(), <span class="op">-</span><span class="dv">20</span>, <span class="dv">15</span>, <span class="dv">60</span>], crs<span class="op">=</span>ccrs.PlateCarree())</span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="test_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<pre><code>&lt;Figure size 640x480 with 0 Axes&gt;</code></pre>
-</div>
-</div>
 <p>Now you can really see where each phytoplankton class domianates, and through the gradational mixing of colors, we can see where, and to what degree they overlap. Neat, right?</p>
 </section>
 <section id="just-a-tiny-bit-more-context-please" class="level2">

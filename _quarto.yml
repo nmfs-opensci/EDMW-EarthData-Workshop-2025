@@ -3,13 +3,14 @@ project:
   output-dir: docs
   render:
     - "*.*"
+    - "!tutorials/Tutorial_3_moana-erddap-clean.ipynb"
     
 default-image-extension: ""
 
 resources:
   - tutorials/*.csv
   - tutorials/interactive_kd.html
-  - tutorials/Tutorial_3_moana-erddap.ipynb
+  - tutorials/Tutorial_3_moana-erddap-clean.ipynb
   - lectures/*.pdf
   - widgets/jupyterhub_link_widget.html
   - widgets/widget-popout.html

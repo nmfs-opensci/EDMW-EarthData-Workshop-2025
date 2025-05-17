@@ -3,6 +3,8 @@ project:
   output-dir: docs
   render:
     - "*.*"
+    
+default-image-extension: ""
 
 resources:
   - tutorials/*.csv
@@ -96,6 +98,6 @@ format:
       - translate.html
       - widgets/widget-popout.html
 
-filters:
-  - include-files.lua
-  - quarto
+#filters:
+#  - include-files.lua
+#  - quarto

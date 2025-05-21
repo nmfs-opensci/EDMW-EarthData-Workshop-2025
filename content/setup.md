@@ -8,7 +8,7 @@ To get data from NASA Earth Data, you will need to register and get a username a
 
 ## Jupyter Hub
 
-If you want to follow along with our tutorials during the workshop on our workshop Jupyter Hub <https://workshop.nmfs-openscapes.2i2c.cloud/> then
+If you want to follow along with our tutorials during the workshop on our workshop Jupyter Hub < br/><https://workshop.nmfs-openscapes.2i2c.cloud/> then
 
 1. If you are NOAA, [click here](https://docs.google.com/document/d/1YS3Vg0w4kR4PPttToNtTccJN1IfVArT5sOCg-K4_kb4/edit?usp=sharing) (NOAA only) for instructions and to get the password (NOAA access only)
 2. If you are not-NOAA, we will give the password to the workshop Jupyter Hub out at the start of the workshop. 
@@ -17,15 +17,15 @@ If you want to follow along with our tutorials during the workshop on our worksh
 
 ## Getting the tutorials
 
-Once in the Jupyter Hub, you can open a terminal with File > New > Terminal. Then type this on the command line:
+Once you are logged into the Jupyter Hub, go to a tutorial in <https://nmfs-opensci.github.io/EDMW-EarthData-Workshop-2025/> and there are buttons to open the tutorial in different places.
+
+Alternatively, you can clone the repo and go into the tutorials directory. Open a terminal with File > New > Terminal. Then type this on the command line:
+
 
 ```
 cd ~
-git clone https://github.com/nmfs-opensci/EDMW-2H-tutorials-2025
+git clone https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2025
 ```
-
-Alternatively, go to a tutorial in <https://nmfs-opensci.github.io/EDMW-EarthData-Workshop-2025/> and there are buttons to open the tutorial in different places.
-
 
 
 We will be using a JupyterHub for the workshop but you can run the tutorials in Colab, Binder or on your own computer.

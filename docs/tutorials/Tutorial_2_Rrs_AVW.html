@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Tutorial 2: Going “hyper”spectral – 2025 EDMW Workshop - PACE</title>
+<title>Tutorial 2 - Going “hyper”spectral – 2025 EDMW Workshop - PACE</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -310,9 +310,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#interacting-with-hyperspectral-remote-sensing-reflectance-rrs" id="toc-interacting-with-hyperspectral-remote-sensing-reflectance-rrs" class="nav-link active" data-scroll-target="#interacting-with-hyperspectral-remote-sensing-reflectance-rrs">Interacting with hyperspectral Remote Sensing Reflectance (Rrs)</a></li>
-  <li><a href="#are-you-ready" id="toc-are-you-ready" class="nav-link" data-scroll-target="#are-you-ready"><em>Are you ready?</em></a></li>
-  <li><a href="#lets-go-get-some-data-first" id="toc-lets-go-get-some-data-first" class="nav-link" data-scroll-target="#lets-go-get-some-data-first">Let’s go get some data first</a></li>
+  <li><a href="#lets-go-get-some-data-first" id="toc-lets-go-get-some-data-first" class="nav-link active" data-scroll-target="#lets-go-get-some-data-first">Let’s go get some data first</a></li>
   <li><a href="#lets-open-it-up" id="toc-lets-open-it-up" class="nav-link" data-scroll-target="#lets-open-it-up">Let’s open it up!</a></li>
   <li><a href="#mapping-time" id="toc-mapping-time" class="nav-link" data-scroll-target="#mapping-time">Mapping time!</a></li>
   <li><a href="#lets-extract-some-data" id="toc-lets-extract-some-data" class="nav-link" data-scroll-target="#lets-extract-some-data">Let’s extract some data</a></li>
@@ -346,7 +344,8 @@ function googleTranslateElementInit() {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/Tutorial_0_search.html">Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/Tutorial_2_Rrs_AVW.html">Rrs and AVW</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Tutorial 2: Going “hyper”spectral</h1>
+<h1 class="title">Tutorial 2 - Going “hyper”spectral</h1>
+<p class="subtitle lead">Interacting with hyperspectral Remote Sensing Reflectance (Rrs) Level 2 data</p>
 </div>
 
 
@@ -363,24 +362,20 @@ function googleTranslateElementInit() {
 </header>
 
 
-<section id="interacting-with-hyperspectral-remote-sensing-reflectance-rrs" class="level2">
-<h2 class="anchored" data-anchor-id="interacting-with-hyperspectral-remote-sensing-reflectance-rrs">Interacting with hyperspectral Remote Sensing Reflectance (Rrs)</h2>
+<p><a href="https://colab.research.google.com/github/nmfs-opensci/EDMW-EarthData-Workshop-2025/blob/main/tutorials/Tutorial_2_Rrs_AVW.ipynb"><img src="https://img.shields.io/badge/Open_in_Colab-blue?style=for-the-badge" class="img-fluid" alt="Colab Badge"></a> <a href="javascript:void(0);" onclick="openJupyterWidget('https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2025/blob/main/tutorials/Tutorial_2_Rrs_AVW.ipynb');"> <img src="https://img.shields.io/badge/Open_in_JupyterHub-orange?style=for-the-badge" alt="JupyterHub Badge"> </a> <a href="https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2025/blob/main/tutorials/Tutorial_2_Rrs_AVW.ipynb"><img src="https://img.shields.io/badge/Download-grey?style=for-the-badge" class="img-fluid" alt="Download Badge"></a></p>
 <p>It can be a little tricky working with a netcdf that is (…checks notes) <strong>172</strong> layers thick. Each individual layer in the PACE_OCI*_<em>AOP</em> files represents a 1272 x 1709 array of remote sensing reflectance values. This is a lot of information to take in, so how can we better conceptualize this information?</p>
 <p><em>Cue up triumphant brass horn noises</em></p>
 <p>Enter the realm of the <strong>Apparent Visible Wavelength (or AVW)</strong>. Let’s not go into too much detail here so that we can get to work, but in short, the AVW represents a one-dimensional variable that describes the weighted harmonic mean of a given Rrs spectrum. Imagine trying to balance a single Rrs spectrum on the tip of a pin - the wavelength where the spectrum is perfectly balanced is the AVW (units of nm). This balance point shifts proportionally in response to sublte changes in that spectrum. As a typical rule of thumb, lower AVW values (440 - 490 nm) represent relatively clear, less productive waters while higher AVW values (490 - 600 nm) represent more turbid, productive water masses. Capiche?</p>
 <p>Let’s dive in and mess around with some spectra then, and see what these images are trying to tell us. By the end of this tutorial, you will have:</p>
 <blockquote class="blockquote">
+<p>📘 Learning Objectives</p>
 <ol type="1">
-<li>Created a pretty map of the Apparent Visible Wavelength product</li>
-<li>Drawn a customized transect on that image, and extracted a “slice” of data</li>
-<li>Plotted up those lovely Rrs spectra along that transect as a function of AVW values</li>
-<li>Extracted a user-defined 5x5 box from the image and plotted the mean Rrs with standard deviation</li>
+<li>Create a pretty map of the Apparent Visible Wavelength (AVW) product</li>
+<li>Draw a customized transect on that image and extract a “slice” of data</li>
+<li>Plot Rrs spectra along that transect as a function of AVW values</li>
+<li>Extract a user-defined 5x5 box from the image and plot the mean Rrs with standard deviation</li>
 </ol>
 </blockquote>
-</section>
-<section id="are-you-ready" class="level2">
-<h2 class="anchored" data-anchor-id="are-you-ready"><em>Are you ready?</em></h2>
-</section>
 <section id="lets-go-get-some-data-first" class="level2">
 <h2 class="anchored" data-anchor-id="lets-go-get-some-data-first">Let’s go get some data first</h2>
 <p>Login to NASA Earth Access</p>

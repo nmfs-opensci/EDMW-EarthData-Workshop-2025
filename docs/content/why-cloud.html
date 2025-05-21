@@ -332,8 +332,9 @@ function googleTranslateElementInit() {
 <pre class="mermaid mermaid-js">flowchart LR
 
 %% Server-Based Access
-    S_C1[Client A] &lt;-- whole file --&gt; S_SRV[Central Server&lt;br/&gt;I/O limited by its capacity&lt;br /&gt;No extra services]
-    S_SRV --&gt; S_DISK[NetCDF Files]
+    S_C1[Client A] -- connect --&gt; S_SRV[Central Server&lt;br/&gt;I/O limited by its capacity&lt;br /&gt;No extra services]
+    S_SRV -- download file --&gt; S_C1
+    S_SRV === DISK[NetCDF Files]
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -350,10 +351,10 @@ function googleTranslateElementInit() {
 <div>
 <pre class="mermaid mermaid-js">flowchart LR
 
-    S_C1[Client A] &lt;-- subset of file --&gt; S_SRV[Central Server&lt;br/&gt;I/O limited by its capacity&lt;br /&gt;extra services]
-    S_C2[Client] &lt;-- subset of file --&gt; S_SRV
-    S_C3[Client] &lt;-- subset of file --&gt; S_SRV
-    S_SRV --&gt; S_DISK[NetCDF Files]
+    S_C1[Client] -- query --&gt; S_SRV[Central Server\nI/O limited by its capacity\nextra services]
+    S_SRV -- subset of file --&gt; S_C1
+    S_SRV === S_DISK[NetCDF Files]
+    
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -370,18 +371,12 @@ function googleTranslateElementInit() {
 <div>
 <pre class="mermaid mermaid-js">flowchart LR
 
-    S_D1[Client] &lt;-- chunk of data --&gt; S_SRV[Cloud Object Storage&lt;br/&gt;No client limits&lt;br /&gt;Chunked NetCDF Files&lt;br /&gt;No extra services]
-    S_D2[Client] &lt;-- chunk of data --&gt; S_SRV
-    S_D3[Client] &lt;-- chunk of data --&gt; S_SRV
-    S_D4[Client] &lt;-- chunk of data --&gt; S_SRV
-    S_D5[Client] &lt;-- chunk of data --&gt; S_SRV
-    S_D6[Client] &lt;-- chunk of data --&gt; S_SRV
-    S_SRV &lt;-- chunk of data --&gt; S_C1[Client]
-    S_SRV &lt;-- chunk of data --&gt; S_C2[Client]
-    S_SRV &lt;-- chunk of data --&gt; S_C3[Client]
-    S_SRV &lt;-- chunk of data --&gt; S_C4[Client]
-    S_SRV &lt;-- chunk of data --&gt; S_C5[Client]
-    S_SRV &lt;-- chunk of data --&gt; S_C6[Client]
+    S_D1[Client] -- read data chunk --- S_SRV[Cloud Object Storage\nNo client limits\nChunked NetCDF Files\nNo extra services]
+    S_D2[Client] -- read data chunk --- S_SRV
+    S_D3[Client] -- read data chunk --- S_SRV
+    S_D4[Client] -- read data chunk --- S_SRV
+    S_D5[Client] -- read data chunk --- S_SRV
+    S_D6[Client] -- read data chunk --- S_SRV
 </pre>
 </div>
 <p></p></figure><p></p>

@@ -328,7 +328,7 @@
     "href": "content/schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "All times Eastern. May 22, 2025\n\n10-10:05 Welcome!\n10:05-10:25am Introduction to hyperspectral ocean color data\n10:25-10:45am Overview of Level 2 and Level 3 PACE products\n10:45-11:00am Set-up on our JupyterHub and Earth Data\n11:00-11:10am Intro to cloud and cloud-native workflows\n11:10-11:30pm Tutorial 1: PACE Data Access on NASA EarthData (earthaccess and xarray packages)\n11:30-12:00pm BREAK\n12:00-12:20pm Tutorial 2: Remote-sensing reflectance (Rrs)\n12:20-12:40pm Tutorial 3: Diffuse attenuation coefficients (Kd)\n12:20-12:40pm Tutorial 4: Phytoplankton Community Composition (MOANA) data on ERDDAP\n12:40-1:00pm Q&A on PACE data and Fisheries and Ocean Ecosystem Applications",
+    "text": "All times Eastern Day Light (UTC/GMT -4 hours). May 22, 2025\n\n10-10:05 Welcome!\n10:05-10:25am Introduction to hyperspectral ocean color data\n10:25-10:45am Overview of Level 2 and Level 3 PACE products\n10:45-11:00am Set-up on our JupyterHub and NASA Earthdata\n11:00-11:10am Intro to cloud and cloud-native workflows\n11:10-11:30pm Tutorial 1: PACE Data Access on NASA Earthdata (earthaccess and xarray packages)\n11:30-12:00pm BREAK\n12:00-12:20pm Tutorial 2: Remote-sensing reflectance (Rrs)\n12:20-12:40pm Tutorial 3: Diffuse attenuation coefficients (Kd)\n12:20-12:40pm Tutorial 4: Phytoplankton Community Composition (MOANA) data on ERDDAP\n12:40-1:00pm Q&A on PACE data and Fisheries and Ocean Ecosystem Applications",
     "crumbs": [
       "JupyterHub",
       "Welcome",

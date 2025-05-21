@@ -342,13 +342,14 @@ window.Quarto = {
   <li><a href="#you-should-select-3.8-gb-ram-when-you-start-the-server" id="toc-you-should-select-3.8-gb-ram-when-you-start-the-server" class="nav-link active" data-scroll-target="#you-should-select-3.8-gb-ram-when-you-start-the-server">You should select 3.8 Gb RAM when you start the server</a></li>
   <li><a href="#introduction-to-kd" id="toc-introduction-to-kd" class="nav-link" data-scroll-target="#introduction-to-kd">Introduction to kd</a></li>
   <li><a href="#a-standard-run-of-the-mill-rainbow" id="toc-a-standard-run-of-the-mill-rainbow" class="nav-link" data-scroll-target="#a-standard-run-of-the-mill-rainbow">A standard, run-of-the-mill rainbow</a></li>
-  <li><a href="#lock-and-load-the-pace-data" id="toc-lock-and-load-the-pace-data" class="nav-link" data-scroll-target="#lock-and-load-the-pace-data">Lock and load the PACE data</a></li>
+  <li><a href="#get-the-pace-data-from-nasa-earthdata" id="toc-get-the-pace-data-from-nasa-earthdata" class="nav-link" data-scroll-target="#get-the-pace-data-from-nasa-earthdata">Get the PACE data from NASA Earthdata</a></li>
   <li><a href="#create-a-kd-map" id="toc-create-a-kd-map" class="nav-link" data-scroll-target="#create-a-kd-map">Create a Kd map</a></li>
   <li><a href="#pick-a-point-any-point" id="toc-pick-a-point-any-point" class="nav-link" data-scroll-target="#pick-a-point-any-point">Pick a point, any point</a></li>
   <li><a href="#lets-look-at-this-another-way" id="toc-lets-look-at-this-another-way" class="nav-link" data-scroll-target="#lets-look-at-this-another-way">Let’s look at this another way</a></li>
   <li><a href="#lets-paint-the-town-rainbow" id="toc-lets-paint-the-town-rainbow" class="nav-link" data-scroll-target="#lets-paint-the-town-rainbow">Let’s paint the town rainbow!</a></li>
   <li><a href="#lets-make-a-plot" id="toc-lets-make-a-plot" class="nav-link" data-scroll-target="#lets-make-a-plot">Let’s make a plot!</a></li>
   <li><a href="#lets-do-time" id="toc-lets-do-time" class="nav-link" data-scroll-target="#lets-do-time">Let’s do time!</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul>
 <div class="toc-actions"><ul class="collapse"><li><a href="https://github.dev/nmfs-opensci/EDMW-EarthData-Workshop-2025/blob/main/tutorials/Tutorial_4_kd.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2025/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2025/blob/main/tutorials/Tutorial_4_kd.ipynb" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
@@ -400,10 +401,10 @@ function googleTranslateElementInit() {
 </section>
 <section id="introduction-to-kd" class="level2">
 <h2 class="anchored" data-anchor-id="introduction-to-kd">Introduction to kd</h2>
-<p>We often think of remote sensing products as largely representative of near-surface values. For the most part, this is true. With ocean color, we’re essentially looking at an integrated signal of light emerging from the ocean. The differential depths at which light disappears is a function of how turbid the water is, which, in turn, impacts how much an individual wavelength of light contributes to the remote sensing refelctance that we see from space. Let’s follow the story of a little photon of light with a bit more detail.</p>
-<p>First, let’s call “light” out by it’s prefered terminology in this context - spectral downwelling irradiance just below the sea surface, <span class="math inline">\(E_{s}^{-}({\lambda})\)</span>, a term that represents the amount of light at each wavelength that has hit the surface of the ocean and crossed over the air-sea barrier. From here, <span class="math inline">\(E_{s}^{-}({\lambda})\)</span> is attenuated (i.e., disappeared) exponentially with depth (<span class="math inline">\(z\)</span>). PACE now provides the slope of this exponential decay function, known as the diffuse light attenuation coefficient, <span class="math inline">\(K_{d}({\lambda})\)</span>, for 19 individual wavelengths. Thus, at any given depth of the ocean, we can determine the spectral downwelling irradiance, <span class="math inline">\(E_{d}({\lambda},z)\)</span>, as follows:</p>
+<p>We often think of remote sensing products as largely representative of near-surface values. For the most part, this is true. With ocean color, we’re essentially looking at an integrated signal of light emerging from the ocean. The differential depths at which light disappears is a function of how turbid the water is, which, in turn, impacts how much an individual wavelength of light contributes to the remote sensing reflectance that we see from space. Let’s follow the story of a little photon of light with a bit more detail.</p>
+<p>First, let’s call “light” out by its preferred terminology in this context - spectral downwelling irradiance just below the sea surface, <span class="math inline">\(E_{s}^{-}({\lambda})\)</span>, a term that represents the amount of light at each wavelength that has hit the surface of the ocean and crossed over the air-sea barrier. From here, <span class="math inline">\(E_{s}^{-}({\lambda})\)</span> is attenuated (i.e., disappeared) exponentially with depth (<span class="math inline">\(z\)</span>). PACE now provides the slope of this exponential decay function, known as the diffuse light attenuation coefficient, <span class="math inline">\(K_{d}({\lambda})\)</span>, for 19 individual wavelengths. Thus, at any given depth of the ocean, we can determine the spectral downwelling irradiance, <span class="math inline">\(E_{d}({\lambda},z)\)</span>, as follows:</p>
 <p><span class="math inline">\(E_{d}({\lambda},z) = E_{s}^{-}({\lambda})*exp^{-Kd*z}\)</span></p>
-<p>If we are supplied a standard reference <span class="math inline">\(E_{s}^{-}({\lambda})\)</span> spectrum, a <span class="math inline">\(K_{d}({\lambda})\)</span> value from PACE, and a depth of our choice, we can solve for <span class="math inline">\(E_{d}({\lambda},z)\)</span> and figure out how much and what kind of light is available at any given depth, anywhere in the ocean. In other words, a 3D product! Well, 4D I guess, if we consider latitude, longitiude, wavelengths, and depth. If this is a bit fuzzy, not to worry, we’ll illustrate this concept a bit more in the following exercises.</p>
+<p>If we are supplied a standard reference <span class="math inline">\(E_{s}^{-}({\lambda})\)</span> spectrum, a <span class="math inline">\(K_{d}({\lambda})\)</span> value from PACE, and a depth of our choice, we can solve for <span class="math inline">\(E_{d}({\lambda},z)\)</span> and figure out how much and what kind of light is available at any given depth, anywhere in the ocean. In other words, a 3D product! Well, 4D I guess, if we consider latitude, longitude, wavelengths, and depth. If this is a bit fuzzy, not to worry, we’ll illustrate this concept a bit more in the following exercises.</p>
 <blockquote class="blockquote">
 <p>📘 Learning Objectives</p>
 <ol type="1">
@@ -419,14 +420,20 @@ function googleTranslateElementInit() {
 <p>Where do bad rainbows go? (They go to Prism) They get a light sentence though, it’s only so they can have time to reflect…</p>
 <p>…</p>
 <p>…</p>
-<p>Right. First thing, we need a reference spectrum. As mentioned above, this is spectral downwelling irradiance just below the sea surface, <span class="math inline">\(E_{s}^{-}({\lambda})\)</span>. If you’re interested in the details, this was calculated from the ASTM G173-03 Reference Spectra Derived from SMARTS v. 2.9.2, additionally corrected for an average sun angle for satellites, diffuse contributions, and crossing the air-sea boundary. We have saved this in a file for you.</p>
-<div id="4ab919a6-b5b4-4555-a2c2-32de82e4633e" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<p>Right. First thing, we need a reference spectrum. As mentioned above, this is spectral downwelling irradiance just below the sea surface, <span class="math inline">\(E_{s}^{-}({\lambda})\)</span>. If you’re interested in the details, this was calculated from the ASTM G173-03 Reference Spectra Derived from SMARTS v. 2.9.2, additionally corrected for an average sun angle for satellites, diffuse contributions, and crossing the air-sea boundary. We have entered the reference data into a data frame for you. <!--
+# Create the one-liner for the es spectrum from the file
+with open("Es_spectrum.csv", "r") as f:
+    lines = f.read().splitlines()
+
+csv_inline = "\\n".join(lines)
+print(f'import pandas as pd; from io import StringIO\n\ndf_es = pd.read_csv(StringIO("{csv_inline}"))')
+--></p>
+<div id="4ab919a6-b5b4-4555-a2c2-32de82e4633e" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd<span class="op">;</span> <span class="im">from</span> io <span class="im">import</span> StringIO</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the CSV file</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df_es <span class="op">=</span> pd.read_csv(<span class="st">'Es_spectrum.csv'</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df_es</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df_es <span class="op">=</span> pd.read_csv(StringIO(<span class="st">"wave,Es</span><span class="ch">\n</span><span class="st">351,0.43348</span><span class="ch">\n</span><span class="st">361,0.43439</span><span class="ch">\n</span><span class="st">385,0.47793</span><span class="ch">\n</span><span class="st">413,0.92794</span><span class="ch">\n</span><span class="st">425,0.93371</span><span class="ch">\n</span><span class="st">442,1.0603</span><span class="ch">\n</span><span class="st">460,1.1661</span><span class="ch">\n</span><span class="st">475,1.1853</span><span class="ch">\n</span><span class="st">490,1.1524</span><span class="ch">\n</span><span class="st">510,1.1682</span><span class="ch">\n</span><span class="st">532,1.1506</span><span class="ch">\n</span><span class="st">555,1.1472</span><span class="ch">\n</span><span class="st">583,1.1366</span><span class="ch">\n</span><span class="st">618,1.0676</span><span class="ch">\n</span><span class="st">640,1.0623</span><span class="ch">\n</span><span class="st">655,0.96797</span><span class="ch">\n</span><span class="st">665,1.0384</span><span class="ch">\n</span><span class="st">678,1.0291</span><span class="ch">\n</span><span class="st">711,0.96479"</span>))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df_es</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
 <div>
 
 
@@ -540,7 +547,7 @@ function googleTranslateElementInit() {
 </div>
 </div>
 </div>
-<p>Just in case you like to see what this looks like so it’s not some abstract concept, let’s take a quick look. This is a quantified representation of the sun’s intensity of light at different wavelengths, after passing through the atmosphere and sitting at the very tip top surface layer of ocean water. We’re getting a little fancy with the rainbow colors, but it helps illustrate the point. Refer to the commented out portion for a simpler representation.</p>
+<p>Just in case you like to see what this looks like so it’s not some abstract concept, let’s take a quick look. This is a quantified representation of the sun’s intensity of light at different wavelengths, after passing through the atmosphere and sitting at the top surface layer of ocean water. We’re getting a little fancy with the rainbow colors, but it helps illustrate the point. Refer to the commented out portion for a simpler representation.</p>
 <div id="8e42d684-f996-44c1-946c-75a428ac6b00" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.collections <span class="im">import</span> PolyCollection</span>
@@ -579,8 +586,8 @@ function googleTranslateElementInit() {
 </div>
 </div>
 </section>
-<section id="lock-and-load-the-pace-data" class="level2">
-<h2 class="anchored" data-anchor-id="lock-and-load-the-pace-data">Lock and load the PACE data</h2>
+<section id="get-the-pace-data-from-nasa-earthdata" class="level2">
+<h2 class="anchored" data-anchor-id="get-the-pace-data-from-nasa-earthdata">Get the PACE data from NASA Earthdata</h2>
 <section id="authenticate" class="level3">
 <h3 class="anchored" data-anchor-id="authenticate">Authenticate</h3>
 <div id="808a754a-6b70-4018-a1b4-3525e9a13a49" class="cell" data-execution_count="24">
@@ -606,7 +613,7 @@ function googleTranslateElementInit() {
 <pre><code>1</code></pre>
 </div>
 </div>
-<p>There are fancy ways of finding the “short_name” above, but if you’re not familiar with them and in a hurry, find your dataset here: https://www.earthdata.nasa.gov/data/catalog?keyword=PACE%20OCI&amp;platforms_h[0][basis]=Space-based%20Platforms&amp;science_keywords_h[0][topic]=Oceans</p>
+<p>There are fancy ways of finding the “short_name” above, but if you’re not familiar with them and in a hurry, find your dataset here: <a href="https://www.earthdata.nasa.gov/data/catalog?keyword=PACE%20OCI&amp;platforms_h%5B0%5D%5Bbasis%5D=Space-based%20Platforms&amp;science_keywords_h%5B0%5D%5Btopic%5D=Oceans" class="uri">https://www.earthdata.nasa.gov/data/catalog?keyword=PACE%20OCI&amp;platforms_h[0][basis]=Space-based%20Platforms&amp;science_keywords_h[0][topic]=Oceans</a></p>
 </section>
 <section id="load-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="load-the-data">Load the data</h3>
@@ -1103,7 +1110,7 @@ Attributes: (12/64)
 </div>
 </div>
 <p>Lower Kd values = lower rate of light attenuation = light goes deeper into the water</p>
-<p>Higher Kd values = more rapid attenutation of light = light doesn’t go as deep</p>
+<p>Higher Kd values = more rapid attenuation of light = light doesn’t go as deep</p>
 <p>We can do the plot with <code>hvplot</code> to make an interactive plot that we can zoom into. <code>hvplot</code> is RAM efficient. It only loads a coarsened version of the full dataset and then loads the finer scale data as we zoom in. Click on the map and you can zoom in. The tooltip will show the lat/lon and Kd.</p>
 <div id="e90338ab-c6c1-4f2e-869a-2eb3221928c7" class="cell" data-editable="true" data-slideshow="{&quot;slide_type&quot;:&quot;&quot;}" data-tags="[]" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
@@ -2831,7 +2838,7 @@ if (window.Jupyter !== undefined) {
 </section>
 <section id="pick-a-point-any-point" class="level2">
 <h2 class="anchored" data-anchor-id="pick-a-point-any-point">Pick a point, any point</h2>
-<p>This is going to do is extract the Kd data for wavelengths at a specified point on the map. Kd is a xarray Dataset and has the method “nearest” for finding values nearest to a target.</p>
+<p>This is going to extract the Kd data for wavelengths at a specified point on the map and save as <code>Kd_pixel</code>. <code>Kd_pixel</code> is an xarray Dataset and has the method “nearest” for finding values nearest to a target.</p>
 <div id="b2e5bef5-d283-4511-8fd9-631b76b7553d" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define target coordinates and wavelengths</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This is an open ocean point. See the first Kd plot.</span></span>
@@ -2850,7 +2857,7 @@ if (window.Jupyter !== undefined) {
        0.4958, 0.5372, 0.973 ], dtype=float32)</code></pre>
 </div>
 </div>
-<p>We’re then going to choose three wavelengths, one red (678 nm), one green (555 nm), one blue-ish (490 nm). Using the reference irradiance data we imported earlier, we’re going to use those <span class="math inline">\(K_{d}({\lambda})\)</span> terms from PACE to propagate the light (<span class="math inline">\(E_{d}({\lambda},z)\)</span>) downward. Then we’ll see what that looks like in a profile plot.</p>
+<p>We’re going to choose three wavelengths, one red (678 nm), one green (555 nm), one blue-ish (490 nm). Using the reference irradiance data we imported earlier, we’re going to use those <span class="math inline">\(K_{d}({\lambda})\)</span> terms from PACE to propagate the light (<span class="math inline">\(E_{d}({\lambda},z)\)</span>) downward. Then we’ll see what that looks like in a profile plot.</p>
 <div id="23ccdf7a-7c7d-4112-a958-8f230692fadc" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -2894,7 +2901,7 @@ if (window.Jupyter !== undefined) {
 </div>
 </div>
 </div>
-<p>What we can see here is that attenuation rates are not very steep for blue light, meaning blue light goes pretty far into the water column. This is a good indicator that we’re dealing with open ocean waters. An honerable mention to green light, of course, who made it down about 75 meters before disappearing. Way to go green, we’re all rooting for you. Then there’s red. What are you doing red? Well, it turns out that even in the absence of a lot of absorbing and scattering particles, the very nature of pure water means it is going to absorb red light pretty quickly, so it left the party a bit early.</p>
+<p>What we can see here is that attenuation rates are not very steep for blue light, meaning blue light goes pretty far into the water column. This is a good indicator that we’re dealing with open ocean waters. An honorable mention to green light, of course, who made it down about 75 meters before disappearing. Way to go green, we’re all rooting for you. Then there’s red. What are you doing red? Well, it turns out that even in the absence of a lot of absorbing and scattering particles, the very nature of pure water means it is going to absorb red light pretty quickly, so it left the party a bit early.</p>
 </section>
 <section id="lets-look-at-this-another-way" class="level2">
 <h2 class="anchored" data-anchor-id="lets-look-at-this-another-way">Let’s look at this another way</h2>
@@ -2939,7 +2946,7 @@ if (window.Jupyter !== undefined) {
 </div>
 </div>
 </div>
-<p>You can clearly see the anti-social red light absolutely refusing to joint its friends into the deep. As such, the deeper you go, other wavelengths of light eventually attenuatre as well, creating a dominance of blue light into the depths. This is the case for the open ocean. For funzies, feel free to go back and put in some different coordiantes, perhaps closer to the coast. A very different pattern will emerge here, as we’ll ilustrate below.</p>
+<p>You can clearly see the anti-social red light absolutely refusing to join its friends into the deep. As such, the deeper you go, other wavelengths of light eventually attenuate as well, creating a dominance of blue light into the depths. This is the case for the open ocean. For fun, feel free to go back and put in some different coordinates, perhaps closer to the coast. A very different pattern will emerge here, as we’ll illustrate below.</p>
 </section>
 <section id="lets-paint-the-town-rainbow" class="level2">
 <h2 class="anchored" data-anchor-id="lets-paint-the-town-rainbow">Let’s paint the town rainbow!</h2>
@@ -3021,8 +3028,8 @@ if (window.Jupyter !== undefined) {
 </div>
 </div>
 </div>
-<p>Notice how the blue light didn’t go down very far in the “Coastal Waters”? The reason for this is because greedy little phytoplankton are preferentially absorbing this blue light to fuel photosynthesis. We think of algae as green plants, but what we’re seeing here is that they appear inherently green to our eyes only becuase they are utilizng all the other wavelengths of light except for green! Other things can absorb blue light as well, like chromophoric dissolved organic matter and detritus, further changing the differential attenuation rates. Now, attenuation doesn’t just mean absorption of light. Light is also being scattered, perhaps multiple times. Particles can scatter light back out of the water and prevent it from going deeper, which also contributes to attenuation. Depending on the size and shape of that particle, it may be that it helps the light scatter multiple times, thereby increasing it’s chance of being absorbed on the way back up! While we’re only seeing a surface reflectance value from space, it represents a complex series of physical processes with light and the environment beneath the surface.</p>
-<p>There you have it! Spectral light attenutation of downwelling irradiance. Now you have the ability to quantitatively characterize the subsurface light field for any depth across the entire ocean. Go PACE!</p>
+<p>Notice how the blue light didn’t go down very far in the “Coastal Waters”? The reason for this is that greedy little phytoplankton are preferentially absorbing this blue light to fuel photosynthesis. We think of algae as green plants, but what we’re seeing here is that they appear inherently green to our eyes only because they are utilizing all the other wavelengths of light except for green! Other things can absorb blue light as well, like chromophoric dissolved organic matter and detritus, further changing the differential attenuation rates. Now, attenuation doesn’t just mean absorption of light. Light is also being scattered, perhaps multiple times. Particles can scatter light back out of the water and prevent it from going deeper, which also contributes to attenuation. Depending on the size and shape of that particle, it may be that it helps the light scatter multiple times, thereby increasing its chance of being absorbed on the way back up! While we’re only seeing a surface reflectance value from space, it represents a complex series of physical processes with light and the environment beneath the surface.</p>
+<p>There you have it! Spectral light attenuation of downwelling irradiance. Now you have the ability to quantitatively characterize the subsurface light field for any depth across the entire ocean. Go PACE!</p>
 </section>
 <section id="lets-do-time" class="level2">
 <h2 class="anchored" data-anchor-id="lets-do-time">Let’s do time!</h2>
@@ -3648,7 +3655,7 @@ Attributes: (12/64)
 </div>
 </div>
 </div>
-<p>For the second plot we will look at Ed at 10m for all wavelengths. The light attenuation varies a lot by month.</p>
+<p>For the second plot we will look at Ed at 10m for all wavelengths. The light attenuation varies by month.</p>
 <div id="d9972699-1463-4f10-b52d-99a9bae38bab" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -3707,6 +3714,10 @@ Attributes: (12/64)
 </div>
 </div>
 </div>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>Hopefully this notebook has gotten you excited about the possibilities of using light availability as information for understanding the ocean environment.</p>
 
 
 </section>

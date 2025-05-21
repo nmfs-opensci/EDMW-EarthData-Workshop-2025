@@ -314,7 +314,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
   <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
   <li><a href="#get-started" id="toc-get-started" class="nav-link" data-scroll-target="#get-started">Get Started</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#summary-1" id="toc-summary-1" class="nav-link" data-scroll-target="#summary-1">Summary</a></li>
   </ul>
 <div class="toc-actions"><ul class="collapse"><li><a href="https://github.dev/nmfs-opensci/EDMW-EarthData-Workshop-2025/blob/main/tutorials/Tutorial_1_access.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2025/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2025/blob/main/tutorials/Tutorial_1_access.ipynb" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
@@ -402,7 +402,7 @@ function googleTranslateElementInit() {
 </section>
 <section id="search-for-data" class="level3">
 <h3 class="anchored" data-anchor-id="search-for-data">Search for data</h3>
-<p>We want to search NASA Earth Data for collections using the OCI instrument. Use <a href="https://search.earthdata.nasa.gov/search?fi=OCI" class="uri">https://search.earthdata.nasa.gov/search?fi=OCI</a></p>
+<p>We want to search NASA Earthdata for collections using the OCI instrument. Use <a href="https://search.earthdata.nasa.gov/search?fi=OCI" class="uri">https://search.earthdata.nasa.gov/search?fi=OCI</a></p>
 <p>There are multiple keywords we can use to discovery data from collections. The table below contains the <code>short_name</code>, <code>concept_id</code>, and <code>doi</code> for some collections we are interested in for other exercises. Each of these can be used to search for data or information related to the collection we are interested in.</p>
 <table class="caption-top table">
 <thead>
@@ -426,7 +426,7 @@ function googleTranslateElementInit() {
 </tbody>
 </table>
 <p>How can we find the <code>shortname</code> or <code>concept_id</code> for collections not in the table above?. Let’s take a quick detour.</p>
-<p>https://search.earthdata.nasa.gov/search</p>
+<p><a href="https://search.earthdata.nasa.gov/search" class="uri">https://search.earthdata.nasa.gov/search</a></p>
 </section>
 <section id="search-by-collection---level-2-data" class="level3">
 <h3 class="anchored" data-anchor-id="search-by-collection---level-2-data">Search by collection - Level 2 data</h3>
@@ -441,7 +441,7 @@ function googleTranslateElementInit() {
 <pre><code>143</code></pre>
 </div>
 </div>
-<p>Why are there so many?? Swath data that is in spatial chunks. We need to specify a bounding box.</p>
+<p>Why are there so many?? Level 2 data is swath data and swath data is in spatial chunks. We need to specify a bounding box.</p>
 <div id="2862742c-7e8b-4c60-9fb4-11cc3dc4eba7" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Level 2 data</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> earthaccess.search_data(</span>
@@ -457,7 +457,7 @@ function googleTranslateElementInit() {
 </section>
 <section id="search-by-collection---level-3-data" class="level3">
 <h3 class="anchored" data-anchor-id="search-by-collection---level-3-data">Search by collection - Level 3 data</h3>
-<p>Global data so there should be one file per day, right?</p>
+<p>Level 3 is global data (no swaths and no tiles) so there should be one file per day, right?</p>
 <div id="3b8329d0-3986-4c63-b9bb-4b3bff2c717b" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Level 3 data</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> earthaccess.search_data(</span>
@@ -1156,8 +1156,8 @@ Attributes: (12/64)
 </div>
 </section>
 </section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<section id="summary-1" class="level2">
+<h2 class="anchored" data-anchor-id="summary-1">Summary</h2>
 <p>This concludes tutorial 1. You have worked with some PACE data in the cloud and plotted a single file.</p>
 
 

@@ -312,9 +312,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#you-will-need-3.7gb-for-this-tutorial" id="toc-you-will-need-3.7gb-for-this-tutorial" class="nav-link active" data-scroll-target="#you-will-need-3.7gb-for-this-tutorial">You will need 3.7Gb for this tutorial</a></li>
   <li><a href="#interacting-with-multiple-phytoplankton-groups-simultaneously" id="toc-interacting-with-multiple-phytoplankton-groups-simultaneously" class="nav-link" data-scroll-target="#interacting-with-multiple-phytoplankton-groups-simultaneously">Interacting with multiple phytoplankton groups simultaneously</a></li>
-  <li><a href="#are-you-ready" id="toc-are-you-ready" class="nav-link" data-scroll-target="#are-you-ready"><em>Are you ready?</em></a></li>
-  <li><a href="#lock-and-load-the-data" id="toc-lock-and-load-the-data" class="nav-link" data-scroll-target="#lock-and-load-the-data">Lock and load the data</a></li>
-  <li><a href="#its-map-time-again" id="toc-its-map-time-again" class="nav-link" data-scroll-target="#its-map-time-again">It’s map time again</a></li>
+  <li><a href="#load-the-data-from-erddap" id="toc-load-the-data-from-erddap" class="nav-link" data-scroll-target="#load-the-data-from-erddap">Load the data from ERDDAP</a></li>
+  <li><a href="#map-time" id="toc-map-time" class="nav-link" data-scroll-target="#map-time">Map time!</a></li>
   <li><a href="#lets-get-a-bit-more-quantitative" id="toc-lets-get-a-bit-more-quantitative" class="nav-link" data-scroll-target="#lets-get-a-bit-more-quantitative">Let’s get a bit more quantitative</a></li>
   <li><a href="#the-times-they-are-a-changin" id="toc-the-times-they-are-a-changin" class="nav-link" data-scroll-target="#the-times-they-are-a-changin">The times, they are a changin’</a></li>
   <li><a href="#bringing-it-all-together" id="toc-bringing-it-all-together" class="nav-link" data-scroll-target="#bringing-it-all-together">Bringing it all together</a></li>
@@ -383,19 +382,16 @@ function googleTranslateElementInit() {
 <section id="you-will-need-3.7gb-for-this-tutorial" class="level2">
 <h2 class="anchored" data-anchor-id="you-will-need-3.7gb-for-this-tutorial">You will need 3.7Gb for this tutorial</h2>
 <p>Go to File &gt; Hub Control Panel &gt; Stop my server</p>
-<p>Then restart after chosing 3.7 Gb in the drop-down.</p>
+<p>Then restart after choosing 3.7 Gb in the drop-down.</p>
 </section>
 <section id="interacting-with-multiple-phytoplankton-groups-simultaneously" class="level2">
 <h2 class="anchored" data-anchor-id="interacting-with-multiple-phytoplankton-groups-simultaneously">Interacting with multiple phytoplankton groups simultaneously</h2>
 <p>MOANA is the first phytoplankton community composition algorithm to be released by PACE. This product returns near-surface concentrations (cells mL-1) of three different picophytoplankton (i.e., phytoplankton &lt;2 μm in size): Prochlorococcus, Synechococcus, and autotrophic picoeukaryotes (Figure 15). The algorithm uses empirical relationships between measured cell concentrations, in situ hyperspectral remote sensing reflectances, and sea surface temperatures. Details of this algorithm can be found in <a href="https://doi.org/10.1364/OE.398127">Lange et al.&nbsp;(2020)</a>.</p>
 <p>Picophytoplankton are composed of the cyanobacteria Prochlorococcus (∼0.8 µm) and Synechococcus (∼1 µm), as well as picoeukaryotes, which combined are responsible for 50 to 90% of all primary production in open ocean ecosystems and contribute up to 30% of carbon export in these regions. Geographically, Prochlorococcus tends to inhabit warmer and mostly oligotrophic waters surrounded by Synechococcus patches along frontal boundaries. These fronts often reside at boundaries where phytoplankton communities start to transition to higher concentrations of larger eukaryotic cells, such as picoeukaryotes and nanoeukaryotic flagellates. Thus, identification of Prochlorococcus and Synechococcus distributions may be useful in identifying trophic boundaries in oceanic ecosystems, in addition to providing insight into productivity, food web regimes, and carbon export.</p>
-<p>Note, for now, the MOANA product is only avaialble for the Atlantic Ocean.</p>
+<p>Note, for now, the MOANA product is only available for the Atlantic Ocean.</p>
 </section>
-<section id="are-you-ready" class="level2">
-<h2 class="anchored" data-anchor-id="are-you-ready"><em>Are you ready?</em></h2>
-</section>
-<section id="lock-and-load-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="lock-and-load-the-data">Lock and load the data</h2>
+<section id="load-the-data-from-erddap" class="level2">
+<h2 class="anchored" data-anchor-id="load-the-data-from-erddap">Load the data from ERDDAP</h2>
 <div id="d05417c1-06e7-47af-ae9a-28a2401e5a52" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Load Libraries ----</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -848,9 +844,9 @@ Attributes: (12/71)
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> ds.load()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="its-map-time-again" class="level2">
-<h2 class="anchored" data-anchor-id="its-map-time-again">It’s map time again</h2>
-<p>We’ve got three different phytoplankton classes in this MOANA data set. Let’s create some pretty maps and get a sense of their relative distributions.</p>
+<section id="map-time" class="level2">
+<h2 class="anchored" data-anchor-id="map-time">Map time!</h2>
+<p>We have three different phytoplankton classes in this MOANA data set. Let’s create some pretty maps and get a sense of their relative distributions.</p>
 <div id="1f87275e-9b05-422b-848b-e72451906254" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Define metadata for plots ----</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>phyto_info <span class="op">=</span> {</span>
@@ -904,11 +900,11 @@ Attributes: (12/71)
 </div>
 </div>
 </div>
-<p>Looking good! Here you can see that little ole Prochlorococcus really runs amok in the offshore waters, where both Synechococcus and Picoeukaryotes tend to dominate at higher latitudes, and Picoeukaryotes assert their dominance in along the coastal margins… you know, to the degree that a free-floating cell can “assert” anything.</p>
+<p>Looking good! Here you can see that Prochlorococcus really runs amok in the offshore waters, while Synechococcus and Picoeukaryotes tend to dominate at higher latitudes, and Picoeukaryotes assert their dominance in along the coastal margins…to the degree that a free-floating cell can “assert” anything.</p>
 </section>
 <section id="lets-get-a-bit-more-quantitative" class="level2">
 <h2 class="anchored" data-anchor-id="lets-get-a-bit-more-quantitative">Let’s get a bit more quantitative</h2>
-<p>Let’s get a little better sense of how these phytoplakton classes are geographically distributed. What we’re going to do next is plot how all three of these phytoplankton classes change in relation to latitude. To do this, we’ll be taking “slices” of data and averaging them. Conceptually, think of a horizontal line across 50 degrees North - we’ll extract all that data, take an average, and then move on to the pixel below (e.g.&nbsp;49.98 degrees North) and do the same until we hit 50 degrees South. Doing this for each phytoplankton class, we can now distill this information into something that can be put onto a line plot.</p>
+<p>Let’s get a little better sense of how these phytoplankton classes are geographically distributed. We will plot how all three of these phytoplankton classes change in relation to latitude. To do this, we will take “slices” of data and average them. Conceptually, think of a horizontal line across 50 degrees North - we’ll extract all that data, take an average, and then move on to the pixel below (e.g.&nbsp;49.98 degrees North) and do the same until we hit 50 degrees South. Doing this for each phytoplankton class, we can now distill this information into something that can be put onto a line plot.</p>
 <div id="71ceff87-a045-4626-bce6-a488b9d17877" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>syn <span class="op">=</span> ds[<span class="st">"syncoccus_moana"</span>].sel(latitude <span class="op">=</span> <span class="bu">slice</span>(<span class="dv">50</span>, <span class="op">-</span><span class="dv">50</span>)).mean(dim<span class="op">=</span>[<span class="st">"longitude"</span>])</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>pro <span class="op">=</span> ds[<span class="st">"prococcus_moana"</span>].sel(latitude <span class="op">=</span> <span class="bu">slice</span>(<span class="dv">50</span>, <span class="op">-</span><span class="dv">50</span>)).mean(dim<span class="op">=</span>[<span class="st">"longitude"</span>])</span>
@@ -956,8 +952,8 @@ Attributes: (12/71)
 </section>
 <section id="the-times-they-are-a-changin" class="level2">
 <h2 class="anchored" data-anchor-id="the-times-they-are-a-changin">The times, they are a changin’</h2>
-<p>For this exercise, we’ll download one year’s worth of PACE data to see how things are evolving over time. Using this time series, we’re going to use the “slice” function again, but this time we’ll extract a 10 degree x 10 degree box in the south Atlantic ocean. It can be smaller, or located elsewhere if you like, but either way, we’re going to average the data within that box for each individual time step.</p>
-<p>Next, we’ll plot how all three of these phytoplankton classes change over the course of 1 year, allowing you to see the cycles of growth and decay relative to one another. It is useful to add this context because not all chlorophyll-a is equivalent, e.g., a bloom of <em>Prochlorococcus</em> may represent a different amount of trophic energy potential relative to blooms of other phytoplankton classes, or it may havce come about from a different oceanographic process.</p>
+<p>For this exercise, we’ll download one year’s worth of PACE data to see how things are evolving over time. Using this time series, we will use the “slice” function again, but this time we’ll extract a 10 degree x 10 degree box in the southern Atlantic Ocean. It can be smaller, or located elsewhere if you like, but either way, we’re going to average the data within that box for each individual time step.</p>
+<p>Next, we’ll plot how all three of these phytoplankton classes change over the course of 1 year, allowing you to see the cycles of growth and decay relative to one another. It is useful to add this context because not all chlorophyll-a is equivalent, e.g., a bloom of <em>Prochlorococcus</em> may represent a different amount of trophic energy potential relative to blooms of other phytoplankton classes, or it may have come about from a different oceanographic process.</p>
 <div id="fecdf56b-cd97-43dd-ab46-4b1d84f74fd1" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
@@ -1494,7 +1490,7 @@ Coordinates:
 <h2 class="anchored" data-anchor-id="bringing-it-all-together">Bringing it all together</h2>
 <p>A central theme of working with PACE data revolves around wrangling multiple dimensions of data into something you can conceptualize. Viewing three separate maps makes it a bit difficult to see the interactions between the different phytoplankton classes. This is important - we want to know where these boundaries are colliding, because this indicates that something is changing with the underlying oceanography.</p>
 <p>Let’s try something a little different here. Instead of making three separate plots, let’s stack them all and make a false “true color” image by substituting the usual red, green, and blue radiance channels with <em>Synechococcus</em> (red), Picoeukaryotes (green), and <em>Proclorococcus</em> (blue). Can it be done?</p>
-<p>Yes, but with a tiny bit of nuance here. We talked earlier about how higher cell counts does not unequivocally mean that this is a “dominant” class. We can do something called histogram stretching, which is a little trick some folks use to make their true color images pop a little more. Basically, for each phytoplankton class, let’s take all the data between the 2% and 98% percentile range, and normalize those data to the respective median. This ensure all phytoplankton classes are now on a level playing field when we stack them up. Higher or lower values no longer represent absolute cell counts, they now represent higher or lower weights relative to their central tendency. The same trick is often done for making “true color” images to make them pop a little more. Let’s give it a try:</p>
+<p>Yes, but with a tiny bit of nuance here. We talked earlier about how higher cell counts does not unequivocally mean that this is a “dominant” class. We can do something called histogram stretching, which is a little trick some folks use to make their true color images pop a little more. Basically, for each phytoplankton class, let’s take all the data between the 2% and 98% percentile range, and normalize those data to the respective median. This ensures all phytoplankton classes are now on a level playing field when we stack them up. Higher or lower values no longer represent absolute cell counts, they now represent higher or lower weights relative to their central tendency. The same trick is often done for making “true color” images to make them pop a little more. Let’s give it a try:</p>
 <div id="123bd4c2-d1f7-4077-9d38-1d8650e50118" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Lazy Load Data ----</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
@@ -1557,11 +1553,11 @@ Coordinates:
 </div>
 </div>
 </div>
-<p>Now you can really see where each phytoplankton class dominates, and through the gradational mixing of colors, we can see where, and to what degree they overlap. Neat, right?</p>
+<p>Now you can really see where each phytoplankton class dominates, and through the gradational mixing of colors, we can see where, and to what degree they overlap.</p>
 </section>
 <section id="create-a-legend" class="level2">
 <h2 class="anchored" data-anchor-id="create-a-legend">Create a legend</h2>
-<p>We still could use a bit of help contextualizing the above image, so let’s just make a little legend for it. Since we’re in tri-color space, let’s use the very useful, and in my opinion, underutilized ternary plot. These are fun little plots that show the relative contribution of three variables relative to one another. It helps us determine how to interpret the purple, teal, pink, and orange areas you see on the map.</p>
+<p>We still could use a bit of help contextualizing the above image, so let’s just make a little legend for it. Since we’re in tricolor space, let’s create a legend that shows the relative contribution of three variables relative to one another. It helps us determine how to interpret the purple, teal, pink, and orange areas you see on the map.</p>
 <div id="96f916d8-63b6-42d7-a6da-970dfd422677" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.patches <span class="im">import</span> Polygon</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1614,7 +1610,7 @@ Coordinates:
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
-<p>There you have it! PACE’s first phytoplankton class algorithm. Note, even if these specific critters are not of particular interest to you, they are excellent indicators of underlying oceanographic processes (MOANA uses SST as an input as well). If you are a highly migratory species traversing the open seas, these boundaries may very well be influencial.</p>
+<p>There you have it! MOANA is PACE’s first phytoplankton class algorithm. Note, even if these specific critters are not of particular interest to you, they are excellent indicators of underlying oceanographic processes (MOANA uses SST as an input as well). If you are a highly migratory species traversing the open seas, these boundaries may very well be influential.</p>
 
 
 </section>

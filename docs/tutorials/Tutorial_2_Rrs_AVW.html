@@ -310,13 +310,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#lets-go-get-some-data-first" id="toc-lets-go-get-some-data-first" class="nav-link active" data-scroll-target="#lets-go-get-some-data-first">Let’s go get some data first</a></li>
+  <li><a href="#get-the-data-from-nasa-earthdata" id="toc-get-the-data-from-nasa-earthdata" class="nav-link active" data-scroll-target="#get-the-data-from-nasa-earthdata">Get the data from NASA Earthdata</a></li>
   <li><a href="#lets-open-it-up" id="toc-lets-open-it-up" class="nav-link" data-scroll-target="#lets-open-it-up">Let’s open it up!</a></li>
   <li><a href="#mapping-time" id="toc-mapping-time" class="nav-link" data-scroll-target="#mapping-time">Mapping time!</a></li>
   <li><a href="#lets-extract-some-data" id="toc-lets-extract-some-data" class="nav-link" data-scroll-target="#lets-extract-some-data">Let’s extract some data</a></li>
   <li><a href="#lets-see-what-that-extracted-data-looks-like" id="toc-lets-see-what-that-extracted-data-looks-like" class="nav-link" data-scroll-target="#lets-see-what-that-extracted-data-looks-like">Let’s see what that extracted data looks like</a></li>
   <li><a href="#lets-make-a-match--" id="toc-lets-make-a-match--" class="nav-link" data-scroll-target="#lets-make-a-match--">Let’s make a match :-)</a></li>
-  <li><a href="#thats-a-wrap" id="toc-thats-a-wrap" class="nav-link" data-scroll-target="#thats-a-wrap">That’s a wrap!</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul>
 <div class="toc-actions"><ul class="collapse"><li><a href="https://github.dev/nmfs-opensci/EDMW-EarthData-Workshop-2025/blob/main/tutorials/Tutorial_2_Rrs_AVW.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2025/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2025/blob/main/tutorials/Tutorial_2_Rrs_AVW.ipynb" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
@@ -365,8 +365,8 @@ function googleTranslateElementInit() {
 <p><a href="https://colab.research.google.com/github/nmfs-opensci/EDMW-EarthData-Workshop-2025/blob/main/tutorials/clean/Tutorial_2_Rrs_AVW.ipynb"><img src="https://img.shields.io/badge/Open_in_Colab-blue?style=for-the-badge" class="img-fluid" alt="Colab Badge"></a> <a href="javascript:void(0);" onclick="openJupyterWidget('https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2025/blob/main/tutorials/clean/Tutorial_2_Rrs_AVW.ipynb');"> <img src="https://img.shields.io/badge/Open_in_JupyterHub-orange?style=for-the-badge" alt="JupyterHub Badge"> </a> <a href="https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2025/blob/main/tutorials/clean/Tutorial_2_Rrs_AVW.ipynb"><img src="https://img.shields.io/badge/Download-grey?style=for-the-badge" class="img-fluid" alt="Download Badge"></a></p>
 <p>It can be a little tricky working with a netcdf that is (…checks notes) <strong>172</strong> layers thick. Each individual layer in the PACE_OCI*_<em>AOP</em> files represents a 1272 x 1709 array of remote sensing reflectance values. This is a lot of information to take in, so how can we better conceptualize this information?</p>
 <p><em>Cue up triumphant brass horn noises</em></p>
-<p>Enter the realm of the <strong>Apparent Visible Wavelength (or AVW)</strong>. Let’s not go into too much detail here so that we can get to work, but in short, the AVW represents a one-dimensional variable that describes the weighted harmonic mean of a given Rrs spectrum. Imagine trying to balance a single Rrs spectrum on the tip of a pin - the wavelength where the spectrum is perfectly balanced is the AVW (units of nm). This balance point shifts proportionally in response to sublte changes in that spectrum. As a typical rule of thumb, lower AVW values (440 - 490 nm) represent relatively clear, less productive waters while higher AVW values (490 - 600 nm) represent more turbid, productive water masses. Capiche?</p>
-<p>Let’s dive in and mess around with some spectra then, and see what these images are trying to tell us. By the end of this tutorial, you will have:</p>
+<p>Enter the realm of the <strong>Apparent Visible Wavelength (or AVW)</strong>. Let’s not go into too much detail here so that we can get to work, but in short, the AVW represents a one-dimensional variable that describes the weighted harmonic mean of a given Rrs spectrum. Imagine trying to balance a single Rrs spectrum on the tip of a pin - the wavelength where the spectrum is perfectly balanced is the AVW (units of nm). This balance point shifts proportionally in response to subtle changes in that spectrum. As a typical rule of thumb, lower AVW values (440 - 490 nm) represent relatively clear, less productive waters while higher AVW values (490 - 600 nm) represent more turbid, productive water masses.</p>
+<p>Let’s dive in and mess around with some spectra and see what these images are trying to tell us. By the end of this tutorial, you will have:</p>
 <blockquote class="blockquote">
 <p>📘 Learning Objectives</p>
 <ol type="1">
@@ -376,9 +376,9 @@ function googleTranslateElementInit() {
 <li>Extract a user-defined 5x5 box from the image and plot the mean Rrs with standard deviation</li>
 </ol>
 </blockquote>
-<section id="lets-go-get-some-data-first" class="level2">
-<h2 class="anchored" data-anchor-id="lets-go-get-some-data-first">Let’s go get some data first</h2>
-<p>Login to NASA Earth Access</p>
+<section id="get-the-data-from-nasa-earthdata" class="level2">
+<h2 class="anchored" data-anchor-id="get-the-data-from-nasa-earthdata">Get the data from NASA Earthdata</h2>
+<p>Login to NASA Earthdata</p>
 <div id="3489e602-7ad5-4222-a5e1-7b72ee994426" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> earthaccess</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>auth <span class="op">=</span> earthaccess.login()</span>
@@ -391,7 +391,7 @@ function googleTranslateElementInit() {
 Enter your Earthdata password:  ········</code></pre>
 </div>
 </div>
-<p>For these “Level 2” files, we’re downloading an individual scene, so feeding it a bounding box will help narrow down the results. Here, I’m looking for a scene off the coast of Louisiana, on March 5, 2025.</p>
+<p>These “Level 2” files have many smaller spatial panels or scenes to cover the whole globe. Specifying a bounding box will help narrow down the results. Here, I’m looking for data off the coast of Louisiana, on March 5, 2025.</p>
 <div id="45c43b21-267c-4bec-8e6e-9777e669bb79" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>bbox <span class="op">=</span> (<span class="op">-</span><span class="fl">98.0</span>, <span class="fl">27.0</span>, <span class="op">-</span><span class="fl">96.0</span>, <span class="fl">31.0</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
@@ -417,7 +417,7 @@ Enter your Earthdata password:  ········</code></pre>
 </script>
 </div>
 </div>
-<p>You don’t have to do this next little bit, but it helps you identify the various “groups” within the file so you know where to pull data from. Once you know, it will be the same across all the Level 2 PACE files.</p>
+<p>Level 2 netcdf files have “groups”. The next code helps you identify the various “groups” within the file so you know where to pull data from. Once you know the groups, it will be the same across all the Level 2 PACE files.</p>
 <div id="b0b35b72-8bc8-46d6-86f4-ac478e1a7d1d" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> h5netcdf</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> h5netcdf.File(fileset[<span class="dv">0</span>]) <span class="im">as</span> <span class="bu">file</span>:</span>
@@ -483,7 +483,7 @@ Enter your Earthdata password:  ········</code></pre>
 </section>
 <section id="mapping-time" class="level2">
 <h2 class="anchored" data-anchor-id="mapping-time">Mapping time!</h2>
-<p>Let’s make a map of the AVW product to get a sense of what kind of water masses we’re dealing with here, and explore what looks interesting.</p>
+<p>Let’s make a map of the AVW product to get a sense of what kind of water masses we’re dealing with here and explore what looks interesting.</p>
 <div id="8ba814cd-b9de-4db6-8f24-3a950b80782f" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Make product plot ----</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
@@ -554,7 +554,7 @@ Enter your Earthdata password:  ········</code></pre>
 </section>
 <section id="lets-see-what-that-extracted-data-looks-like" class="level2">
 <h2 class="anchored" data-anchor-id="lets-see-what-that-extracted-data-looks-like">Let’s see what that extracted data looks like</h2>
-<p>Next, for every data point that was extracted along the transect, we’re going to pull together 172 layers of Rrs information and see what each of those spectra look like. But wait, there’s more! To help add some cotnext to those spectra, we’re going to make sure that we color code each spectra so that it corresponds to the colormap on our AVW image. In other words, a red-colored spectrum will represent data that you pulled from a red part of the map.</p>
+<p>Next, for every data point that was extracted along the transect, we’re going to pull together 172 layers of Rrs information and see what each of those spectra look like. But wait, there’s more! To help add some context to those spectra, we’re going to make sure that we color code each spectra so that it corresponds to the colormap on our AVW image. In other words, a red-colored spectrum will represent data that you pulled from a red part of the map.</p>
 <p>This will generate two plots. The first plot will show the Rrs spectrum “as is” in units of inverse steradians (sr^-1). It is useful to examine this, because it tells you something about the <em>brightness</em> of the water. Sometimes, two spectral shapes may look very similar, but the relative magnitude of values can help you determine if you’re looking at a more highly scattering water mass (higher relative magnitude) versus a highly absorbing water mass (lower relative magnitude). In the second plot, we divided the Rrs by the integrated area under the spectrum. This puts everything “equal” in terms of brightness, allowing you to focus more on absolute spectral shape differences. Both are informative in their own way.</p>
 <p>Feel free to go back and build a new transect, explore, and get a feel for what different water masses look like.</p>
 <div id="ad82a112-1494-4800-be05-413af48363cd" class="cell" data-execution_count="12">
@@ -670,9 +670,9 @@ Enter your Earthdata password:  ········</code></pre>
 </div>
 </div>
 </section>
-<section id="thats-a-wrap" class="level2">
-<h2 class="anchored" data-anchor-id="thats-a-wrap">That’s a wrap!</h2>
-<p>Well folks, there you have it. Hyperspectral data, demystified. Well, maybe not entirely, but the tools here can be adapted to really help you explore the data and get a little more hands on with the raw reflectance information. Users often shy away from this information in favor of more geophysical variables that can be modeled and explained in the context of an ecosystem, like chlorophyll-a. This is completely understandable, but do keep in mind that every step you get away from the refelctance introduces additional uncertainties. Some folks have found that using raw reflectance values can outperform the use of more derived products, as in the case of <a href="https://doi.org/10.1093/icesjms/fsx187">modeling Atlantic Sturgeon habitat</a>.</p>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>Well folks, there you have it. Hyperspectral data, demystified. Well, maybe not entirely, but the tools here can be adapted to really help you explore the data and get a little more hands on with the raw reflectance information. Users often shy away from this information in favor of more geophysical variables that can be modeled and explained in the context of an ecosystem, like chlorophyll-a. This is completely understandable, but do keep in mind that every step you get away from the reflectance introduces additional uncertainties. Some folks have found that using raw reflectance values can outperform the use of more derived products, as in the case of <a href="https://doi.org/10.1093/icesjms/fsx187">modeling Atlantic Sturgeon habitat</a>.</p>
 
 
 </section>

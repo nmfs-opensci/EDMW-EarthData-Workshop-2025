@@ -273,11 +273,9 @@ ul.task-list li input[type="checkbox"] {
    
   <ul class="collapse">
   <li><a href="#earth-data-login" id="toc-earth-data-login" class="nav-link active" data-scroll-target="#earth-data-login">Earth Data Login</a></li>
-  <li><a href="#jupyter-hub" id="toc-jupyter-hub" class="nav-link" data-scroll-target="#jupyter-hub">Jupyter Hub</a></li>
-  <li><a href="#getting-the-tutorials" id="toc-getting-the-tutorials" class="nav-link" data-scroll-target="#getting-the-tutorials">Getting the tutorials</a></li>
-  <li><a href="#jupyter-hub-setup" id="toc-jupyter-hub-setup" class="nav-link" data-scroll-target="#jupyter-hub-setup">Jupyter Hub setup</a></li>
-  <li><a href="#earthdata-login-account" id="toc-earthdata-login-account" class="nav-link" data-scroll-target="#earthdata-login-account">Earthdata Login account</a></li>
-  <li><a href="#running-the-tutorials" id="toc-running-the-tutorials" class="nav-link" data-scroll-target="#running-the-tutorials">Running the tutorials</a></li>
+  <li><a href="#jupyterhub" id="toc-jupyterhub" class="nav-link" data-scroll-target="#jupyterhub">JupyterHub</a></li>
+  <li><a href="#getting-the-tutorials-into-the-jupyterhub" id="toc-getting-the-tutorials-into-the-jupyterhub" class="nav-link" data-scroll-target="#getting-the-tutorials-into-the-jupyterhub">Getting the tutorials into the JupyterHub</a></li>
+  <li><a href="#colab" id="toc-colab" class="nav-link" data-scroll-target="#colab">Colab</a></li>
   </ul>
 <div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2025/edit/main/content/setup.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2025/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2025/blob/main/content/setup.md" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
@@ -324,47 +322,31 @@ function googleTranslateElementInit() {
 
 <section id="earth-data-login" class="level2">
 <h2 class="anchored" data-anchor-id="earth-data-login">Earth Data Login</h2>
-<p>To get data from NASA Earth Data, you will need to register and get a username and password. Register here: <a href="https://urs.earthdata.nasa.gov/" class="uri">https://urs.earthdata.nasa.gov/</a></p>
+<p>To get data from NASA Earthdata, you will need to register and get a username and password. Register here: <a href="https://urs.earthdata.nasa.gov/" class="uri">https://urs.earthdata.nasa.gov/</a>. Write down your username and password; you will need it often.</p>
 </section>
-<section id="jupyter-hub" class="level2">
-<h2 class="anchored" data-anchor-id="jupyter-hub">Jupyter Hub</h2>
-<p>If you want to follow along with our tutorials during the workshop on our workshop Jupyter Hub &lt; br/&gt;<a href="https://workshop.nmfs-openscapes.2i2c.cloud/" class="uri">https://workshop.nmfs-openscapes.2i2c.cloud/</a> then</p>
+<section id="jupyterhub" class="level2">
+<h2 class="anchored" data-anchor-id="jupyterhub">JupyterHub</h2>
 <ol type="1">
-<li>If you are NOAA, <a href="https://docs.google.com/document/d/1YS3Vg0w4kR4PPttToNtTccJN1IfVArT5sOCg-K4_kb4/edit?usp=sharing">click here</a> (NOAA only) for instructions and to get the password (NOAA access only)</li>
-<li>If you are not-NOAA, we will give the password to the workshop Jupyter Hub out at the start of the workshop.</li>
+<li>Go to our JupyterHub: <a href="https://workshop.nmfs-openscapes.2i2c.cloud/" class="uri">https://workshop.nmfs-openscapes.2i2c.cloud/</a></li>
+<li>Log in with your email and the workshop password. If you are NOAA, <a href="https://docs.google.com/document/d/1YS3Vg0w4kR4PPttToNtTccJN1IfVArT5sOCg-K4_kb4/edit?usp=sharing">click here</a> to see the password. If you are not-NOAA, we will give the password during the workshop.</li>
+<li>Once you are in, Click Start Server. <img src="./img/servers.png" class="img-fluid"></li>
 </ol>
-<p><em>Do I need to use the Jupyter Hub?</em> No.&nbsp;You can run the tutorials in Colab, Binder, Codespaces, another Jupyter Hub or download and run on your own computer. Or you can just listen!</p>
 </section>
-<section id="getting-the-tutorials" class="level2">
-<h2 class="anchored" data-anchor-id="getting-the-tutorials">Getting the tutorials</h2>
-<p>Once you are logged into the Jupyter Hub, go to a tutorial in <a href="https://nmfs-opensci.github.io/EDMW-EarthData-Workshop-2025/" class="uri">https://nmfs-opensci.github.io/EDMW-EarthData-Workshop-2025/</a> and there are buttons to open the tutorial in different places.</p>
-<p>Alternatively, you can clone the repo and go into the tutorials directory. Open a terminal with File &gt; New &gt; Terminal. Then type this on the command line:</p>
+<section id="getting-the-tutorials-into-the-jupyterhub" class="level2">
+<h2 class="anchored" data-anchor-id="getting-the-tutorials-into-the-jupyterhub">Getting the tutorials into the JupyterHub</h2>
+<p>Once you are logged into the JupyterHub, go to a tutorial in <a href="https://nmfs-opensci.github.io/EDMW-EarthData-Workshop-2025/" class="uri">https://nmfs-opensci.github.io/EDMW-EarthData-Workshop-2025/</a> and click on <img src="https://img.shields.io/badge/Workshop_Hub-green?style=for-the-badge" class="img-fluid">. This will open the tutorial in the workshop JupyterHub.</p>
+<p>Alternatively, you can clone the repo and go into the tutorials/clean directory. Open a terminal with File &gt; New &gt; Terminal. Then type this on the command line:</p>
 <pre><code>cd ~
 git clone https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2025</code></pre>
-<p>We will be using a JupyterHub for the workshop but you can run the tutorials in Colab, Binder or on your own computer.</p>
 </section>
-<section id="jupyter-hub-setup" class="level2">
-<h2 class="anchored" data-anchor-id="jupyter-hub-setup">Jupyter Hub setup</h2>
+<section id="colab" class="level2">
+<h2 class="anchored" data-anchor-id="colab">Colab</h2>
+<p>You can run the tutorials in Colab but you will need to install the packages. Create a new code cell at the top of the notebook (after clicking the “Open in Colab”) button. Run the following pip install commands and then do Runtime &gt; Restart session. Yes it will delete local variables. That’s ok. If you don’t restart the session, xarray cannot fine the engines it needs.</p>
 <ul>
-<li><a href="https://workshop.nmfs-openscapes.2i2c.cloud/" class="uri">https://workshop.nmfs-openscapes.2i2c.cloud/</a></li>
-<li><a href="https://docs.google.com/document/d/1YS3Vg0w4kR4PPttToNtTccJN1IfVArT5sOCg-K4_kb4/edit?usp=sharing">Click here</a> for instructions and to get the password (NOAA access only)</li>
-<li>Once you are in, Click Start Server. <img src="images/server.png" class="img-fluid"></li>
-</ul>
-</section>
-<section id="earthdata-login-account" class="level2">
-<h2 class="anchored" data-anchor-id="earthdata-login-account">Earthdata Login account</h2>
-<p>You will need this to get the PACE data and to get NASA Earth Data in general.</p>
-<ul>
-<li>Create an Earthdata Login account (if you don’t already have one) at <a href="https://urs.earthdata.nasa.gov" class="uri">https://urs.earthdata.nasa.gov</a></li>
-<li>Write down your username and password; you will need it often.</li>
-</ul>
-</section>
-<section id="running-the-tutorials" class="level2">
-<h2 class="anchored" data-anchor-id="running-the-tutorials">Running the tutorials</h2>
-<ul>
-<li>Navigate to a tutorial in the EDMW workshop</li>
-<li>You will see buttons for opening the tutorial in different ways. Choose the way that works for you. <img src="images/tutorial.png" class="img-fluid"></li>
-<li>If using the Jupyter Hub, click on the “Open in Jupyter Hub” button.</li>
+<li>For tutorial 1: <code>pip install earthaccess xarray[io]</code></li>
+<li>For tutorial 2 (Rrs): <code>pip install earthaccess cartopy xarray[io]</code></li>
+<li>For tutorial 3 (Kd): <code>pip install earthaccess cartopy xarray[io] hvplot</code></li>
+<li>For tutorial 4 (MOANA): <code>pip install cartopy xarray[io]</code></li>
 </ul>
 
 

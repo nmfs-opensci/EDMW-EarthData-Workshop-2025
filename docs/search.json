@@ -574,7 +574,7 @@
     "href": "content/setup.html#earth-data-login",
     "title": "Set-up",
     "section": "Earth Data Login",
-    "text": "Earth Data Login\nTo get data from NASA Earth Data, you will need to register and get a username and password. Register here: https://urs.earthdata.nasa.gov/",
+    "text": "Earth Data Login\nTo get data from NASA Earthdata, you will need to register and get a username and password. Register here: https://urs.earthdata.nasa.gov/. Write down your username and password; you will need it often.",
     "crumbs": [
       "JupyterHub",
       "Welcome",
@@ -582,11 +582,11 @@
     ]
   },
   {
-    "objectID": "content/setup.html#jupyter-hub",
-    "href": "content/setup.html#jupyter-hub",
+    "objectID": "content/setup.html#jupyterhub",
+    "href": "content/setup.html#jupyterhub",
     "title": "Set-up",
-    "section": "Jupyter Hub",
-    "text": "Jupyter Hub\nIf you want to follow along with our tutorials during the workshop on our workshop Jupyter Hub &lt; br/&gt;https://workshop.nmfs-openscapes.2i2c.cloud/ then\n\nIf you are NOAA, click here (NOAA only) for instructions and to get the password (NOAA access only)\nIf you are not-NOAA, we will give the password to the workshop Jupyter Hub out at the start of the workshop.\n\nDo I need to use the Jupyter Hub? No. You can run the tutorials in Colab, Binder, Codespaces, another Jupyter Hub or download and run on your own computer. Or you can just listen!",
+    "section": "JupyterHub",
+    "text": "JupyterHub\n\nGo to our JupyterHub: https://workshop.nmfs-openscapes.2i2c.cloud/\nLog in with your email and the workshop password. If you are NOAA, click here to see the password. If you are not-NOAA, we will give the password during the workshop.\nOnce you are in, Click Start Server.",
     "crumbs": [
       "JupyterHub",
       "Welcome",
@@ -594,11 +594,11 @@
     ]
   },
   {
-    "objectID": "content/setup.html#getting-the-tutorials",
-    "href": "content/setup.html#getting-the-tutorials",
+    "objectID": "content/setup.html#getting-the-tutorials-into-the-jupyterhub",
+    "href": "content/setup.html#getting-the-tutorials-into-the-jupyterhub",
     "title": "Set-up",
-    "section": "Getting the tutorials",
-    "text": "Getting the tutorials\nOnce you are logged into the Jupyter Hub, go to a tutorial in https://nmfs-opensci.github.io/EDMW-EarthData-Workshop-2025/ and there are buttons to open the tutorial in different places.\nAlternatively, you can clone the repo and go into the tutorials directory. Open a terminal with File &gt; New &gt; Terminal. Then type this on the command line:\ncd ~\ngit clone https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2025\nWe will be using a JupyterHub for the workshop but you can run the tutorials in Colab, Binder or on your own computer.",
+    "section": "Getting the tutorials into the JupyterHub",
+    "text": "Getting the tutorials into the JupyterHub\nOnce you are logged into the JupyterHub, go to a tutorial in https://nmfs-opensci.github.io/EDMW-EarthData-Workshop-2025/ and click on . This will open the tutorial in the workshop JupyterHub.\nAlternatively, you can clone the repo and go into the tutorials/clean directory. Open a terminal with File &gt; New &gt; Terminal. Then type this on the command line:\ncd ~\ngit clone https://github.com/nmfs-opensci/EDMW-EarthData-Workshop-2025",
     "crumbs": [
       "JupyterHub",
       "Welcome",
@@ -606,35 +606,11 @@
     ]
   },
   {
-    "objectID": "content/setup.html#jupyter-hub-setup",
-    "href": "content/setup.html#jupyter-hub-setup",
+    "objectID": "content/setup.html#colab",
+    "href": "content/setup.html#colab",
     "title": "Set-up",
-    "section": "Jupyter Hub setup",
-    "text": "Jupyter Hub setup\n\nhttps://workshop.nmfs-openscapes.2i2c.cloud/\nClick here for instructions and to get the password (NOAA access only)\nOnce you are in, Click Start Server.",
-    "crumbs": [
-      "JupyterHub",
-      "Welcome",
-      "Set-up"
-    ]
-  },
-  {
-    "objectID": "content/setup.html#earthdata-login-account",
-    "href": "content/setup.html#earthdata-login-account",
-    "title": "Set-up",
-    "section": "Earthdata Login account",
-    "text": "Earthdata Login account\nYou will need this to get the PACE data and to get NASA Earth Data in general.\n\nCreate an Earthdata Login account (if you don’t already have one) at https://urs.earthdata.nasa.gov\nWrite down your username and password; you will need it often.",
-    "crumbs": [
-      "JupyterHub",
-      "Welcome",
-      "Set-up"
-    ]
-  },
-  {
-    "objectID": "content/setup.html#running-the-tutorials",
-    "href": "content/setup.html#running-the-tutorials",
-    "title": "Set-up",
-    "section": "Running the tutorials",
-    "text": "Running the tutorials\n\nNavigate to a tutorial in the EDMW workshop\nYou will see buttons for opening the tutorial in different ways. Choose the way that works for you. \nIf using the Jupyter Hub, click on the “Open in Jupyter Hub” button.",
+    "section": "Colab",
+    "text": "Colab\nYou can run the tutorials in Colab but you will need to install the packages. Create a new code cell at the top of the notebook (after clicking the “Open in Colab”) button. Run the following pip install commands and then do Runtime &gt; Restart session. Yes it will delete local variables. That’s ok. If you don’t restart the session, xarray cannot fine the engines it needs.\n\nFor tutorial 1: pip install earthaccess xarray[io]\nFor tutorial 2 (Rrs): pip install earthaccess cartopy xarray[io]\nFor tutorial 3 (Kd): pip install earthaccess cartopy xarray[io] hvplot\nFor tutorial 4 (MOANA): pip install cartopy xarray[io]",
     "crumbs": [
       "JupyterHub",
       "Welcome",

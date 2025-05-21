@@ -52,7 +52,7 @@ object storage buckets (S3, GCS, etc) is like a food court with pre-prepared san
 ### Key difference
 
 1. Cloud-native formats and object storage buckets remove the kitchen bottleneck by letting each client serve themselves from pre-prepared, independently accessible data chunks.
-2. Cloud-native formats^* is 'pre-packaged' into to chunks that ready for grab and go. Cloud-native can also be thought of as 'read-optimized'.
+2. Cloud-native formats are 'pre-packaged' into to chunks that ready for grab and go. Cloud-native can also be thought of as 'read-optimized'.
 
 * Examples of cloud-native formats: Zarr, GeoTIFF, legacy netCDFs with a sidecar file (kerchunk, VirtualiZarr) that let's you grab chunks
 

@@ -6,6 +6,8 @@ subtitle: "PACE hyperspectral ocean color data May 22 10am Eastern"
 ::: {style="vertical-align: middle; text-align:center; border-style: solid;   border-color: blue;   border-width: 5px;   padding: 5px; font-size: 120%;"}
 Welcome to the NOAA Fisheries workshop focused on geospatial analysis using ocean ‘big data’. Today, we are focused on data from the NASA [Phytoplankton, Aerosol, Cloud and ocean Ecosystem](https://pace.oceansciences.org/) mission. This workshop is for those who are new to working with earth data in the cloud. We will be working in Python, but you will be given notebooks so you do not need to write code. This workshop will also introduce working with Jupyter Hubs, Jupyter Lab and the Pangeo Python tooling for 'big data' geospatial analysis.
 
+Sept 2025! Fish-PACE Hackweek (virtual). Please go to the [Fish-PACE website](https://ocean-satellite-tools.github.io/hackweek-2025/) to sign up for notifications.
+
 ![](content/img/satellite.jpg){width="300"}
 :::
 
